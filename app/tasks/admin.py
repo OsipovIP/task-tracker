@@ -174,3 +174,49 @@ class IdleRecordAdmin(admin.ModelAdmin):
             'classes': ('collapse',)
         }),
     )
+    # --- Добавить в конец admin.py ---
+
+from .models import ModelTagConfig
+
+@admin.register(ModelTagConfig)
+class ModelTagConfigAdmin(admin.ModelAdmin):
+    list_display = (
+        'oes_model', 'clickhouse_table', 'tag_name', 
+        'check_type', 'threshold_min', 'threshold_max', 
+        'min_change', 'task_priority', 'is_active'
+    )
+    list_filter = ('clickhouse_table', 'check_type', 'is_active', 'task_priority', 'oes_model')
+    search_fields = ('tag_name', 'description', 'oes_model__name')
+    list_editable = ('is_active', 'check_type', 'threshold_min', 'threshold_max', 'min_change', 'task_priority')
+    
+    fieldsets = (
+        ('Привязка к модели', {
+            'fields': ('oes_model', 'clickhouse_table')
+        }),
+        ('Тег и проверка', {
+            'fields': ('tag_name', 'check_type', 'description')
+        }),
+        ('Параметры проверки', {
+            'fields': ('threshold_min', 'threshold_max', 'min_change'),
+            'description': (
+                'Заполняйте в зависимости от типа проверки:<br>'
+                '• <b>Наличие данных</b> — параметры не нужны<br>'
+                '• <b>Мин. порог</b> — заполните "Минимальный порог"<br>'
+                '• <b>Макс. порог</b> — заполните "Максимальный порог"<br>'
+                '• <b>Диапазон</b> — заполните оба порога<br>'
+                '• <b>Изменение</b> — заполните "Минимальная дельта"'
+            )
+        }),
+        ('Задача при провале', {
+            'fields': ('task_priority',)
+        }),
+        ('Статус', {
+            'fields': ('is_active',)
+        }),
+    )
+    
+    def get_readonly_fields(self, request, obj=None):
+        """При редактировании нельзя менять модель и тег (это ключ unique_together)."""
+        if obj:
+            return ('oes_model', 'tag_name')
+        return ()

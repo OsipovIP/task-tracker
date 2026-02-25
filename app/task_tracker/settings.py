@@ -149,3 +149,13 @@ LOGIN_REDIRECT_URL = '/tasks/'
 # Куда перенаправлять пользователей, которые не авторизованы
 LOGIN_URL = '/accounts/login/' 
 # -------------------------------------------------------------
+# --- Добавить в конец settings.py ---
+
+# =====================================================================
+# CLICKHOUSE (read-only, для мониторинга телеметрии)
+# =====================================================================
+CLICKHOUSE_HOST = config('CLICKHOUSE_HOST', default='localhost')
+CLICKHOUSE_PORT = config('CLICKHOUSE_PORT', default='8123')
+CLICKHOUSE_USER = config('CLICKHOUSE_USER', default='')
+CLICKHOUSE_PASSWORD = config('CLICKHOUSE_PASSWORD', default='')
+CLICKHOUSE_DB = config('CLICKHOUSE_DB', default='telemetry')

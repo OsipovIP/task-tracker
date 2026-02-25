@@ -468,3 +468,151 @@ class IdleRecord(models.Model):
     def __str__(self):
         obj_name = self.oes_object.name if self.oes_object else f"obj_{self.object_id_external}"
         return f"Простой {obj_name}: {self.begin_dt} - {self.category_name}"
+
+        # =====================================================================
+# --- ЭТАП 2: МОДЕЛИ ДЛЯ МОНИТОРИНГА ТЕЛЕМЕТРИИ ---
+# Добавить в конец файла models.py
+# =====================================================================
+
+class ModelTagConfig(models.Model):
+    """Конфигурация тегов для проверки телеметрии по модели техники.
+    
+    Определяет какие теги (колонки в ClickHouse) нужно проверять
+    для каждой модели техники и каким способом.
+    """
+    
+    # Типы проверки
+    CHECK_EXISTS = 'exists'
+    CHECK_THRESHOLD_MIN = 'threshold_min'
+    CHECK_THRESHOLD_MAX = 'threshold_max'
+    CHECK_THRESHOLD_RANGE = 'threshold_range'
+    CHECK_CHANGE = 'change'
+    CHECK_TYPE_CHOICES = [
+        (CHECK_EXISTS, 'Наличие данных (значение ≠ -1000000)'),
+        (CHECK_THRESHOLD_MIN, 'Минимальный порог (значение ≥ min)'),
+        (CHECK_THRESHOLD_MAX, 'Максимальный порог (значение ≤ max)'),
+        (CHECK_THRESHOLD_RANGE, 'Диапазон (min ≤ значение ≤ max)'),
+        (CHECK_CHANGE, 'Изменение (значение должно меняться)'),
+    ]
+    
+    # Таблицы ClickHouse
+    CH_TABLE_TRUCKS = 'trucks'
+    CH_TABLE_HEAVY = 'heavy_equipment'
+    CH_TABLE_CHOICES = [
+        (CH_TABLE_TRUCKS, 'Самосвалы (telemetry.trucks)'),
+        (CH_TABLE_HEAVY, 'Тяжёлая техника (telemetry.heavy_equipment)'),
+    ]
+    
+    # Связь с моделью техники
+    oes_model = models.ForeignKey(
+        OesModel,
+        on_delete=models.CASCADE,
+        related_name='tag_configs',
+        verbose_name="Модель техники"
+    )
+    
+    # Таблица ClickHouse
+    clickhouse_table = models.CharField(
+        max_length=50,
+        choices=CH_TABLE_CHOICES,
+        verbose_name="Таблица ClickHouse"
+    )
+    
+    # Тег (колонка в ClickHouse)
+    tag_name = models.CharField(
+        max_length=100,
+        verbose_name="Имя тега (колонка в ClickHouse)",
+        help_text="Например: lon, lat, temp_engine, dut, speed_gps"
+    )
+    
+    # Тип проверки
+    check_type = models.CharField(
+        max_length=20,
+        choices=CHECK_TYPE_CHOICES,
+        default=CHECK_EXISTS,
+        verbose_name="Тип проверки"
+    )
+    
+    # Пороговые значения
+    threshold_min = models.FloatField(
+        null=True, blank=True,
+        verbose_name="Минимальный порог",
+        help_text="Для threshold_min и threshold_range"
+    )
+    threshold_max = models.FloatField(
+        null=True, blank=True,
+        verbose_name="Максимальный порог",
+        help_text="Для threshold_max и threshold_range"
+    )
+    
+    # Минимальное изменение (для check_type='change')
+    min_change = models.FloatField(
+        null=True, blank=True,
+        verbose_name="Минимальная дельта изменения",
+        help_text="Для типа 'Изменение': разница между max и min за период. "
+                  "Например 0.0001 для GPS координат."
+    )
+    
+    # Описание для человека
+    description = models.CharField(
+        max_length=500,
+        blank=True, default='',
+        verbose_name="Описание проверки",
+        help_text="Что проверяем и зачем. Например: 'GPS координаты должны меняться при работе'"
+    )
+    
+    # Приоритет создаваемой задачи при провале проверки
+    PRIORITY_CRITICAL = 'critical'
+    PRIORITY_HIGH = 'high'
+    PRIORITY_MEDIUM = 'medium'
+    PRIORITY_LOW = 'low'
+    PRIORITY_CHOICES = [
+        (PRIORITY_CRITICAL, 'Критический'),
+        (PRIORITY_HIGH, 'Высокий'),
+        (PRIORITY_MEDIUM, 'Средний'),
+        (PRIORITY_LOW, 'Низкий'),
+    ]
+    task_priority = models.CharField(
+        max_length=20,
+        choices=PRIORITY_CHOICES,
+        default=PRIORITY_MEDIUM,
+        verbose_name="Приоритет задачи",
+        help_text="Приоритет задачи, которая будет создана при провале проверки"
+    )
+    
+    is_active = models.BooleanField(default=True, verbose_name="Активна")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата обновления")
+
+    class Meta:
+        verbose_name = "Конфигурация тега мониторинга"
+        verbose_name_plural = "Конфигурации тегов мониторинга"
+        ordering = ['oes_model', 'tag_name']
+        # Один тег на одну модель — без дублей
+        unique_together = ['oes_model', 'tag_name']
+
+    def __str__(self):
+        return f"{self.oes_model.name} → {self.tag_name} ({self.get_check_type_display()})"
+    
+    def clean(self):
+        """Валидация: проверяем что пороги заполнены для соответствующих типов проверки."""
+        from django.core.exceptions import ValidationError
+        errors = {}
+        
+        if self.check_type == self.CHECK_THRESHOLD_MIN and self.threshold_min is None:
+            errors['threshold_min'] = 'Укажите минимальный порог для этого типа проверки'
+        
+        if self.check_type == self.CHECK_THRESHOLD_MAX and self.threshold_max is None:
+            errors['threshold_max'] = 'Укажите максимальный порог для этого типа проверки'
+        
+        if self.check_type == self.CHECK_THRESHOLD_RANGE:
+            if self.threshold_min is None:
+                errors['threshold_min'] = 'Укажите минимальный порог для диапазона'
+            if self.threshold_max is None:
+                errors['threshold_max'] = 'Укажите максимальный порог для диапазона'
+        
+        if self.check_type == self.CHECK_CHANGE and self.min_change is None:
+            errors['min_change'] = 'Укажите минимальную дельту изменения'
+        
+        if errors:
+            raise ValidationError(errors)
