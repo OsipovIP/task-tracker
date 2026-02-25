@@ -374,3 +374,97 @@ class RadioRepair(models.Model):
 
     def __str__(self):
         return f"Ремонт {self.device} от {self.repair_date}"
+# =====================================================================
+# --- МОДЕЛЬ ДЛЯ ХРАНЕНИЯ ПРОСТОЕВ (API idles) ---
+# Добавить в конец файла models.py
+# =====================================================================
+
+class IdleRecord(models.Model):
+    """Запись о простое техники, полученная из внешнего API."""
+    
+    # Внешний ID для защиты от дублей
+    external_id = models.IntegerField(
+        unique=True,
+        verbose_name="ID простоя из API",
+        help_text="Уникальный ID записи из внешнего API"
+    )
+    
+    # Связь с техникой
+    oes_object = models.ForeignKey(
+        OesObject,
+        on_delete=models.SET_NULL,
+        null=True, blank=True,
+        related_name='idle_records',
+        verbose_name="Объект OES"
+    )
+    object_uuid = models.UUIDField(
+        null=True, blank=True,
+        verbose_name="UUID объекта",
+        help_text="object_uuid из API для связки с OesObject.mdm_object_uuid",
+        db_index=True
+    )
+    object_id_external = models.IntegerField(
+        null=True, blank=True,
+        verbose_name="ID объекта из API",
+        help_text="object_id из API"
+    )
+    
+    # Временные рамки простоя
+    begin_dt = models.DateTimeField(verbose_name="Начало простоя")
+    end_dt = models.DateTimeField(null=True, blank=True, verbose_name="Конец простоя")
+    duration = models.IntegerField(
+        null=True, blank=True,
+        verbose_name="Длительность (мин)"
+    )
+    duration_from_shift = models.IntegerField(
+        null=True, blank=True,
+        verbose_name="Длительность от смены (мин)"
+    )
+    
+    # Классификация простоя
+    idle_type_id = models.IntegerField(null=True, blank=True, verbose_name="ID типа простоя")
+    idle_type_name = models.CharField(max_length=255, blank=True, default='', verbose_name="Тип простоя")
+    category_id = models.IntegerField(null=True, blank=True, verbose_name="ID категории простоя")
+    category_name = models.CharField(max_length=255, blank=True, default='', verbose_name="Категория простоя")
+    
+    # Дополнительные данные
+    comment = models.TextField(blank=True, default='', verbose_name="Комментарий")
+    selected = models.BooleanField(default=False, verbose_name="Выбран")
+    is_manual = models.BooleanField(default=False, verbose_name="Ручной ввод")
+    is_engine_on = models.BooleanField(default=False, verbose_name="Двигатель включён")
+    is_allowed_zone = models.BooleanField(default=False, verbose_name="В разрешённой зоне")
+    
+    # Геолокация
+    lat = models.CharField(max_length=50, blank=True, default='', verbose_name="Широта")
+    lon = models.CharField(max_length=50, blank=True, default='', verbose_name="Долгота")
+    geozones = models.CharField(max_length=500, blank=True, default='', verbose_name="Геозоны")
+    
+    # Служебные поля
+    updated_by = models.CharField(max_length=255, blank=True, default='', verbose_name="Обновлено кем")
+    enterprise_id = models.IntegerField(null=True, blank=True, verbose_name="ID предприятия")
+    
+    # Сырые данные (весь JSON ответ)
+    raw_data = models.JSONField(null=True, blank=True, verbose_name="Сырые данные из API")
+    
+    # Метаданные импорта
+    fetched_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата загрузки")
+    shift_type = models.CharField(
+        max_length=10,
+        choices=[('day', 'Дневная'), ('night', 'Ночная')],
+        blank=True, default='',
+        verbose_name="Тип смены"
+    )
+
+    class Meta:
+        verbose_name = "Простой техники"
+        verbose_name_plural = "Простои техники"
+        ordering = ['-begin_dt']
+        indexes = [
+            models.Index(fields=['begin_dt', 'end_dt']),
+            models.Index(fields=['object_uuid']),
+            models.Index(fields=['category_name']),
+        ]
+
+    def __str__(self):
+        obj_name = self.oes_object.name if self.oes_object else f"obj_{self.object_id_external}"
+        return f"Простой {obj_name}: {self.begin_dt} - {self.category_name}"

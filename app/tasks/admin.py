@@ -141,3 +141,36 @@ class ManualAssetAdmin(admin.ModelAdmin):
     
     readonly_fields = ('created_at', 'updated_at')
 
+
+from .models import IdleRecord
+
+@admin.register(IdleRecord)
+class IdleRecordAdmin(admin.ModelAdmin):
+    list_display = ('external_id', 'oes_object', 'begin_dt', 'end_dt', 'duration', 'category_name', 'idle_type_name', 'shift_type', 'fetched_at')
+    list_filter = ('shift_type', 'category_name', 'is_manual', 'fetched_at')
+    search_fields = ('oes_object__name', 'category_name', 'comment')
+    readonly_fields = ('external_id', 'raw_data', 'fetched_at')
+    date_hierarchy = 'begin_dt'
+    
+    fieldsets = (
+        ('Основное', {
+            'fields': ('external_id', 'oes_object', 'object_uuid', 'object_id_external')
+        }),
+        ('Время', {
+            'fields': ('begin_dt', 'end_dt', 'duration', 'duration_from_shift', 'shift_type')
+        }),
+        ('Классификация', {
+            'fields': ('idle_type_id', 'idle_type_name', 'category_id', 'category_name')
+        }),
+        ('Детали', {
+            'fields': ('comment', 'selected', 'is_manual', 'is_engine_on', 'is_allowed_zone')
+        }),
+        ('Геолокация', {
+            'fields': ('lat', 'lon', 'geozones'),
+            'classes': ('collapse',)
+        }),
+        ('Служебное', {
+            'fields': ('updated_by', 'enterprise_id', 'raw_data', 'fetched_at'),
+            'classes': ('collapse',)
+        }),
+    )
