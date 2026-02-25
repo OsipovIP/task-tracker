@@ -44,4 +44,8 @@ urlpatterns = [
     path('radios/return/<int:pk>/', views.radio_return, name='radio_return'),
     path('radios/repair/', views.radio_repair, name='radio_repair'),
     path('radios/repairs/', views.radio_repairs_list, name='radio_repairs_list'),
+    # Мониторинг телеметрии
+    path('telemetry/', views.telemetry_monitor, name='telemetry_monitor'),
+    path('telemetry/create-task/<int:object_id>/', views.create_telemetry_task, name='create_telemetry_task'),
+    path('telemetry/create-tasks-bulk/', views.create_telemetry_tasks_bulk, name='create_telemetry_tasks_bulk'),
 ]

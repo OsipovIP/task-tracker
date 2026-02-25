@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ page_title }}{% endblock title %}
+
+{% block authenticated_content %}
+<div class="container-fluid mt-3">
+    <h2>📡 {{ page_title }}</h2>
+    
+    <!-- Статус подключения и статистика -->
+    <div class="row mb-3">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body py-2">
+                    <div class="d-flex justify-content-between align-items-center flex-wrap">
+                        <div>
+                            {% if ch_connected %}
+                                <span class="badge bg-success">ClickHouse: OK</span>
+                            {% else %}
+                                <span class="badge bg-danger">ClickHouse: нет связи</span>
+                            {% endif %}
+                            <span class="badge bg-secondary ms-2">Всего объектов: {{ stats.total_objects }}</span>
+                            <span class="badge bg-info ms-2">В работе: {{ stats.working }}</span>
+                        </div>
+                        <div>
+                            <span class="badge bg-success">✅ {{ stats.ok }}</span>
+                            <span class="badge bg-warning text-dark">⚠️ {{ stats.warn }}</span>
+                            <span class="badge bg-danger">❌ {{ stats.fail }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    {% if error_message %}
+    <div class="alert alert-warning">
+        <strong>⚠️</strong> {{ error_message }}
+    </div>
+    {% endif %}
+    
+    <!-- Фильтры -->
+    <div class="card mb-3">
+        <div class="card-body py-2">
+            <form method="get" class="row g-2 align-items-end">
+                <div class="col-auto">
+                    <label class="form-label mb-0 small">Период проверки</label>
+                    <select name="hours" class="form-select form-select-sm">
+                        <option value="1" {% if hours == 1 %}selected{% endif %}>1 час</option>
+                        <option value="2" {% if hours == 2 %}selected{% endif %}>2 часа</option>
+                        <option value="4" {% if hours == 4 %}selected{% endif %}>4 часа</option>
+                        <option value="8" {% if hours == 8 %}selected{% endif %}>8 часов</option>
+                    </select>
+                </div>
+                <div class="col-auto">
+                    <label class="form-label mb-0 small">Модель</label>
+                    <select name="model" class="form-select form-select-sm">
+                        <option value="">Все модели</option>
+                        {% for m in monitored_models %}
+                            <option value="{{ m.id }}" {% if model_filter == m.id|stringformat:"d" %}selected{% endif %}>
+                                {{ m.name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-auto">
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" name="show_ok" value="1" 
+                               id="showOk" {% if show_ok %}checked{% endif %}>
+                        <label class="form-check-label small" for="showOk">Показать OK</label>
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary btn-sm">Обновить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Результаты -->
+    {% if results %}
+    <div class="table-responsive">
+        <table class="table table-sm table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>Статус</th>
+                    <th>Борт</th>
+                    <th>Модель</th>
+                    <th>Теги</th>
+                    <th>Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in results %}
+                <tr class="{% if item.overall == 'fail' %}table-danger{% elif item.overall == 'warn' %}table-warning{% else %}table-success{% endif %}">
+                    <td>
+                        {% if item.overall == 'fail' %}
+                            <span class="badge bg-danger">❌ FAIL</span>
+                        {% elif item.overall == 'warn' %}
+                            <span class="badge bg-warning text-dark">⚠️ WARN</span>
+                        {% else %}
+                            <span class="badge bg-success">✅ OK</span>
+                        {% endif %}
+                    </td>
+                    <td><strong>{{ item.object.name }}</strong></td>
+                    <td>
+                        <small class="text-muted">
+                            {{ item.object.model.name|default:"—" }}
+                        </small>
+                    </td>
+                    <td>
+                        {% for tag_name, tag_data in item.tags.items %}
+                            {% if tag_data.status == 'ok' %}
+                                <span class="badge bg-success" title="{{ tag_data.detail }}">
+                                    {{ tag_name }} ✅
+                                </span>
+                            {% elif tag_data.status == 'warn' %}
+                                <span class="badge bg-warning text-dark" title="{{ tag_data.detail }}">
+                                    {{ tag_name }} ⚠️
+                                </span>
+                            {% else %}
+                                <span class="badge bg-danger" title="{{ tag_data.detail }}">
+                                    {{ tag_name }} ❌
+                                </span>
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% if item.overall != 'ok' %}
+                            <a href="{% url 'create_telemetry_task' item.object.id %}" 
+                               class="btn btn-outline-danger btn-sm"
+                               title="Создать задачу">
+                                📋 Задача
+                            </a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% elif not error_message %}
+    <div class="alert alert-success">
+        <strong>✅</strong> Все работающие машины передают данные корректно.
+    </div>
+    {% endif %}
+</div>
+{% endblock authenticated_content %}

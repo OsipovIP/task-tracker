@@ -11,6 +11,9 @@ from openpyxl.utils import get_column_letter
 from .forms import TaskForm, TaskStatusForm, TaskPhotoForm, TaskCommentForm, TaskEditForm, TaskCompletionReportForm, CreateAndCloseTaskForm, RadioModelForm, RadioTypeForm, RadioAssignmentForm, RadioRepairForm
 from .models import Task, OesObject, OesModel, TaskPhoto, TaskComment, TaskCompletionReport, ManualAsset, FaultCategory, RadioModel, RadioType, RadioAssignment, RadioRepair
 import logging
+from .models import IdleRecord, ModelTagConfig
+from .clickhouse_client import ClickHouseClient
+from collections import defaultdict
 
 User = get_user_model()
 logger = logging.getLogger(__name__) 
@@ -1429,3 +1432,354 @@ def radio_assignment_act_excel(request, pk: int):
     response['Content-Disposition'] = f'attachment; filename="{file_name}"'
     wb.save(response)
     return response
+    # --- Добавить в конец views.py ---
+# Не забудь добавить импорт вверху views.py:
+# from .models import IdleRecord, ModelTagConfig
+# from .clickhouse_client import ClickHouseClient
+# from collections import defaultdict
+
+@login_required
+def telemetry_monitor(request):
+    """Страница мониторинга телеметрии работающей техники."""
+    from .models import IdleRecord, ModelTagConfig
+    from .clickhouse_client import ClickHouseClient
+    from collections import defaultdict
+    
+    hours = int(request.GET.get('hours', 1))
+    show_ok = request.GET.get('show_ok', '') == '1'
+    model_filter = request.GET.get('model', '')
+    
+    results = []
+    stats = {'ok': 0, 'warn': 0, 'fail': 0, 'total_objects': 0, 'working': 0}
+    ch_connected = False
+    error_message = ''
+    
+    try:
+        # 1. Проверяем ClickHouse
+        ch = ClickHouseClient()
+        ch_connected = ch.test_connection()
+        
+        if not ch_connected:
+            error_message = 'Нет подключения к ClickHouse'
+            raise Exception(error_message)
+        
+        # 2. Активные конфигурации тегов
+        tag_configs = ModelTagConfig.objects.filter(
+            is_active=True
+        ).select_related('oes_model')
+        
+        if not tag_configs:
+            error_message = 'Нет активных конфигураций тегов. Настройте их через Django Admin.'
+            raise Exception(error_message)
+        
+        # Группируем по (модель, таблица)
+        configs_by_model_table = defaultdict(list)
+        models_with_configs = set()
+        for tc in tag_configs:
+            key = (tc.oes_model_id, tc.clickhouse_table)
+            configs_by_model_table[key].append(tc)
+            models_with_configs.add(tc.oes_model_id)
+        
+        # 3. Объекты с мониторингом
+        all_objects = OesObject.objects.filter(
+            model_id__in=models_with_configs,
+            source_id__isnull=False
+        ).select_related('model', 'model__category')
+        
+        # Фильтр по модели
+        if model_filter:
+            all_objects = all_objects.filter(model_id=model_filter)
+        
+        stats['total_objects'] = all_objects.count()
+        
+        # 4. ID объектов в простое
+        idle_object_ids = set(
+            IdleRecord.objects.filter(
+                end_dt__isnull=True,
+                oes_object__isnull=False
+            ).values_list('oes_object__source_id', flat=True)
+        )
+        
+        # 5. Работающие машины
+        working_objects = [
+            obj for obj in all_objects
+            if obj.source_id not in idle_object_ids
+        ]
+        stats['working'] = len(working_objects)
+        
+        # 6. Группируем по (модель, таблица)
+        objects_by_model_table = defaultdict(list)
+        for obj in working_objects:
+            for key in configs_by_model_table:
+                model_id, ch_table = key
+                if obj.model_id == model_id:
+                    objects_by_model_table[key].append(obj)
+        
+        # 7. Запросы в ClickHouse
+        for (model_id, ch_table), objects in objects_by_model_table.items():
+            if not objects:
+                continue
+            
+            tag_confs = configs_by_model_table[(model_id, ch_table)]
+            object_uuids = [obj.mdm_object_uuid for obj in objects if obj.mdm_object_uuid]
+            
+            if not object_uuids:
+                continue
+            
+            ch_results = ch.check_tags_batch(
+                table=ch_table,
+                object_uuids=object_uuids,
+                tag_configs=tag_confs,
+                hours=hours
+            )
+            
+            obj_by_uuid = {obj.mdm_object_uuid: obj for obj in objects if obj.mdm_object_uuid}
+            
+            for uuid, tags_data in ch_results.items():
+                obj = obj_by_uuid.get(uuid)
+                if not obj:
+                    continue
+                
+                has_fail = any(d['status'] == 'fail' for d in tags_data.values())
+                has_warn = any(d['status'] == 'warn' for d in tags_data.values())
+                
+                if has_fail:
+                    overall = 'fail'
+                elif has_warn:
+                    overall = 'warn'
+                else:
+                    overall = 'ok'
+                
+                # Считаем статистику
+                for d in tags_data.values():
+                    stats[d['status']] += 1
+                
+                # Добавляем в результаты (если show_ok или есть проблемы)
+                if show_ok or overall != 'ok':
+                    results.append({
+                        'object': obj,
+                        'overall': overall,
+                        'tags': tags_data,
+                    })
+        
+        # Сортировка: fail первые, потом warn, потом ok
+        priority_order = {'fail': 0, 'warn': 1, 'ok': 2}
+        results.sort(key=lambda r: (priority_order.get(r['overall'], 3), r['object'].name))
+    
+    except Exception as e:
+        if not error_message:
+            error_message = str(e)
+    
+    # Модели для фильтра
+    monitored_models = OesModel.objects.filter(
+        tag_configs__is_active=True
+    ).distinct().order_by('name')
+    
+    context = {
+        'results': results,
+        'stats': stats,
+        'ch_connected': ch_connected,
+        'error_message': error_message,
+        'hours': hours,
+        'show_ok': show_ok,
+        'model_filter': model_filter,
+        'monitored_models': monitored_models,
+        'page_title': 'Мониторинг телеметрии',
+    }
+    return render(request, 'tasks/telemetry_monitor.html', context)
+# --- Добавить в конец views.py (после telemetry_monitor) ---
+
+@login_required
+def create_telemetry_task(request, object_id):
+    """Создание задачи из мониторинга телеметрии с защитой от дублей."""
+    from .models import ModelTagConfig
+    
+    oes_object = get_object_or_404(OesObject, pk=object_id)
+    
+    # Проверяем дедупликацию: есть ли открытая задача по этому объекту
+    # с источником 'TELEMETRY'
+    existing_task = Task.objects.filter(
+        oes_object=oes_object,
+        external_source='TELEMETRY',
+    ).exclude(
+        status=Task.STATUS_DONE
+    ).first()
+    
+    if existing_task:
+        messages.warning(
+            request, 
+            f'Задача #{existing_task.id} по объекту {oes_object.name} уже существует!'
+        )
+        return redirect('task_detail', pk=existing_task.pk)
+    
+    # Создаём задачу
+    model_name = oes_object.model.name if oes_object.model else 'Неизвестная модель'
+    
+    task = Task.objects.create(
+        title=f'Нет телеметрии: {oes_object.name} ({model_name})',
+        description=(
+            f'Автоматически создана из мониторинга телеметрии.\n'
+            f'Объект: {oes_object.name}\n'
+            f'Модель: {model_name}\n'
+            f'Проблема: отсутствие или некорректные данные телеметрии.\n'
+            f'Дата обнаружения: {timezone.now().strftime("%d.%m.%Y %H:%M")}'
+        ),
+        status=Task.STATUS_WAITING,
+        priority=Task.PRIORITY_MEDIUM,
+        oes_object=oes_object,
+        reporter=request.user,
+        external_source='TELEMETRY',
+        external_id=f'telem_{oes_object.id}_{timezone.now().strftime("%Y%m%d")}',
+    )
+    
+    messages.success(request, f'Задача #{task.id} создана для {oes_object.name}!')
+    return redirect('telemetry_monitor')
+
+
+@login_required
+def create_telemetry_tasks_bulk(request):
+    """Массовое создание задач для всех проблемных объектов."""
+    if request.method != 'POST':
+        return redirect('telemetry_monitor')
+    
+    from .models import IdleRecord, ModelTagConfig
+    from .clickhouse_client import ClickHouseClient
+    from collections import defaultdict
+    
+    hours = int(request.POST.get('hours', 1))
+    created_count = 0
+    skipped_count = 0
+    
+    try:
+        ch = ClickHouseClient()
+        if not ch.test_connection():
+            messages.error(request, 'Нет подключения к ClickHouse')
+            return redirect('telemetry_monitor')
+        
+        # Повторяем логику из telemetry_monitor
+        tag_configs = ModelTagConfig.objects.filter(is_active=True).select_related('oes_model')
+        
+        configs_by_model_table = defaultdict(list)
+        models_with_configs = set()
+        for tc in tag_configs:
+            key = (tc.oes_model_id, tc.clickhouse_table)
+            configs_by_model_table[key].append(tc)
+            models_with_configs.add(tc.oes_model_id)
+        
+        all_objects = OesObject.objects.filter(
+            model_id__in=models_with_configs,
+            source_id__isnull=False
+        ).select_related('model')
+        
+        idle_object_ids = set(
+            IdleRecord.objects.filter(
+                end_dt__isnull=True,
+                oes_object__isnull=False
+            ).values_list('oes_object__source_id', flat=True)
+        )
+        
+        working_objects = [
+            obj for obj in all_objects
+            if obj.source_id not in idle_object_ids
+        ]
+        
+        # Объекты с уже открытыми задачами TELEMETRY
+        existing_task_object_ids = set(
+            Task.objects.filter(
+                external_source='TELEMETRY'
+            ).exclude(
+                status=Task.STATUS_DONE
+            ).values_list('oes_object_id', flat=True)
+        )
+        
+        objects_by_model_table = defaultdict(list)
+        for obj in working_objects:
+            for key in configs_by_model_table:
+                model_id, ch_table = key
+                if obj.model_id == model_id:
+                    objects_by_model_table[key].append(obj)
+        
+        for (model_id, ch_table), objects in objects_by_model_table.items():
+            if not objects:
+                continue
+            
+            tag_confs = configs_by_model_table[(model_id, ch_table)]
+            object_uuids = [obj.mdm_object_uuid for obj in objects if obj.mdm_object_uuid]
+            
+            if not object_uuids:
+                continue
+            
+            ch_results = ch.check_tags_batch(
+                table=ch_table,
+                object_uuids=object_uuids,
+                tag_configs=tag_confs,
+                hours=hours
+            )
+            
+            obj_by_uuid = {obj.mdm_object_uuid: obj for obj in objects if obj.mdm_object_uuid}
+            
+            for uuid, tags_data in ch_results.items():
+                obj = obj_by_uuid.get(uuid)
+                if not obj:
+                    continue
+                
+                has_problems = any(
+                    d['status'] in ('fail', 'warn')
+                    for d in tags_data.values()
+                )
+                
+                if not has_problems:
+                    continue
+                
+                # Дедупликация
+                if obj.id in existing_task_object_ids:
+                    skipped_count += 1
+                    continue
+                
+                # Собираем описание проблем
+                problem_details = []
+                max_priority = Task.PRIORITY_LOW
+                priority_order = {
+                    'critical': 0, 'high': 1, 'medium': 2, 'low': 3
+                }
+                
+                for tag_name, tag_data in tags_data.items():
+                    if tag_data['status'] in ('fail', 'warn'):
+                        problem_details.append(f"  • {tag_name}: {tag_data['detail']}")
+                        # Берём максимальный приоритет из конфигов
+                        for tc in tag_confs:
+                            if tc.tag_name == tag_name:
+                                if priority_order.get(tc.task_priority, 3) < priority_order.get(max_priority, 3):
+                                    max_priority = tc.task_priority
+                
+                model_name = obj.model.name if obj.model else 'Неизвестная модель'
+                
+                Task.objects.create(
+                    title=f'Нет телеметрии: {obj.name} ({model_name})',
+                    description=(
+                        f'Автоматически создана из мониторинга телеметрии.\n'
+                        f'Объект: {obj.name}\n'
+                        f'Модель: {model_name}\n\n'
+                        f'Обнаруженные проблемы:\n'
+                        f'{chr(10).join(problem_details)}\n\n'
+                        f'Дата обнаружения: {timezone.now().strftime("%d.%m.%Y %H:%M")}'
+                    ),
+                    status=Task.STATUS_WAITING,
+                    priority=max_priority,
+                    oes_object=obj,
+                    reporter=request.user,
+                    external_source='TELEMETRY',
+                    external_id=f'telem_{obj.id}_{timezone.now().strftime("%Y%m%d")}',
+                )
+                created_count += 1
+                existing_task_object_ids.add(obj.id)
+        
+        messages.success(
+            request,
+            f'Создано задач: {created_count}, пропущено (уже есть): {skipped_count}'
+        )
+    
+    except Exception as e:
+        messages.error(request, f'Ошибка: {str(e)}')
+    
+    return redirect('telemetry_monitor')
