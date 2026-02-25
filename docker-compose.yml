@@ -4,13 +4,13 @@ version: '3.8'
 services:
   web:
     build: .
-    container_name: django_task_tracker
+    container_name: django_task_tracker_dev
     # Загружаем переменные окружения из .env
     env_file:
       - .env
     # Открываем порт контейнера (8000) на порт хоста (80, 8000 или другой)
     ports:
-      - "7575:8000"
+      - "7574:8000"
     # Подключаем том для сохранения загруженных фотографий
     volumes:
       - ./app:/usr/src/app 
@@ -24,7 +24,7 @@ services:
 
   telegram_bot:
     build: .
-    container_name: telegram_task_tracker_bot
+    container_name: telegram_task_tracker_bot_dev
     # Загружаем переменные окружения из .env (включая TELEGRAM_BOT_TOKEN)
     env_file:
       - .env
