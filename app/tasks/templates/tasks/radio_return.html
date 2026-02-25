@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block authenticated_content %}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">{{ page_title }}</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Рация:</strong> {{ assignment.device }}</p>
+                    <p><strong>Выдана:</strong> {{ assignment.assignee_name }}</p>
+                    <p><strong>Дата выдачи:</strong> {{ assignment.issued_at|date:"d.m.Y H:i" }}</p>
+                    
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="d-flex gap-2 mt-3">
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-undo me-2"></i>Подтвердить возврат
+                            </button>
+                            <a href="{% url 'radio_assignments_list' %}" class="btn btn-secondary">
+                                <i class="fas fa-times me-2"></i>Отмена
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+

@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% block title %}Мои Задачи и Пул{% endblock %}
+
+{% block authenticated_content %}
+<div class="container mt-4">
+
+    <!-- Блок для отображения сообщений (Success, Error, Warning) от Django -->
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    {% if tasks %}
+        <!-- Адаптивная сетка для отображения задач в виде карточек -->
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        {% for task in tasks %}
+            <div class="col">
+                <!-- Карточка задачи -->
+                <div class="card shadow-sm h-100 
+                    {% if task.assigned_to == request.user %}border-success{% endif %}">
+                    
+                    <div class="card-body">
+                        <h5 class="card-title d-flex justify-content-between align-items-center">
+                            <!-- Ссылка на страницу деталей задачи -->
+                            <a href="{% url 'task_detail' pk=task.pk %}" class="text-decoration-none text-dark fw-bold">
+                                #{{ task.id }} &ndash; {{ task.title }}
+                            </a>
+                            <div class="d-flex gap-2">
+                                <!-- ITIL метка - ОТКЛЮЧЕНО -->
+                                {% comment %}
+                                {% if task.external_source == 'ITIL' %}
+                                    ITIL
+                                {% endif %}
+                                {% endcomment %}
+                                <!-- Бейдж приоритета -->
+                                <span class="badge rounded-pill 
+                                    {% if task.priority == 'critical' %}bg-danger
+                                    {% elif task.priority == 'high' %}bg-warning text-dark
+                                    {% else %}bg-info text-dark{% endif %}">
+                                    {{ task.get_priority_display }}
+                                </span>
+                            </div>
+                        </h5>
+                        <p class="card-text text-muted small mt-2">{{ task.description|truncatechars:120 }}</p>
+                    </div>
+
+                    <!-- Детали задачи (Статус, Назначение, Срок) -->
+                    <ul class="list-group list-group-flush small">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Статус: 
+                            <span class="badge rounded-pill bg-secondary text-white">
+                                {{ task.get_status_display }}
+                            </span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Назначена: 
+                            {% if task.assigned_to %}
+                                {% if task.assigned_to.first_name or task.assigned_to.last_name %}
+                                    {{ task.assigned_to.first_name }} {{ task.assigned_to.last_name }}
+                                {% else %}
+                                    {{ task.assigned_to.username }}
+                                {% endif %}
+                            {% elif task.assigned_group %}
+                                Пул ({{ task.assigned_group.name }})
+                            {% else %}
+                                <span class="text-muted">Не назначена</span>
+                            {% endif %}
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Актив: 
+                            {% if task.oes_object %}
+                                {{ task.oes_object.name }}
+                                {% if task.oes_object.model %}
+                                    ({{ task.oes_object.model.name }})
+                                {% endif %}
+                            {% else %}
+                                <span class="text-muted">Не указан</span>
+                            {% endif %}
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Номер ITIL: 
+                            {% if task.itil_number %}
+                                {{ task.itil_number }}
+                            {% else %}
+                                <span class="text-muted">Не указан</span>
+                            {% endif %}
+                        </li>
+                        {% if task.additional_assignees.all %}
+                        <li class="list-group-item">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <span>Доп. исполнители:</span>
+                                <div class="text-end">
+                                    {% for user in task.additional_assignees.all %}
+                                        {{ user.username }}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </li>
+                        {% endif %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Срок: 
+                            {% if task.due_date %}
+                                <span class="text-muted">{{ task.due_date|date:"d M Y" }}</span>
+                            {% else %}
+                                <span class="text-muted">Не установлен</span>
+                            {% endif %}
+                        </li>
+                    </ul>
+
+                    <!-- Футер карточки с действием -->
+                    <div class="card-footer text-end">
+                        <!-- Все задачи уже назначены пользователю, поэтому только просмотр -->
+                        <a href="{% url 'task_detail' pk=task.pk %}" class="btn btn-sm btn-outline-primary">
+                            <i class="fas fa-eye me-1"></i> Просмотр
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    {% else %}
+        <!-- Сообщение, если задач нет -->
+        <div class="alert alert-info py-3 shadow-sm" role="alert">
+            <h4 class="alert-heading"><i class="fas fa-info-circle me-2"></i> Нет назначенных задач</h4>
+            У вас нет задач, назначенных лично.
+        </div>
+    {% endif %}
+
+</div>
+{% endblock authenticated_content %}

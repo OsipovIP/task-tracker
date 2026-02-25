@@ -1,0 +1,432 @@
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
+from django.contrib import messages
+from django.db.models import Q
+from .forms import TaskForm, TaskStatusForm, TaskPhotoForm, TaskCommentForm, TaskEditForm, TaskCompletionReportForm
+from .models import Task, OesObject, OesModel, TaskPhoto, TaskComment, TaskCompletionReport 
+
+
+# 1. ВОССТАНОВЛЕННАЯ ФУНКЦИЯ: task_list
+@login_required 
+def task_list(request):
+    """Отображает список всех задач, видимых пользователю."""
+    # Получаем все задачи, назначенные текущему пользователю
+    # Включаем как обычные задачи, так и ITIL задачи
+    tasks = Task.objects.filter(
+        assigned_to=request.user
+    ).order_by('-created_at') 
+
+    context = {
+        'tasks': tasks,
+        'page_title': 'Список задач',
+    }
+    return render(request, 'tasks/task_list.html', context)
+# --------------------------------------------------------------------------
+
+
+# 2. ВАША ФУНКЦИЯ: task_create
+@login_required # Только для авторизованных пользователей
+def task_create(request):
+    if request.method == 'POST':
+        form = TaskForm(request.POST)
+        
+        if form.is_valid():
+            # Получаем ID объекта из скрытого поля
+            oes_object_id = request.POST.get('oes_object_id')
+            
+            if oes_object_id:
+                try:
+                    oes_object = OesObject.objects.get(id=oes_object_id)
+                    
+                    # Создаем задачу с данными из формы
+                    new_task = form.save(commit=False)
+                    new_task.oes_object = oes_object
+                    new_task.reporter = request.user 
+                    
+                    # Если исполнитель не указан, назначаем на создателя
+                    if not new_task.assigned_to:
+                        new_task.assigned_to = request.user
+                    
+                    new_task.save()
+                    
+                    messages.success(request, 'Задача успешно создана!')
+                    return redirect('task_detail', pk=new_task.pk) 
+                    
+                except OesObject.DoesNotExist:
+                    messages.error(request, 'Выбранный объект не найден')
+            else:
+                messages.error(request, 'Пожалуйста, выберите объект')
+        else:
+            messages.error(request, 'Пожалуйста, исправьте ошибки в форме')
+    else:
+        form = TaskForm()
+        
+    context = {
+        'form': form, 
+        'page_title': 'Создание новой задачи',
+    }
+    return render(request, 'task_form.html', context)
+
+
+# 3. ФУНКЦИЯ: task_detail
+@login_required
+def task_detail(request, pk):
+    """Отображает детали конкретной задачи."""
+    task = get_object_or_404(Task, pk=pk)
+    
+    # Определяем, может ли пользователь редактировать задачу
+    # Можно редактировать если: 
+    # - назначен как исполнитель ИЛИ 
+    # - является создателем ИЛИ 
+    # - это ITIL задача без исполнителя ИЛИ
+    # - является менеджером
+    user_is_assigned = (
+        task.assigned_to == request.user or 
+        task.reporter == request.user or
+        (task.external_source == 'ITIL' and not task.assigned_to) or
+        request.user.groups.filter(name='Менеджеры').exists()
+    )
+    
+    # Получаем фотографии и комментарии
+    photos = TaskPhoto.objects.filter(task=task).order_by('-uploaded_at')
+    comments = TaskComment.objects.filter(task=task).order_by('created_at')
+    
+    # Обработка POST запросов
+    if request.method == 'POST':
+        # Изменение статуса
+        if 'status_submit' in request.POST:
+            if user_is_assigned:
+                new_status = request.POST.get('status')
+                if new_status in [choice[0] for choice in Task.STATUS_CHOICES]:
+                    task.status = new_status
+                    task.save()
+                    messages.success(request, 'Статус задачи обновлен!')
+                else:
+                    messages.error(request, 'Неверный статус!')
+            else:
+                messages.error(request, 'Только назначенный исполнитель может изменять статус!')
+        
+        # Загрузка фото
+        elif 'photo_submit' in request.POST:
+            if user_is_assigned:
+                photo_form = TaskPhotoForm(request.POST, request.FILES)
+                if photo_form.is_valid():
+                    photo = photo_form.save(commit=False)
+                    photo.task = task
+                    photo.uploaded_by = request.user
+                    photo.save()
+                    messages.success(request, 'Фото успешно загружено!')
+                else:
+                    messages.error(request, 'Ошибка при загрузке фото!')
+            else:
+                messages.error(request, 'Только назначенный исполнитель может загружать фото!')
+        
+        # Добавление комментария
+        elif 'comment_submit' in request.POST:
+            comment_text = request.POST.get('text', '').strip()
+            if comment_text:
+                TaskComment.objects.create(
+                    task=task,
+                    author=request.user,
+                    text=comment_text
+                )
+                messages.success(request, 'Комментарий добавлен!')
+            else:
+                messages.error(request, 'Комментарий не может быть пустым!')
+        
+        # Редактирование задачи (для менеджеров)
+        elif 'edit_submit' in request.POST:
+            if user_is_assigned:
+                print(f"DEBUG: Получены данные формы: {request.POST}")
+                print(f"DEBUG: Текущая задача: {task.title}")
+                
+                # Получаем ID объекта из скрытого поля перед валидацией формы
+                oes_object_id = request.POST.get('oes_object_id')
+                print(f"DEBUG: oes_object_id из скрытого поля: {oes_object_id}")
+                
+                if oes_object_id:
+                    try:
+                        oes_object = OesObject.objects.get(id=oes_object_id)
+                        # Временно устанавливаем объект для валидации
+                        task.oes_object = oes_object
+                        print(f"DEBUG: Установлен объект: {oes_object.name}")
+                    except OesObject.DoesNotExist:
+                        messages.error(request, 'Выбранный объект не найден')
+                        oes_object_id = None
+                
+                edit_form = TaskEditForm(request.POST, instance=task)
+                print(f"DEBUG: Форма валидна: {edit_form.is_valid()}")
+                if not edit_form.is_valid():
+                    print(f"DEBUG: Ошибки формы: {edit_form.errors}")
+                
+                if edit_form.is_valid():
+                    # Сохраняем форму
+                    saved_task = edit_form.save()
+                    print(f"DEBUG: Задача сохранена: {saved_task.title}")
+                    print(f"DEBUG: Объект после сохранения: {saved_task.oes_object}")
+                    messages.success(request, f'Задача #{task.id} успешно обновлена!')
+                else:
+                    messages.error(request, f'Ошибка при обновлении задачи: {edit_form.errors}')
+            else:
+                messages.error(request, 'У вас нет прав для редактирования этой задачи!')
+        
+        # Закрытие задачи с отчетом
+        elif 'complete_submit' in request.POST:
+            if user_is_assigned:
+                completion_form = TaskCompletionReportForm(request.POST)
+                if completion_form.is_valid():
+                    # Создаем отчет о закрытии
+                    report = completion_form.save(commit=False)
+                    report.task = task
+                    report.completed_by = request.user
+                    report.save()
+                    
+                    # Закрываем задачу
+                    task.status = Task.STATUS_DONE
+                    task.save()
+                    
+                    messages.success(request, 'Задача закрыта с отчетом!')
+                else:
+                    messages.error(request, 'Ошибка при создании отчета!')
+            else:
+                messages.error(request, 'У вас нет прав для закрытия этой задачи!')
+        
+        return redirect('task_detail', pk=task.pk)
+    
+    # Создаем формы
+    status_form = TaskStatusForm(initial={'status': task.status})
+    photo_form = TaskPhotoForm()
+    comment_form = TaskCommentForm()
+    edit_form = TaskEditForm(instance=task)
+    completion_form = TaskCompletionReportForm()
+    
+    # Проверяем, есть ли уже отчет о закрытии
+    completion_report = getattr(task, 'completion_report', None)
+    
+    context = {
+        'task': task,
+        'user_is_assigned': user_is_assigned,
+        'photos': photos,
+        'comments': comments,
+        'status_form': status_form,
+        'photo_form': photo_form,
+        'comment_form': comment_form,
+        'edit_form': edit_form,
+        'completion_form': completion_form,
+        'completion_report': completion_report,
+        'page_title': f'Задача #{task.id}',
+    }
+    return render(request, 'tasks/task_detail.html', context)
+
+
+# 4. ФУНКЦИЯ: task_claim - захват задачи из пула
+@login_required
+def task_claim(request, pk):
+    """Позволяет пользователю взять задачу на себя."""
+    task = get_object_or_404(Task, pk=pk)
+    
+    # Назначаем текущего пользователя исполнителем
+    task.assigned_to = request.user
+    task.status = Task.STATUS_IN_PROGRESS
+    task.save()
+    
+    return redirect('task_detail', pk=task.pk)
+
+
+# 5. ФУНКЦИЯ: task_confirm_receipt - подтверждение получения задачи
+@login_required
+def task_confirm_receipt(request, pk):
+    """Подтверждает, что пользователь получил задачу."""
+    from django.utils import timezone
+    
+    task = get_object_or_404(Task, pk=pk)
+    
+    # Устанавливаем время подтверждения
+    task.acknowledged_at = timezone.now()
+    task.save()
+    
+    return redirect('task_detail', pk=task.pk)
+
+
+# 6. ФУНКЦИЯ: load_objects - AJAX загрузка объектов по модели
+from django.http import JsonResponse
+from .models import OesObject
+
+def load_objects(request):
+    """AJAX endpoint для поиска OesObject по тексту."""
+    search_query = request.GET.get('search')
+    model_id = request.GET.get('model_id')  # Для обратной совместимости
+    
+    if search_query and len(search_query) >= 2:
+        # Улучшенный поиск: по названию объекта, модели и категории
+        from django.db.models import Q
+        
+        objects = OesObject.objects.filter(
+            Q(name__icontains=search_query) |
+            Q(model__name__icontains=search_query) |
+            Q(model__category__name__icontains=search_query)
+        ).select_related('model', 'model__category').distinct()[:15]  # Увеличиваем до 15 результатов
+        
+        # Форматируем результат
+        formatted_objects = []
+        for obj in objects:
+            model_name = f"{obj.model.category.name} / {obj.model.name}" if obj.model else "Неизвестная модель"
+            formatted_objects.append({
+                'id': obj.id,
+                'name': obj.name,
+                'model_name': model_name
+            })
+        
+        return JsonResponse({'objects': formatted_objects})
+    
+    # Старая логика для model_id (обратная совместимость)
+    elif model_id:
+        objects = OesObject.objects.filter(model_id=model_id).values('id', 'name')
+        return JsonResponse({'objects': list(objects)})
+    
+    return JsonResponse({'objects': []})
+
+
+# 7. ФУНКЦИЯ: task_pool - задачи со статусом "к выполнению"
+@login_required
+def task_pool(request):
+    """Отображает все задачи со статусом 'к выполнению'."""
+    tasks = Task.objects.filter(status=Task.STATUS_TODO).order_by('-priority', 'created_at')
+    
+    context = {
+        'tasks': tasks,
+        'page_title': 'Пул задач (к выполнению)',
+    }
+    return render(request, 'tasks/task_pool.html', context)
+
+
+# 8. ФУНКЦИЯ: all_tasks - все задачи с фильтром по статусу
+@login_required
+def all_tasks(request):
+    """Отображает все задачи с возможностью фильтрации по статусу, активу и назначенному пользователю."""
+    from django.contrib.auth import get_user_model
+    
+    # Получаем параметры фильтрации из GET запроса
+    status_filter = request.GET.get('status')
+    asset_filter = request.GET.get('asset')
+    assignee_filter = request.GET.get('assignee')
+    
+    # Если статус не указан и нет других фильтров, по умолчанию показываем "Ожидание"
+    if status_filter is None and not asset_filter and not assignee_filter:
+        status_filter = Task.STATUS_WAITING
+    
+    # Базовый queryset
+    tasks = Task.objects.all()
+    
+    # Применяем фильтр по статусу, если он указан
+    if status_filter:
+        tasks = tasks.filter(status=status_filter)
+    
+    # Применяем фильтр по активу, если он указан
+    if asset_filter:
+        tasks = tasks.filter(oes_object__name__icontains=asset_filter)
+    
+    # Применяем фильтр по назначенному пользователю, если он указан
+    if assignee_filter:
+        tasks = tasks.filter(assigned_to__username__icontains=assignee_filter)
+    
+    tasks = tasks.order_by('-priority', 'created_at')
+    
+    # Получаем все возможные статусы для фильтра
+    status_choices = Task.STATUS_CHOICES
+    
+    # Получаем уникальные активы для автокомплита
+    assets = OesObject.objects.values_list('name', flat=True).distinct().order_by('name')
+    
+    # Получаем пользователей для автокомплита
+    User = get_user_model()
+    users = User.objects.values_list('username', flat=True).distinct().order_by('username')
+    
+    context = {
+        'tasks': tasks,
+        'status_choices': status_choices,
+        'current_status': status_filter,
+        'current_asset': asset_filter,
+        'current_assignee': assignee_filter,
+        'assets': assets,
+        'users': users,
+        'page_title': 'Все задачи',
+    }
+    return render(request, 'tasks/all_tasks.html', context)
+
+
+# 9. ФУНКЦИЯ: work_order_management - формирование наряда (только для менеджеров)
+@login_required
+def work_order_management(request):
+    """Быстрое редактирование задач для формирования наряда. Доступно только менеджерам."""
+    from django.contrib.auth import get_user_model
+    from django.contrib.auth.models import Group
+    
+    # Проверяем, что пользователь в группе "Менеджеры"
+    if not request.user.groups.filter(name='Менеджеры').exists():
+        messages.error(request, 'Доступ запрещен. Эта страница доступна только менеджерам.')
+        return redirect('task_list')
+    
+    User = get_user_model()
+    
+    # Обработка POST запроса (сохранение изменений)
+    if request.method == 'POST':
+        task_id = request.POST.get('task_id')
+        
+        if task_id:
+            try:
+                task = Task.objects.get(id=task_id)
+                
+                # Обновляем поля задачи
+                task.title = request.POST.get('title', task.title)
+                task.description = request.POST.get('description', task.description)
+                task.status = request.POST.get('status', task.status)
+                task.due_date = request.POST.get('due_date') or None
+                
+                # Обновляем актив
+                oes_object_id = request.POST.get('oes_object_id')
+                if oes_object_id:
+                    try:
+                        task.oes_object = OesObject.objects.get(id=oes_object_id)
+                    except OesObject.DoesNotExist:
+                        pass
+                
+                # Обновляем назначенного пользователя
+                assigned_to_id = request.POST.get('assigned_to')
+                if assigned_to_id:
+                    try:
+                        task.assigned_to = User.objects.get(id=assigned_to_id)
+                    except User.DoesNotExist:
+                        pass
+                elif request.POST.get('assigned_to') == '':
+                    task.assigned_to = None
+                
+                task.save()
+                messages.success(request, f'Задача #{task.id} успешно обновлена!')
+                
+            except Task.DoesNotExist:
+                messages.error(request, 'Задача не найдена')
+        
+        return redirect('work_order_management')
+    
+    # Получаем все задачи со статусом "Ожидание"
+    tasks = Task.objects.filter(status=Task.STATUS_WAITING).order_by('-created_at')
+    
+    # Получаем всех пользователей для выбора исполнителя
+    users = User.objects.filter(is_active=True).order_by('username')
+    
+    # Получаем все статусы
+    status_choices = Task.STATUS_CHOICES
+    
+    # Получаем активы для автокомплита
+    assets = OesObject.objects.all().select_related('model').order_by('name')
+    
+    context = {
+        'tasks': tasks,
+        'users': users,
+        'status_choices': status_choices,
+        'assets': assets,
+        'page_title': 'Формирование наряда',
+    }
+    return render(request, 'tasks/work_order_management.html', context)

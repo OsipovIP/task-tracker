@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block authenticated_content %}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4>{{ page_title }}</h4>
+        <div>
+            <a href="{% url 'radio_models_list' %}" class="btn btn-secondary me-2">
+                Модели раций
+            </a>
+            <a href="{% url 'radio_assign' %}" class="btn btn-secondary me-2">
+                Выдать рацию
+            </a>
+            <a href="{% url 'radio_add' %}" class="btn btn-secondary">
+                Добавить рацию
+            </a>
+        </div>
+    </div>
+
+    <div class="alert alert-info">
+        Всего активных раций: <strong>{{ active_count }}</strong>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered" id="radioTable">
+            <thead class="table-dark">
+                <tr>
+                    <th>Модель</th>
+                    <th>SN</th>
+                    <th>CCID</th>
+                    <th>ID</th>
+                    <th>Описание</th>
+                    <th>Статус</th>
+                    <th>Действия</th>
+                </tr>
+                <tr class="filters">
+                    <th><input type="text" class="form-control form-control-sm filter-input" placeholder="Фильтр..."></th>
+                    <th><input type="text" class="form-control form-control-sm filter-input" placeholder="Фильтр..."></th>
+                    <th><input type="text" class="form-control form-control-sm filter-input" placeholder="Фильтр..."></th>
+                    <th><input type="text" class="form-control form-control-sm filter-input" placeholder="Фильтр..."></th>
+                    <th><input type="text" class="form-control form-control-sm filter-input" placeholder="Фильтр..."></th>
+                    <th><input type="text" class="form-control form-control-sm filter-input" placeholder="Фильтр..."></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for radio in radios %}
+                <tr>
+                    <td>{{ radio.model.name }}</td>
+                    <td>{{ radio.sn }}</td>
+                    <td>{{ radio.ccid|default:"—" }}</td>
+                    <td>{{ radio.sim|default:"—" }}</td>
+                    <td>{{ radio.description|default:"—" }}</td>
+                    <td>{% if radio.is_active %}Активна{% else %}Неактивна{% endif %}</td>
+                    <td>
+                        <a href="{% url 'radio_edit' radio.pk %}" class="btn btn-sm btn-secondary">Редактировать</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="7" class="text-center">Нет раций в справочнике</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="mt-3">
+        <a href="{% url 'radio_repair' %}" class="btn btn-secondary me-2">Учет ремонта</a>
+        <a href="{% url 'radio_assignments_list' %}" class="btn btn-secondary me-2">Журнал выдачи</a>
+        <a href="{% url 'radio_repairs_list' %}" class="btn btn-secondary">История ремонтов</a>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+console.log('Script loaded');
+console.log('jQuery available:', typeof jQuery !== 'undefined');
+
+// Ждем загрузки jQuery
+if (typeof jQuery === 'undefined') {
+    console.error('jQuery not loaded!');
+} else {
+    jQuery(document).ready(function($) {
+        console.log('Document ready');
+        console.log('Filter inputs found:', $('.filter-input').length);
+        console.log('Table rows found:', $('#radioTable tbody tr').length);
+        
+        // Фильтрация таблицы
+        $('.filter-input').on('keyup', function() {
+            console.log('Filter input changed');
+            var filters = [];
+            $('#radioTable .filters .filter-input').each(function() {
+                filters.push($(this).val().toLowerCase());
+            });
+            console.log('Filters:', filters);
+            
+            $('#radioTable tbody tr').each(function() {
+                var $row = $(this);
+                var show = true;
+                
+                filters.forEach(function(filter, index) {
+                    if (filter) {
+                        var cellText = $row.find('td').eq(index).text().toLowerCase();
+                        if (cellText.indexOf(filter) === -1) {
+                            show = false;
+                        }
+                    }
+                });
+                
+                $row.toggle(show);
+            });
+        });
+    });
+}
+</script>
+{% endblock %}
+

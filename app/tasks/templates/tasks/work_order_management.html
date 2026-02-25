@@ -1,0 +1,584 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block authenticated_content %}
+
+<!-- Сообщения от Django -->
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+{% endif %}
+
+
+<!-- Кнопки управления -->
+<div class="mb-4 mt-4 d-flex gap-2">
+    <button type="button" class="btn btn-success" id="add-new-task-btn">
+        <i class="fas fa-plus me-2"></i>Добавить новую задачу
+    </button>
+    
+    <a href="{% url 'create_and_close_task' %}" class="btn btn-outline-success">
+        <i class="fas fa-check-circle me-2"></i>Создать и закрыть
+    </a>
+    
+    <form method="post" style="display: inline;" id="send-telegram-form">
+        {% csrf_token %}
+        <button type="submit" name="send_to_telegram" class="btn btn-primary">
+            <i class="fas fa-plane me-2"></i>Отправить наряд в Telegram
+        </button>
+    </form>
+</div>
+
+
+<!-- Таблица задач с возможностью редактирования -->
+<div class="table-responsive mt-3">
+    <table class="table table-hover table-bordered align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th style="width: 5%; padding: 12px 8px; text-align: center; border-right: 1px solid #495057;">#</th>
+                <th style="width: 12%; padding: 12px 8px; text-align: center; border-right: 1px solid #495057;">Актив</th>
+                <th style="width: 8%; padding: 12px 8px; text-align: center; border-right: 1px solid #495057;">Номер ITIL</th>
+                <th style="width: 10%; padding: 12px 8px; text-align: center; border-right: 1px solid #495057;">Назначена</th>
+                <th style="width: 8%; padding: 12px 8px; text-align: center; border-right: 1px solid #495057;">Статус</th>
+                <th style="width: 20%; padding: 12px 8px; text-align: center; border-right: 1px solid #495057;">Описание</th>
+                <th style="width: 18%; padding: 12px 8px; text-align: center; border-right: 1px solid #495057;">Заголовок</th>
+                <th style="width: 10%; padding: 12px 8px; text-align: center; border-right: 1px solid #495057;">Срок</th>
+                <th style="width: 9%; padding: 12px 8px; text-align: center;">Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+            <tr id="task-row-{{ task.id }}">
+                <form method="post" action="{% url 'work_order_management' %}" id="form-{{ task.id }}">
+                    {% csrf_token %}
+                    <input type="hidden" name="task_id" value="{{ task.id }}">
+                    
+                    <td class="text-center">
+                        <strong>#{{ task.id }}</strong>
+                        {% comment %} ITIL ОТКЛЮЧЕНО
+                        {% if task.external_source == 'ITIL' %}
+                            <br>ITIL
+                        {% endif %}
+                        {% endcomment %}
+                    </td>
+                    
+                    <!-- Актив -->
+                    <td>
+                        <div class="position-relative">
+                            <input type="text" 
+                                   class="form-control form-control-sm asset-search" 
+                                   data-task-id="{{ task.id }}"
+                                   value="{% if task.oes_object %}{{ task.oes_object.name }}{% if task.oes_object.model %} ({{ task.oes_object.model.name }}){% endif %}{% elif task.manual_asset %}{{ task.manual_asset.name }} ({{ task.manual_asset.asset_type }}{% if task.manual_asset.model %} / {{ task.manual_asset.model }}{% endif %}) [Ручной]{% endif %}">
+                            <input type="hidden" 
+                                   name="oes_object_id" 
+                                   id="oes_object_id_{{ task.id }}"
+                                   value="{% if task.oes_object %}{{ task.oes_object.id }}{% endif %}">
+                            <input type="hidden" 
+                                   name="manual_asset_id" 
+                                   id="manual_asset_id_{{ task.id }}"
+                                   value="{% if task.manual_asset %}{{ task.manual_asset.id }}{% endif %}">
+                            <div class="search-results position-absolute w-100" 
+                                 id="search-results-{{ task.id }}" 
+                                 style="display: none; z-index: 1000; max-height: 200px; overflow-y: auto;">
+                            </div>
+                        </div>
+                    </td>
+                    
+                    <!-- Номер ITIL -->
+                    <td>
+                        <input type="text" 
+                               class="form-control form-control-sm" 
+                               name="itil_number"
+                               value="{{ task.itil_number|default:'' }}">
+                    </td>
+                    
+                    <!-- Назначена -->
+                    <td>
+                        <select class="form-select form-select-sm" name="assigned_to">
+                            <option value="">Не назначена</option>
+                            {% for user in users %}
+                                <option value="{{ user.id }}" 
+                                        {% if task.assigned_to.id == user.id %}selected{% endif %}>
+                                    {{ user.username }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    
+                    <!-- Статус -->
+                    <td>
+                        <select class="form-select form-select-sm" name="status" required>
+                            {% for status_value, status_label in status_choices %}
+                                <option value="{{ status_value }}" 
+                                        {% if task.status == status_value %}selected{% endif %}>
+                                    {{ status_label }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    
+                    <!-- Описание -->
+                    <td>
+                        <textarea class="form-control form-control-sm" 
+                                  name="description" 
+                                  rows="2"
+                                  style="resize: vertical;">{{ task.description }}</textarea>
+                    </td>
+                    
+                    <!-- Заголовок -->
+                    <td>
+                        <input type="text" 
+                               class="form-control form-control-sm" 
+                               name="title" 
+                               value="{{ task.title }}"
+                               required>
+                    </td>
+                    
+                    <!-- Срок -->
+                    <td>
+                        <input type="datetime-local" 
+                               class="form-control form-control-sm" 
+                               name="due_date"
+                               value="{% if task.due_date %}{{ task.due_date|date:'Y-m-d\TH:i' }}{% endif %}">
+                    </td>
+                    
+                    <!-- Кнопки сохранить -->
+                    <td class="text-center">
+                        <button type="submit" 
+                                class="btn btn-outline-success btn-sm me-1" 
+>
+                            <i class="fas fa-save"></i>
+                        </button>
+                        <button type="submit" 
+                                class="btn btn-outline-info btn-sm" 
+                                name="save_and_send_telegram"
+                                value="{{ task.id }}">
+                            <i class="fas fa-plane"></i>
+                        </button>
+                    </td>
+                </form>
+            </tr>
+            {% endfor %}
+            
+            <!-- Строка для добавления новой задачи -->
+            <tr id="new-task-row" class="table-success" style="display: none;">
+                <form method="post" action="{% url 'work_order_management' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="create_new_task" value="true">
+                    
+                    <td class="text-center">
+                        НОВАЯ
+                    </td>
+                    
+                    <!-- Актив -->
+                    <td>
+                        <div class="position-relative">
+                            <input type="text" 
+                                   class="form-control form-control-sm asset-search" 
+                                   data-task-id="new"
+                                   name="new_oes_object_search">
+                            <input type="hidden" 
+                                   name="oes_object_id" 
+                                   id="oes_object_id_new">
+                            <input type="hidden" 
+                                   name="manual_asset_id" 
+                                   id="manual_asset_id_new">
+                            <div class="search-results position-absolute w-100" 
+                                 id="search-results-new" 
+                                 style="display: none; z-index: 1000; max-height: 200px; overflow-y: auto;">
+                            </div>
+                        </div>
+                    </td>
+                    
+                    <!-- Номер ITIL -->
+                    <td>
+                        <input type="text" 
+                               class="form-control form-control-sm" 
+                               name="itil_number"
+>
+                    </td>
+                    
+                    <!-- Назначена -->
+                    <td>
+                        <select class="form-select form-select-sm" name="assigned_to">
+                            <option value="">Не назначена</option>
+                            {% for user in users %}
+                                <option value="{{ user.id }}">{{ user.username }}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    
+                    <!-- Статус -->
+                    <td>
+                        <select class="form-select form-select-sm" name="status">
+                            {% for status_value, status_label in status_choices %}
+                                <option value="{{ status_value }}" {% if status_value == 'waiting' %}selected{% endif %}>{{ status_label }}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    
+                    <!-- Описание -->
+                    <td>
+                        <textarea class="form-control form-control-sm" 
+                                  name="description" 
+                                  rows="2"
+                                  style="resize: vertical;"
+></textarea>
+                    </td>
+                    
+                    <!-- Заголовок -->
+                    <td>
+                        <input type="text" 
+                               class="form-control form-control-sm" 
+                               name="title" 
+                               required>
+                    </td>
+                    
+                    <!-- Срок -->
+                    <td>
+                        <input type="datetime-local" 
+                               class="form-control form-control-sm" 
+                               name="due_date">
+                    </td>
+                    
+                    <!-- Кнопки -->
+                    <td class="text-center">
+                        <button type="submit" 
+                                class="btn btn-outline-success btn-sm me-1" 
+>
+                            <i class="fas fa-plus"></i>
+                        </button>
+                        <button type="submit" 
+                                class="btn btn-outline-info btn-sm me-1" 
+                                name="create_and_send_telegram"
+                                value="true">
+                            <i class="fas fa-plane"></i>
+                        </button>
+                        <button type="button" 
+                                class="btn btn-outline-secondary btn-sm" 
+                                onclick="cancelNewTask()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </td>
+                </form>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+{% if not tasks %}
+<!-- Сообщение, если задач нет -->
+<div class="alert alert-warning py-3" role="alert">
+    <h4 class="alert-heading">
+        <i class="fas fa-info-circle me-2"></i> Задач со статусом "Ожидание" не найдено
+    </h4>
+    <p class="mb-0">Все задачи назначены или находятся в другом статусе.</p>
+</div>
+{% endif %}
+
+<!-- Стили для поиска активов -->
+<style>
+    .search-results {
+        background-color: white;
+        border: 1px solid #dee2e6;
+        border-radius: 0.25rem;
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        margin-top: 2px;
+        z-index: 9999 !important;
+        max-height: 300px !important;
+        overflow-y: auto;
+    }
+    
+    .search-result-item {
+        padding: 0.5rem;
+        cursor: pointer;
+        border-bottom: 1px solid #dee2e6;
+    }
+    
+    .search-result-item:last-child {
+        border-bottom: none;
+    }
+    
+    .search-result-item:hover {
+        background-color: #f8f9fa;
+    }
+    
+    .table td {
+        vertical-align: middle;
+    }
+    
+    /* Убираем обрезание для таблицы */
+    .table-responsive {
+        overflow: visible !important;
+    }
+    
+    /* Убираем обрезание для tbody */
+    tbody {
+        overflow: visible !important;
+    }
+    
+    /* Убираем обрезание для таблицы */
+    .table {
+        overflow: visible !important;
+    }
+    
+    .asset-search {
+        min-width: 150px;
+    }
+</style>
+
+{% endblock authenticated_content %}
+
+{% block extra_js %}
+<script>
+console.log('jQuery loaded:', typeof $ !== 'undefined');
+$(document).ready(function() {
+    console.log('Work order management script loaded');
+    console.log('Add button exists:', $('#add-new-task-btn').length > 0);
+    
+    // Защита от двойной отправки формы (кроме формы отправки в Telegram)
+    $('form').not('#send-telegram-form').on('submit', function(e) {
+        var $form = $(this);
+        var $submitBtn = $form.find('button[type="submit"]');
+        
+        // Проверяем, не была ли форма уже отправлена
+        if ($form.data('submitted') === true) {
+            e.preventDefault();
+            console.log('Form already submitted, preventing duplicate');
+            return false;
+        }
+        
+        // Помечаем форму как отправленную
+        $form.data('submitted', true);
+        
+        // Блокируем кнопку и меняем текст
+        $submitBtn.prop('disabled', true);
+        var originalHtml = $submitBtn.html();
+        $submitBtn.html('<i class="fas fa-spinner fa-spin"></i>');
+        
+        // Через 3 секунды разблокируем (на случай ошибки)
+        setTimeout(function() {
+            $form.data('submitted', false);
+            $submitBtn.prop('disabled', false);
+            $submitBtn.html(originalHtml);
+        }, 3000);
+    });
+    
+    // Функция показа строки для новой задачи
+    function addNewTaskRow() {
+        console.log('Showing new task row');
+        
+        // Показываем строку для новой задачи
+        $('#new-task-row').show();
+        
+        // Скрываем сообщение "Задач не найдено"
+        $('.alert-warning').hide();
+        
+        // Прокручиваем к новой строке
+        setTimeout(function() {
+            var newRowElement = $('#new-task-row');
+            if (newRowElement.length > 0 && newRowElement.offset()) {
+                $('html, body').animate({
+                    scrollTop: newRowElement.offset().top - 100
+                }, 500);
+            }
+        }, 100);
+    }
+    
+    // Обработчик кнопки "Добавить новую задачу"
+    $('#add-new-task-btn').on('click', function() {
+        console.log('Add new task button clicked');
+        addNewTaskRow();
+    });
+    
+    // Убираем дублирующий обработчик - он создает двойные вызовы
+    
+    // Обработка поиска активов для каждой строки
+    $('.asset-search').on('input', function() {
+        var taskId = $(this).data('task-id');
+        var searchQuery = $(this).val();
+        var resultsDiv = $('#search-results-' + taskId);
+        
+        if (searchQuery.length < 2) {
+            resultsDiv.hide();
+            return;
+        }
+        
+        // AJAX запрос для поиска активов
+        $.ajax({
+            url: '{% url "ajax_load_objects" %}',
+            data: {
+                'search': searchQuery
+            },
+            success: function(data) {
+                resultsDiv.empty();
+                
+                // Исправляем: data содержит объект с ключом 'objects'
+                var objects = data.objects || [];
+                
+                if (objects.length === 0) {
+                    resultsDiv.append('<div class="search-result-item text-muted">Ничего не найдено</div>');
+                } else {
+                    $.each(objects, function(index, item) {
+                        // Используем display_name если есть, иначе формируем сами
+                        var displayText = item.display_name || (item.name + (item.model_name ? ' (' + item.model_name + ')' : ''));
+                        var assetType = item.type || 'oes'; // По умолчанию OES
+                        
+                        var resultItem = $('<div>')
+                            .addClass('search-result-item')
+                            .text(displayText)
+                            .data('id', item.id)
+                            .data('name', displayText)
+                            .data('type', assetType)
+                            .click(function() {
+                                var selectedType = $(this).data('type');
+                                var selectedId = $(this).data('id');
+                                var selectedName = $(this).data('name');
+                                
+                                // Очищаем оба поля
+                                $('#oes_object_id_' + taskId).val('');
+                                $('#manual_asset_id_' + taskId).val('');
+                                
+                                // Устанавливаем значение в правильное поле в зависимости от типа
+                                if (selectedType === 'manual') {
+                                    $('#manual_asset_id_' + taskId).val(selectedId);
+                                } else {
+                                    $('#oes_object_id_' + taskId).val(selectedId);
+                                }
+                                
+                                $('.asset-search[data-task-id="' + taskId + '"]').val(selectedName);
+                                resultsDiv.hide();
+                                
+                                // Автоматически заполняем заголовок для новой задачи
+                                if (taskId === 'new') {
+                                    var today = new Date();
+                                    var dateStr = today.getFullYear() + '-' + 
+                                                 String(today.getMonth() + 1).padStart(2, '0') + '-' + 
+                                                 String(today.getDate()).padStart(2, '0');
+                                    
+                                    var title = selectedName + ' - ' + dateStr;
+                                    $('#new-task-row input[name="title"]').val(title);
+                                }
+                            });
+                        
+                        resultsDiv.append(resultItem);
+                    });
+                }
+                
+                resultsDiv.show();
+            },
+            error: function(xhr, status, error) {
+                resultsDiv.empty();
+                resultsDiv.append('<div class="search-result-item text-danger">Ошибка поиска</div>');
+                resultsDiv.show();
+            }
+        });
+    });
+    
+    // Закрытие результатов поиска при клике вне области
+    $(document).click(function(e) {
+        if (!$(e.target).closest('.position-relative').length) {
+            $('.search-results').hide();
+        }
+    });
+    
+    // Делегированная обработка для новых строк
+    $(document).on('input', '.asset-search', function() {
+        var taskId = $(this).data('task-id');
+        var searchQuery = $(this).val();
+        var resultsDiv = $('#search-results-' + taskId);
+        
+        if (searchQuery.length < 2) {
+            resultsDiv.hide();
+            return;
+        }
+        
+        // AJAX запрос для поиска активов
+        $.ajax({
+            url: '{% url "ajax_load_objects" %}',
+            data: {
+                'search': searchQuery
+            },
+            success: function(data) {
+                resultsDiv.empty();
+                
+                var objects = data.objects || [];
+                
+                if (objects.length === 0) {
+                    resultsDiv.append('<div class="search-result-item text-muted">Ничего не найдено</div>');
+                } else {
+                    $.each(objects, function(index, item) {
+                        // Используем display_name если есть, иначе формируем сами
+                        var displayText = item.display_name || (item.name + (item.model_name ? ' (' + item.model_name + ')' : ''));
+                        var assetType = item.type || 'oes'; // По умолчанию OES
+                        
+                        var resultItem = $('<div>')
+                            .addClass('search-result-item')
+                            .text(displayText)
+                            .data('id', item.id)
+                            .data('name', displayText)
+                            .data('type', assetType)
+                            .click(function() {
+                                var selectedType = $(this).data('type');
+                                var selectedId = $(this).data('id');
+                                var selectedName = $(this).data('name');
+                                
+                                // Очищаем оба поля
+                                $('#oes_object_id_' + taskId).val('');
+                                $('#manual_asset_id_' + taskId).val('');
+                                
+                                // Устанавливаем значение в правильное поле в зависимости от типа
+                                if (selectedType === 'manual') {
+                                    $('#manual_asset_id_' + taskId).val(selectedId);
+                                } else {
+                                    $('#oes_object_id_' + taskId).val(selectedId);
+                                }
+                                
+                                $('.asset-search[data-task-id="' + taskId + '"]').val(selectedName);
+                                resultsDiv.hide();
+                                
+                                // Автоматически заполняем заголовок для новой задачи
+                                if (taskId === 'new') {
+                                    var today = new Date();
+                                    var dateStr = today.getFullYear() + '-' + 
+                                                 String(today.getMonth() + 1).padStart(2, '0') + '-' + 
+                                                 String(today.getDate()).padStart(2, '0');
+                                    
+                                    var title = selectedName + ' - ' + dateStr;
+                                    $('#new-task-row input[name="title"]').val(title);
+                                }
+                            });
+                        
+                        resultsDiv.append(resultItem);
+                    });
+                }
+                
+                resultsDiv.show();
+            },
+            error: function(xhr, status, error) {
+                resultsDiv.empty();
+                resultsDiv.append('<div class="search-result-item text-danger">Ошибка поиска</div>');
+                resultsDiv.show();
+            }
+        });
+    });
+});
+
+// Функция отмены создания новой задачи
+function cancelNewTask() {
+    $('#new-task-row').hide();
+    // Очищаем поля формы
+    $('#new-task-row form')[0].reset();
+    
+    // Если нет задач, показываем сообщение обратно
+    if ($('tbody tr:visible').length === 0) {
+        $('.alert-warning').show();
+    }
+}
+</script>
+{% endblock %}
+

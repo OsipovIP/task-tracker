@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block authenticated_content %}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">{{ page_title }}</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        
+                        <div class="mb-3">
+                            <label for="{{ form.device.id_for_label }}" class="form-label">Рация *</label>
+                            {{ form.device }}
+                            {% if form.device.errors %}
+                                <div class="text-danger">{{ form.device.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="{{ form.assignee_name.id_for_label }}" class="form-label">{{ form.assignee_name.label }} *</label>
+                            {{ form.assignee_name }}
+                            {% if form.assignee_name.errors %}
+                                <div class="text-danger">{{ form.assignee_name.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="{{ form.department.id_for_label }}" class="form-label">Подразделение *</label>
+                            {{ form.department }}
+                            {% if form.department.errors %}
+                                <div class="text-danger">{{ form.department.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="{{ form.notes.id_for_label }}" class="form-label">{{ form.notes.label }}</label>
+                            {{ form.notes }}
+                            {% if form.notes.errors %}
+                                <div class="text-danger">{{ form.notes.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="{{ form.pdf_file.id_for_label }}" class="form-label">{{ form.pdf_file.label }}</label>
+                            {{ form.pdf_file }}
+                            {% if form.pdf_file.errors %}
+                                <div class="text-danger">{{ form.pdf_file.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="d-flex gap-2">
+                            {% if assignment %}
+                                <button type="submit" class="btn btn-secondary">
+                                    <i class="fas fa-save me-2"></i>Сохранить
+                                </button>
+                                <a href="{% url 'radio_assignments_list' %}" class="btn btn-secondary">
+                                    <i class="fas fa-times me-2"></i>Отмена
+                                </a>
+                            {% else %}
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-hand-holding me-2"></i>Выдать
+                                </button>
+                                <a href="{% url 'radio_list' %}" class="btn btn-secondary">
+                                    <i class="fas fa-times me-2"></i>Отмена
+                                </a>
+                            {% endif %}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+

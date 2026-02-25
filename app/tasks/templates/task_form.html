@@ -1,0 +1,359 @@
+{% extends 'base.html' %} 
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block extra_head %}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <style>
+        .select2-container {
+            z-index: 10000; 
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .select2-dropdown {
+            z-index: 9999 !important;
+            max-height: 200px !important;
+            overflow-y: auto !important;
+        }
+        /* Убираем дублирующиеся placeholder */
+        .form-control::placeholder {
+            color: transparent !important;
+        }
+        /* Улучшаем отображение Select2 */
+        .select2-container--default .select2-selection--single {
+            height: 38px;
+            border: 1px solid #ced4da;
+            border-radius: 0.375rem;
+        }
+        /* Ограничиваем высоту выпадающего списка */
+        .select2-results {
+            max-height: 150px !important;
+        }
+        /* Стили для результатов поиска */
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid #ced4da;
+            border-top: none;
+            border-radius: 0 0 0.375rem 0.375rem;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+        }
+        .search-results.show {
+            display: block;
+        }
+        .search-result-item {
+            padding: 8px 12px;
+            cursor: pointer;
+            border-bottom: 1px solid #f8f9fa;
+        }
+        .search-result-item:hover {
+            background-color: #f8f9fa;
+        }
+        .search-result-item.selected {
+            background-color: #007bff;
+            color: white;
+        }
+        .form-group {
+            position: relative;
+        }
+    </style>
+{% endblock %}
+
+{% block authenticated_content %}
+    <div class="container">
+
+        <!-- Отображение сообщений -->
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+            
+            <!-- Поле поиска актива -->
+            <div class="form-group">
+                <label class="form-label">Актив (Объект OES):</label>
+                <input type="text" id="oes_object_search" class="form-control"  autocomplete="off">
+                <div id="search_results" class="search-results"></div>
+            </div>
+
+            <!-- Заголовок задачи -->
+            <div class="form-group">
+                <label for="{{ form.title.id_for_label }}" class="form-label">
+                    {{ form.title.label }}:
+                </label>
+                {{ form.title }}
+                {% if form.title.errors %}
+                    <div class="alert alert-danger mt-2">
+                        {{ form.title.errors }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Описание -->
+            <div class="form-group">
+                <label for="{{ form.description.id_for_label }}" class="form-label">
+                    {{ form.description.label }}:
+                </label>
+                {{ form.description }}
+                {% if form.description.errors %}
+                    <div class="alert alert-danger mt-2">
+                        {{ form.description.errors }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Исполнитель и группа -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="{{ form.assigned_to.id_for_label }}" class="form-label">
+                            {{ form.assigned_to.label }}:
+                        </label>
+                        {{ form.assigned_to }}
+                        {% if form.assigned_to.errors %}
+                            <div class="alert alert-danger mt-2">
+                                {{ form.assigned_to.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="{{ form.assigned_group.id_for_label }}" class="form-label">
+                            {{ form.assigned_group.label }}:
+                        </label>
+                        {{ form.assigned_group }}
+                        {% if form.assigned_group.errors %}
+                            <div class="alert alert-danger mt-2">
+                                {{ form.assigned_group.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Статус и приоритет -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="{{ form.status.id_for_label }}" class="form-label">
+                            {{ form.status.label }}:
+                        </label>
+                        {{ form.status }}
+                        {% if form.status.errors %}
+                            <div class="alert alert-danger mt-2">
+                                {{ form.status.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="{{ form.priority.id_for_label }}" class="form-label">
+                            {{ form.priority.label }}:
+                        </label>
+                        {{ form.priority }}
+                        {% if form.priority.errors %}
+                            <div class="alert alert-danger mt-2">
+                                {{ form.priority.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Срок выполнения -->
+            <div class="form-group">
+                <label for="{{ form.due_date.id_for_label }}" class="form-label">
+                    {{ form.due_date.label }}:
+                </label>
+                {{ form.due_date }}
+                {% if form.due_date.errors %}
+                    <div class="alert alert-danger mt-2">
+                        {{ form.due_date.errors }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Номер ITIL -->
+            <div class="form-group">
+                <label for="{{ form.itil_number.id_for_label }}" class="form-label">
+                    {{ form.itil_number.label }}:
+                </label>
+                {{ form.itil_number }}
+                {% if form.itil_number.errors %}
+                    <div class="alert alert-danger mt-2">
+                        {{ form.itil_number.errors }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-3">Создать задачу</button>
+        </form>
+    </div>
+{% endblock authenticated_content %}
+
+{% block extra_js %}
+    <script>
+        console.log('Блок extra_js выполняется!');
+    </script>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var selectedObjectId = null;
+            var searchTimeout = null;
+            var $searchInput = $('#oes_object_search');
+            var $searchResults = $('#search_results');
+            var selectedIndex = -1;
+            
+            // Добавляем скрытое поле для хранения ID объекта
+            $searchInput.after('<input type="hidden" name="oes_object_id" id="oes_object_id">');
+            
+            // Обработчик ввода в поле поиска
+            $searchInput.on('input', function() {
+                var query = $(this).val().trim();
+                
+                // Очищаем предыдущий таймаут
+                if (searchTimeout) {
+                    clearTimeout(searchTimeout);
+                }
+                
+                // Показываем результаты только если введено минимум 2 символа
+                if (query.length >= 2) {
+                    searchTimeout = setTimeout(function() {
+                        searchObjects(query);
+                    }, 300);
+                } else {
+                    hideResults();
+                }
+            });
+            
+            // Функция поиска объектов
+            function searchObjects(query) {
+                $.ajax({
+                    url: '{% url "ajax_load_objects" %}',
+                    data: { search: query },
+                    dataType: 'json',
+                    success: function(data) {
+                        displayResults(data.objects.slice(0, 10)); // Ограничиваем до 10 результатов
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Ошибка поиска:', error);
+                        hideResults();
+                    }
+                });
+            }
+            
+            // Функция отображения результатов
+            function displayResults(objects) {
+                $searchResults.empty();
+                selectedIndex = -1;
+                
+                if (objects.length === 0) {
+                    $searchResults.append('<div class="search-result-item">Объекты не найдены</div>');
+                } else {
+                    objects.forEach(function(obj) {
+                        var $item = $('<div class="search-result-item" data-id="' + obj.id + '">' + 
+                                     obj.name + ' (' + obj.model_name + ')</div>');
+                        $searchResults.append($item);
+                    });
+                }
+                
+                $searchResults.addClass('show');
+            }
+            
+            // Функция скрытия результатов
+            function hideResults() {
+                $searchResults.removeClass('show').empty();
+                selectedIndex = -1;
+            }
+            
+            // Обработчик клика по результату
+            $searchResults.on('click', '.search-result-item', function() {
+                var objectId = $(this).data('id');
+                if (objectId) {
+                    selectedObjectId = objectId;
+                    $('#oes_object_id').val(selectedObjectId);
+                    
+                    // Получаем текст объекта (без модели в скобках)
+                    var objectText = $(this).text();
+                    var objectName = objectText.split(' (')[0]; // Убираем модель из скобок
+                    
+                    $searchInput.val(objectText);
+                    
+                    // Автоматически заполняем заголовок задачи
+                    var titleField = $('#id_title');
+                    var currentTitle = titleField.val();
+                    
+                    if (!currentTitle || currentTitle.trim() === '') {
+                        // Если заголовок пустой, заполняем автоматически
+                        titleField.val('Задача для ' + objectName);
+                    } else {
+                        // Если заголовок уже есть, добавляем объект в начало
+                        if (!currentTitle.includes(objectName)) {
+                            titleField.val('Задача для ' + objectName + ' - ' + currentTitle);
+                        }
+                    }
+                    
+                    hideResults();
+                    console.log('Выбран объект:', objectId, objectName);
+                }
+            });
+            
+            // Обработчик нажатия клавиш
+            $searchInput.on('keydown', function(e) {
+                var $items = $searchResults.find('.search-result-item[data-id]');
+                
+                if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    selectedIndex = Math.min(selectedIndex + 1, $items.length - 1);
+                    updateSelection();
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    selectedIndex = Math.max(selectedIndex - 1, -1);
+                    updateSelection();
+                } else if (e.key === 'Enter') {
+                    e.preventDefault();
+                    if (selectedIndex >= 0 && selectedIndex < $items.length) {
+                        $items.eq(selectedIndex).click();
+                    }
+                } else if (e.key === 'Escape') {
+                    hideResults();
+                }
+            });
+            
+            // Функция обновления выделения
+            function updateSelection() {
+                var $items = $searchResults.find('.search-result-item[data-id]');
+                $items.removeClass('selected');
+                
+                if (selectedIndex >= 0 && selectedIndex < $items.length) {
+                    $items.eq(selectedIndex).addClass('selected');
+                }
+            }
+            
+            // Скрываем результаты при клике вне поля
+            $(document).on('click', function(e) {
+                if (!$(e.target).closest('.form-group').length) {
+                    hideResults();
+                }
+            });
+        });
+    </script>
+{% endblock %}

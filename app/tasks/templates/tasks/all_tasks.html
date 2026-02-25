@@ -1,0 +1,326 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block authenticated_content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        {% if current_status or current_asset or current_assignee %}
+            <p class="text-muted mb-0">
+                <i class="fas fa-filter me-1"></i>
+                Показаны отфильтрованные результаты
+                {% if tasks|length == 0 %}
+                    - ничего не найдено
+                {% endif %}
+            </p>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Сообщения от Django -->
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+{% endif %}
+
+<!-- Фильтры -->
+<div class="card mb-4">
+    <div class="card-body">
+        <h5 class="card-title">
+            <i class="fas fa-filter me-2"></i>Фильтры
+        </h5>
+        
+        <!-- Форма поиска -->
+        <form method="get" class="row g-3 mb-3">
+            <div class="col-md-3">
+                <label for="asset_search" class="form-label">
+                    <i class="fas fa-cog me-1"></i>Поиск по активу
+                </label>
+                <input type="text" 
+                       class="form-control" 
+                       id="asset_search" 
+                       name="asset" 
+                       value="{{ current_asset|default:'' }}"
+                       list="assets_list">
+                <datalist id="assets_list">
+                    {% for asset in assets %}
+                        <option value="{{ asset }}">
+                    {% endfor %}
+                </datalist>
+            </div>
+            
+            <div class="col-md-3">
+                <label for="assignee_search" class="form-label">
+                    <i class="fas fa-user me-1"></i>Поиск по исполнителю
+                </label>
+                <input type="text" 
+                       class="form-control" 
+                       id="assignee_search" 
+                       name="assignee" 
+                       value="{{ current_assignee|default:'' }}"
+                       list="users_list">
+                <datalist id="users_list">
+                    {% for user in users %}
+                        <option value="{{ user }}">
+                    {% endfor %}
+                </datalist>
+            </div>
+            
+            <div class="col-md-3">
+                <label for="status_filter" class="form-label">
+                    <i class="fas fa-tasks me-1"></i>Фильтр по статусу
+                </label>
+                <select class="form-select" id="status_filter" name="status">
+                    <option value="">Все статусы</option>
+                    {% for status_value, status_label in status_choices %}
+                        <option value="{{ status_value }}" 
+                                {% if current_status == status_value %}selected{% endif %}>
+                            {{ status_label }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <div class="col-md-3">
+                <label for="date_from" class="form-label">
+                    <i class="fas fa-calendar me-1"></i>Дата закрытия с
+                </label>
+                <input type="date" 
+                       class="form-control" 
+                       id="date_from" 
+                       name="date_from" 
+                       value="{{ current_date_from|default:'' }}">
+            </div>
+            
+            <div class="col-md-3">
+                <label for="date_to" class="form-label">
+                    <i class="fas fa-calendar me-1"></i>Дата закрытия по
+                </label>
+                <input type="date" 
+                       class="form-control" 
+                       id="date_to" 
+                       name="date_to" 
+                       value="{{ current_date_to|default:'' }}">
+            </div>
+            
+            <div class="col-md-3">
+                <label for="category_filter" class="form-label">
+                    <i class="fas fa-tags me-1"></i>Фильтр по категории
+                </label>
+                <select class="form-select" id="category_filter" name="category">
+                    <option value="">Все категории</option>
+                    {% for category in categories %}
+                        <option value="{{ category.id }}" 
+                                {% if current_category == category.id|stringformat:"s" %}selected{% endif %}>
+                            {{ category.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <div class="col-md-3 d-flex align-items-end">
+                <div class="btn-group w-100">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-search me-1"></i>Поиск
+                    </button>
+                    <a href="{% url 'all_tasks' %}" class="btn btn-outline-secondary">
+                        <i class="fas fa-times me-1"></i>Очистить
+                    </a>
+                    <a href="{% url 'export_tasks_to_excel' %}?{{ request.GET.urlencode }}" class="btn btn-success">
+                        <i class="fas fa-file-excel me-1"></i>Excel
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Скрытые поля для сохранения других фильтров -->
+            {% if current_asset %}
+                <input type="hidden" name="asset" value="{{ current_asset }}">
+            {% endif %}
+            {% if current_assignee %}
+                <input type="hidden" name="assignee" value="{{ current_assignee }}">
+            {% endif %}
+            {% if current_date_from %}
+                <input type="hidden" name="date_from" value="{{ current_date_from }}">
+            {% endif %}
+            {% if current_date_to %}
+                <input type="hidden" name="date_to" value="{{ current_date_to }}">
+            {% endif %}
+            {% if current_category %}
+                <input type="hidden" name="category" value="{{ current_category }}">
+            {% endif %}
+        </form>
+        
+        <!-- Активные фильтры -->
+        {% if current_status or current_asset or current_assignee or current_date_from or current_date_to or current_category %}
+        <div class="mt-3">
+            <h6 class="text-muted">Активные фильтры:</h6>
+            <div class="d-flex flex-wrap gap-2">
+                {% if current_status %}
+                    Статус: {{ tasks.0.get_status_display|default:"Неизвестно" }}
+                    <a href="?{% if current_asset %}asset={{ current_asset }}&{% endif %}{% if current_assignee %}assignee={{ current_assignee }}{% endif %}" 
+                       class="text-decoration-none ms-1">
+                        <i class="fas fa-times"></i>
+                    </a>
+                {% endif %}
+                
+                {% if current_asset %}
+                    Актив: {{ current_asset }}
+                    <a href="?{% if current_status %}status={{ current_status }}&{% endif %}{% if current_assignee %}assignee={{ current_assignee }}{% endif %}" 
+                       class="text-decoration-none ms-1">
+                        <i class="fas fa-times"></i>
+                    </a>
+                {% endif %}
+                
+                {% if current_assignee %}
+                    Исполнитель: {{ current_assignee }}
+                    <a href="?{% if current_status %}status={{ current_status }}&{% endif %}{% if current_asset %}asset={{ current_asset }}&{% endif %}{% if current_date_from %}date_from={{ current_date_from }}&{% endif %}{% if current_date_to %}date_to={{ current_date_to }}{% endif %}" 
+                       class="text-decoration-none ms-1">
+                        <i class="fas fa-times"></i>
+                    </a>
+                {% endif %}
+                
+                {% if current_date_from %}
+                    Дата с: {{ current_date_from }}
+                    <a href="?{% if current_status %}status={{ current_status }}&{% endif %}{% if current_asset %}asset={{ current_asset }}&{% endif %}{% if current_assignee %}assignee={{ current_assignee }}&{% endif %}{% if current_date_to %}date_to={{ current_date_to }}{% endif %}" 
+                       class="text-decoration-none ms-1">
+                        <i class="fas fa-times"></i>
+                    </a>
+                {% endif %}
+                
+                {% if current_date_to %}
+                    Дата по: {{ current_date_to }}
+                    <a href="?{% if current_status %}status={{ current_status }}&{% endif %}{% if current_asset %}asset={{ current_asset }}&{% endif %}{% if current_assignee %}assignee={{ current_assignee }}&{% endif %}{% if current_date_from %}date_from={{ current_date_from }}&{% endif %}{% if current_category %}category={{ current_category }}{% endif %}" 
+                       class="text-decoration-none ms-1">
+                        <i class="fas fa-times"></i>
+                    </a>
+                {% endif %}
+                
+                {% if current_category %}
+                    Категория: 
+                    {% for category in categories %}
+                        {% if category.id|stringformat:"s" == current_category %}
+                            {{ category.name }}
+                        {% endif %}
+                    {% endfor %}
+                    <a href="?{% if current_status %}status={{ current_status }}&{% endif %}{% if current_asset %}asset={{ current_asset }}&{% endif %}{% if current_assignee %}assignee={{ current_assignee }}&{% endif %}{% if current_date_from %}date_from={{ current_date_from }}&{% endif %}{% if current_date_to %}date_to={{ current_date_to }}{% endif %}" 
+                       class="text-decoration-none ms-1">
+                        <i class="fas fa-times"></i>
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+{% if tasks %}
+    <!-- Таблица задач -->
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Актив</th>
+                    <th>Статус</th>
+                    <th>Исполнитель</th>
+                    <th>Доп. исполнитель</th>
+                    <th>Создана</th>
+                    <th>Закрыта</th>
+                    <th>Категория</th>
+                    <th>Выполненная работа</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for task in tasks %}
+                <tr>
+                    <td>
+                        <a href="{% url 'task_detail' pk=task.pk %}" class="text-decoration-none">
+                            <strong>#{{ task.id }}</strong>
+                        </a>
+                    </td>
+                    <td>
+                        {% if task.oes_object %}
+                            {{ task.oes_object.name }}
+                            {% if task.oes_object.model %}
+                                ({{ task.oes_object.model.name }})
+                            {% endif %}
+                        {% else %}
+                            <span class="text-muted">Не указан</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {{ task.get_status_display }}
+                    </td>
+                    <td>
+                        {% if task.assigned_to %}
+                            {% if task.assigned_to.first_name or task.assigned_to.last_name %}
+                                {{ task.assigned_to.first_name }} {{ task.assigned_to.last_name }}
+                            {% else %}
+                                {{ task.assigned_to.username }}
+                            {% endif %}
+                        {% elif task.assigned_group %}
+                            Пул ({{ task.assigned_group.name }})
+                        {% else %}
+                            <span class="text-muted">Не назначена</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if task.additional_assignees.all %}
+                            {% for user in task.additional_assignees.all %}
+                                {% if user.first_name or user.last_name %}
+                                    {{ user.first_name }} {{ user.last_name }}
+                                {% else %}
+                                    {{ user.username }}
+                                {% endif %}{% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            <span class="text-muted">-</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <small class="text-muted">{{ task.created_at|date:"d.m.Y" }}</small>
+                    </td>
+                    <td>
+                        {% if task.closed_at %}
+                            <span class="text-muted">{{ task.closed_at|date:"d.m.Y" }}</span>
+                        {% else %}
+                            <span class="text-muted">-</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if task.completion_report.fault_category %}
+                            {{ task.completion_report.fault_category.name }}
+                        {% else %}
+                            <span class="text-muted">-</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if task.completion_report.work_performed %}
+                            <div class="text-truncate" style="max-width: 200px;" title="{{ task.completion_report.work_performed }}">
+                                {{ task.completion_report.work_performed|truncatechars:50 }}
+                            </div>
+                        {% else %}
+                            <span class="text-muted">-</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% else %}
+    <!-- Сообщение, если задач нет -->
+    <div class="alert alert-info py-3 shadow-sm" role="alert">
+        <h4 class="alert-heading"><i class="fas fa-info-circle me-2"></i> Задачи не найдены</h4>
+        {% if current_status %}
+            Нет задач со статусом "{{ tasks.0.get_status_display|default:current_status }}".
+        {% else %}
+            В системе пока нет задач.
+        {% endif %}
+    </div>
+{% endif %}
+{% endblock authenticated_content %}

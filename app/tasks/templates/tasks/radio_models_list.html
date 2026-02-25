@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block authenticated_content %}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4>{{ page_title }}</h4>
+        <div>
+            <a href="{% url 'radio_list' %}" class="btn btn-secondary me-2">
+                Рации
+            </a>
+            <a href="{% url 'radio_model_add' %}" class="btn btn-secondary">
+                Добавить модель
+            </a>
+        </div>
+    </div>
+
+    <div class="alert alert-info">
+        Всего активных моделей: <strong>{{ active_count }}</strong>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered" id="modelTable">
+            <thead class="table-dark">
+                <tr>
+                    <th>Название модели</th>
+                    <th>Описание</th>
+                    <th>Статус</th>
+                    <th>Действия</th>
+                </tr>
+                <tr class="filters">
+                    <th><input type="text" class="form-control form-control-sm filter-input" placeholder="Фильтр..."></th>
+                    <th><input type="text" class="form-control form-control-sm filter-input" placeholder="Фильтр..."></th>
+                    <th><input type="text" class="form-control form-control-sm filter-input" placeholder="Фильтр..."></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for model in models %}
+                <tr>
+                    <td>{{ model.name }}</td>
+                    <td>{{ model.description|default:"—" }}</td>
+                    <td>{% if model.is_active %}Активна{% else %}Неактивна{% endif %}</td>
+                    <td>
+                        <a href="{% url 'radio_model_edit' model.pk %}" class="btn btn-sm btn-secondary">Редактировать</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4" class="text-center">Нет моделей в справочнике</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Фильтрация таблицы
+if (typeof jQuery !== 'undefined') {
+    jQuery(document).ready(function($) {
+        $('.filter-input').on('keyup', function() {
+            var filters = [];
+            $('#modelTable .filters .filter-input').each(function() {
+                filters.push($(this).val().toLowerCase());
+            });
+            
+            $('#modelTable tbody tr').each(function() {
+                var $row = $(this);
+                var show = true;
+                
+                filters.forEach(function(filter, index) {
+                    if (filter) {
+                        var cellText = $row.find('td').eq(index).text().toLowerCase();
+                        if (cellText.indexOf(filter) === -1) {
+                            show = false;
+                        }
+                    }
+                });
+                
+                $row.toggle(show);
+            });
+        });
+    });
+}
+</script>
+{% endblock %}
+

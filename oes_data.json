@@ -1,0 +1,7929 @@
+[
+{
+  "model": "tasks.oescategory",
+  "pk": 1,
+  "fields": {
+    "source_id": 1,
+    "name": "Самосвал"
+  }
+},
+{
+  "model": "tasks.oescategory",
+  "pk": 2,
+  "fields": {
+    "source_id": 2,
+    "name": "Экскаватор"
+  }
+},
+{
+  "model": "tasks.oescategory",
+  "pk": 3,
+  "fields": {
+    "source_id": 3,
+    "name": "Бульдозер"
+  }
+},
+{
+  "model": "tasks.oescategory",
+  "pk": 4,
+  "fields": {
+    "source_id": 4,
+    "name": "Погрузчик"
+  }
+},
+{
+  "model": "tasks.oescategory",
+  "pk": 5,
+  "fields": {
+    "source_id": 5,
+    "name": "Хоз.техника"
+  }
+},
+{
+  "model": "tasks.oescategory",
+  "pk": 6,
+  "fields": {
+    "source_id": 6,
+    "name": "Грейдер"
+  }
+},
+{
+  "model": "tasks.oescategory",
+  "pk": 7,
+  "fields": {
+    "source_id": 8,
+    "name": "Техника FortMonitor"
+  }
+},
+{
+  "model": "tasks.oescategory",
+  "pk": 8,
+  "fields": {
+    "source_id": 9,
+    "name": "Стационарная техника"
+  }
+},
+{
+  "model": "tasks.oescategory",
+  "pk": 9,
+  "fields": {
+    "source_id": 10,
+    "name": "Конвейер"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 1,
+  "fields": {
+    "source_id": 33,
+    "category": 1,
+    "name": "Komatsu HD 1500-8 GalileoSky"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 2,
+  "fields": {
+    "source_id": 2,
+    "category": 1,
+    "name": "Komatsu HD 785-7 Б GalileoSky"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 3,
+  "fields": {
+    "source_id": 76,
+    "category": 1,
+    "name": "Komatsu HM 400-3"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 4,
+  "fields": {
+    "source_id": 84,
+    "category": 1,
+    "name": "Sany SET 150"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 5,
+  "fields": {
+    "source_id": 259,
+    "category": 1,
+    "name": "TONLI TL785M"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 6,
+  "fields": {
+    "source_id": 3,
+    "category": 1,
+    "name": "БелАЗ 75131 Б GalileoSky"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 7,
+  "fields": {
+    "source_id": 1,
+    "category": 1,
+    "name": "БелАЗ 75306 Cummins"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 8,
+  "fields": {
+    "source_id": 71,
+    "category": 1,
+    "name": "БелАЗ 75306 Weichai"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 9,
+  "fields": {
+    "source_id": 260,
+    "category": 1,
+    "name": "Белаз 7555"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 10,
+  "fields": {
+    "source_id": 179,
+    "category": 1,
+    "name": "Поливомоечная машина (БелАЗ 7555)"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 11,
+  "fields": {
+    "source_id": 30,
+    "category": 2,
+    "name": "Hitachi EX-1200 GalileoSky"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 12,
+  "fields": {
+    "source_id": 188,
+    "category": 2,
+    "name": "Hitachi EX-1900 GalileoSky"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 13,
+  "fields": {
+    "source_id": 267,
+    "category": 2,
+    "name": "Hitachi EX-2600 D GalileoSky"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 14,
+  "fields": {
+    "source_id": 69,
+    "category": 2,
+    "name": "Hitachi EX-2600 GalileoSky"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 15,
+  "fields": {
+    "source_id": 29,
+    "category": 2,
+    "name": "Hitachi EX-3600 D GalileoSky"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 16,
+  "fields": {
+    "source_id": 28,
+    "category": 2,
+    "name": "Hitachi EX-3600 E GalileoSky"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 17,
+  "fields": {
+    "source_id": 12,
+    "category": 2,
+    "name": "Hitachi ZX240 GalileoSky"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 18,
+  "fields": {
+    "source_id": 262,
+    "category": 2,
+    "name": "Hitachi ZX-850"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 19,
+  "fields": {
+    "source_id": 27,
+    "category": 2,
+    "name": "Komatsu PC-1250 GalileoSky"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 20,
+  "fields": {
+    "source_id": 24,
+    "category": 2,
+    "name": "Komatsu PC-2000 GalileoSky"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 21,
+  "fields": {
+    "source_id": 83,
+    "category": 2,
+    "name": "Komatsu PC-210"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 22,
+  "fields": {
+    "source_id": 68,
+    "category": 2,
+    "name": "Komatsu PC-300"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 23,
+  "fields": {
+    "source_id": 178,
+    "category": 2,
+    "name": "Komatsu PC-3000D"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 24,
+  "fields": {
+    "source_id": 67,
+    "category": 2,
+    "name": "Komatsu PC-400"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 25,
+  "fields": {
+    "source_id": 26,
+    "category": 2,
+    "name": "Komatsu PC-4000 D GalileoSky"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 26,
+  "fields": {
+    "source_id": 25,
+    "category": 2,
+    "name": "Komatsu PC-4000 E GalileoSky"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 27,
+  "fields": {
+    "source_id": 31,
+    "category": 2,
+    "name": "Komatsu PC-800 GalileoSky"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 28,
+  "fields": {
+    "source_id": 186,
+    "category": 2,
+    "name": "Liebherr R-9250"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 29,
+  "fields": {
+    "source_id": 70,
+    "category": 2,
+    "name": "Liebherr R-9400 E"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 30,
+  "fields": {
+    "source_id": 264,
+    "category": 2,
+    "name": "LIEBHERR R 944"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 31,
+  "fields": {
+    "source_id": 11,
+    "category": 2,
+    "name": "LIEBHERR R 954 C GalileoSky"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 32,
+  "fields": {
+    "source_id": 4,
+    "category": 2,
+    "name": "LIEBHERR R 976 GalileoSky"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 33,
+  "fields": {
+    "source_id": 246,
+    "category": 2,
+    "name": "LiuGong 936E"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 34,
+  "fields": {
+    "source_id": 86,
+    "category": 2,
+    "name": "SANY SY 1250"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 35,
+  "fields": {
+    "source_id": 189,
+    "category": 2,
+    "name": "SANY SY 330H"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 36,
+  "fields": {
+    "source_id": 13,
+    "category": 2,
+    "name": "SENNEBOGEN R 870 GalileoSky"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 37,
+  "fields": {
+    "source_id": 176,
+    "category": 2,
+    "name": "WK 20"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 38,
+  "fields": {
+    "source_id": 269,
+    "category": 2,
+    "name": "Тест OES экскаватор"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 39,
+  "fields": {
+    "source_id": 72,
+    "category": 2,
+    "name": "ЭКГ 20"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 40,
+  "fields": {
+    "source_id": 236,
+    "category": 3,
+    "name": "Caterpillar D6R"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 41,
+  "fields": {
+    "source_id": 190,
+    "category": 3,
+    "name": "Caterpillar D9N"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 42,
+  "fields": {
+    "source_id": 5,
+    "category": 3,
+    "name": "Komatsu D 155 GalileoSky"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 43,
+  "fields": {
+    "source_id": 202,
+    "category": 3,
+    "name": "Komatsu D 275 GalileoSky"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 44,
+  "fields": {
+    "source_id": 16,
+    "category": 3,
+    "name": "Komatsu D 375 GalileoSky"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 45,
+  "fields": {
+    "source_id": 80,
+    "category": 3,
+    "name": "Komatsu D 65"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 46,
+  "fields": {
+    "source_id": 81,
+    "category": 3,
+    "name": "Komatsu D 85"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 47,
+  "fields": {
+    "source_id": 6,
+    "category": 3,
+    "name": "Komatsu WD 600 GalileoSky"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 48,
+  "fields": {
+    "source_id": 7,
+    "category": 3,
+    "name": "Liebherr PR 754 GalileoSky"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 49,
+  "fields": {
+    "source_id": 8,
+    "category": 3,
+    "name": "Liebherr PR 764 GalileoSky"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 50,
+  "fields": {
+    "source_id": 22,
+    "category": 3,
+    "name": "Liebherr PR 776 GalileoSky"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 51,
+  "fields": {
+    "source_id": 245,
+    "category": 3,
+    "name": "LiuGong B260"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 52,
+  "fields": {
+    "source_id": 244,
+    "category": 3,
+    "name": "LiuGong B320"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 53,
+  "fields": {
+    "source_id": 263,
+    "category": 3,
+    "name": "SHANTUI DH46-C3RS"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 54,
+  "fields": {
+    "source_id": 23,
+    "category": 3,
+    "name": "Shantui SD-32 GalileoSky"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 55,
+  "fields": {
+    "source_id": 198,
+    "category": 3,
+    "name": "SHANTUI SD60-C5"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 56,
+  "fields": {
+    "source_id": 85,
+    "category": 3,
+    "name": "Shehwa SD9N"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 57,
+  "fields": {
+    "source_id": 256,
+    "category": 4,
+    "name": "Hitachi ZW310"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 58,
+  "fields": {
+    "source_id": 19,
+    "category": 4,
+    "name": "HL 770 GalileoSky"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 59,
+  "fields": {
+    "source_id": 20,
+    "category": 4,
+    "name": "HL 780 GalileoSky"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 60,
+  "fields": {
+    "source_id": 10,
+    "category": 4,
+    "name": "Komatsu WA200 GalileoSky"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 61,
+  "fields": {
+    "source_id": 18,
+    "category": 4,
+    "name": "Komatsu WA 470 GalileoSky"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 62,
+  "fields": {
+    "source_id": 9,
+    "category": 4,
+    "name": "Liebherr L580 GalileoSky"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 63,
+  "fields": {
+    "source_id": 257,
+    "category": 4,
+    "name": "Shantui L 76-C5"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 64,
+  "fields": {
+    "source_id": 241,
+    "category": 5,
+    "name": "BOMAG BW226DH"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 65,
+  "fields": {
+    "source_id": 242,
+    "category": 5,
+    "name": "SANY SSRQ60C"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 66,
+  "fields": {
+    "source_id": 270,
+    "category": 5,
+    "name": "XCMG XLZ2303K"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 67,
+  "fields": {
+    "source_id": 240,
+    "category": 5,
+    "name": "АНЦ Нефтесервис"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 68,
+  "fields": {
+    "source_id": 191,
+    "category": 5,
+    "name": "ВГК-БВР"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 69,
+  "fields": {
+    "source_id": 197,
+    "category": 5,
+    "name": "ВГК Логистик"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 70,
+  "fields": {
+    "source_id": 141,
+    "category": 5,
+    "name": "ВГК Перевозчик Легковые"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 71,
+  "fields": {
+    "source_id": 254,
+    "category": 5,
+    "name": "ВГК - П Спец (Автобус)"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 72,
+  "fields": {
+    "source_id": 250,
+    "category": 5,
+    "name": "ВГК - П Спец (АТЗ)"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 73,
+  "fields": {
+    "source_id": 253,
+    "category": 5,
+    "name": "ВГК - П Спец (Борт, Рефр)"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 74,
+  "fields": {
+    "source_id": 255,
+    "category": 5,
+    "name": "ВГК - П Спец (БурОтряд)"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 75,
+  "fields": {
+    "source_id": 251,
+    "category": 5,
+    "name": "ВГК - П Спец (КДМ)"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 76,
+  "fields": {
+    "source_id": 249,
+    "category": 5,
+    "name": "ВГК - П Спец (КМУ)"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 77,
+  "fields": {
+    "source_id": 248,
+    "category": 5,
+    "name": "ВГК - П Спец (Краны)"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 78,
+  "fields": {
+    "source_id": 252,
+    "category": 5,
+    "name": "ВГК - П Спец (ПАРМ, СМ)"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 79,
+  "fields": {
+    "source_id": 100,
+    "category": 5,
+    "name": "КАМАЗ"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 80,
+  "fields": {
+    "source_id": 89,
+    "category": 5,
+    "name": "Нефаз 660062-10"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 81,
+  "fields": {
+    "source_id": 73,
+    "category": 5,
+    "name": "Поливомоечная машина (БелАЗ 75131)"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 82,
+  "fields": {
+    "source_id": 74,
+    "category": 5,
+    "name": "Поливомоечная машина (БелАЗ 7555)"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 83,
+  "fields": {
+    "source_id": 199,
+    "category": 5,
+    "name": "Рейд"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 84,
+  "fields": {
+    "source_id": 75,
+    "category": 5,
+    "name": "Тех. помощь(робот-тягач)"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 85,
+  "fields": {
+    "source_id": 194,
+    "category": 5,
+    "name": "УАЗ 220621"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 86,
+  "fields": {
+    "source_id": 99,
+    "category": 5,
+    "name": "УРБ 2А-2М на шасси КАМАЗ 43118-46"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 87,
+  "fields": {
+    "source_id": 79,
+    "category": 6,
+    "name": "Caterpillar 24"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 88,
+  "fields": {
+    "source_id": 238,
+    "category": 6,
+    "name": "Komatsu GD 705"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 89,
+  "fields": {
+    "source_id": 17,
+    "category": 6,
+    "name": "Komatsu GD 825 GalileoSky"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 90,
+  "fields": {
+    "source_id": 237,
+    "category": 6,
+    "name": "LiuGong 4269D"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 91,
+  "fields": {
+    "source_id": 177,
+    "category": 6,
+    "name": "SINOMACH 732T 009"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 92,
+  "fields": {
+    "source_id": 247,
+    "category": 6,
+    "name": "XCMG GR 300"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 93,
+  "fields": {
+    "source_id": 21,
+    "category": 6,
+    "name": "ДЗ-98 GalileoSky"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 94,
+  "fields": {
+    "source_id": 142,
+    "category": 7,
+    "name": "АНЦ"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 95,
+  "fields": {
+    "source_id": 239,
+    "category": 7,
+    "name": "АНЦ Нефтесервис"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 96,
+  "fields": {
+    "source_id": 88,
+    "category": 7,
+    "name": "Углевоз"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 97,
+  "fields": {
+    "source_id": 185,
+    "category": 7,
+    "name": "Щебневоз"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 98,
+  "fields": {
+    "source_id": 203,
+    "category": 8,
+    "name": "AHRS"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 99,
+  "fields": {
+    "source_id": 261,
+    "category": 8,
+    "name": "Автономки"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 100,
+  "fields": {
+    "source_id": 180,
+    "category": 8,
+    "name": "Насосы"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 101,
+  "fields": {
+    "source_id": 266,
+    "category": 8,
+    "name": "Насосы заготовки"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 102,
+  "fields": {
+    "source_id": 243,
+    "category": 8,
+    "name": "Насосы не в работе"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 103,
+  "fields": {
+    "source_id": 200,
+    "category": 8,
+    "name": "Опытные образцы"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 104,
+  "fields": {
+    "source_id": 201,
+    "category": 8,
+    "name": "Расходомеры"
+  }
+},
+{
+  "model": "tasks.oesmodel",
+  "pk": 105,
+  "fields": {
+    "source_id": 271,
+    "category": 9,
+    "name": "АСУ ТП Магистральный конвейер и стакер-реклаймеры"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 1,
+  "fields": {
+    "source_id": 175,
+    "model": 1,
+    "name": "0029",
+    "mdm_object_uuid": "a137509f-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 2,
+  "fields": {
+    "source_id": 176,
+    "model": 1,
+    "name": "0030",
+    "mdm_object_uuid": "a137509e-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 3,
+  "fields": {
+    "source_id": 177,
+    "model": 1,
+    "name": "0031",
+    "mdm_object_uuid": "a137509d-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 4,
+  "fields": {
+    "source_id": 178,
+    "model": 1,
+    "name": "0032",
+    "mdm_object_uuid": "a137509c-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 5,
+  "fields": {
+    "source_id": 179,
+    "model": 1,
+    "name": "0033",
+    "mdm_object_uuid": "a137509b-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 6,
+  "fields": {
+    "source_id": 180,
+    "model": 1,
+    "name": "0038",
+    "mdm_object_uuid": "a137507a-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 7,
+  "fields": {
+    "source_id": 1220,
+    "model": 2,
+    "name": "0001",
+    "mdm_object_uuid": "381108fe-c093-11ee-98ec-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 8,
+  "fields": {
+    "source_id": 1346,
+    "model": 2,
+    "name": "0002",
+    "mdm_object_uuid": "eccdd99c-d6a7-11ee-98ed-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 9,
+  "fields": {
+    "source_id": 1271,
+    "model": 2,
+    "name": "0003",
+    "mdm_object_uuid": "3a6f363f-d6a8-11ee-98ed-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 10,
+  "fields": {
+    "source_id": 1222,
+    "model": 2,
+    "name": "0004",
+    "mdm_object_uuid": "1099a591-c094-11ee-98ec-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 11,
+  "fields": {
+    "source_id": 1347,
+    "model": 2,
+    "name": "0005",
+    "mdm_object_uuid": "718df5c3-d6a8-11ee-98ed-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 12,
+  "fields": {
+    "source_id": 1231,
+    "model": 2,
+    "name": "0006",
+    "mdm_object_uuid": "69c8c130-c094-11ee-98ec-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 13,
+  "fields": {
+    "source_id": 1276,
+    "model": 2,
+    "name": "0007",
+    "mdm_object_uuid": "a393d2f2-d6a8-11ee-98ed-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 14,
+  "fields": {
+    "source_id": 1348,
+    "model": 2,
+    "name": "0008",
+    "mdm_object_uuid": "e7eaab16-d6a8-11ee-98ed-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 15,
+  "fields": {
+    "source_id": 1247,
+    "model": 2,
+    "name": "0009",
+    "mdm_object_uuid": "86d0516a-c094-11ee-98ec-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 16,
+  "fields": {
+    "source_id": 1270,
+    "model": 2,
+    "name": "0010",
+    "mdm_object_uuid": "8d365aa1-d6a7-11ee-98ed-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 17,
+  "fields": {
+    "source_id": 1230,
+    "model": 2,
+    "name": "0011",
+    "mdm_object_uuid": "a181784c-c094-11ee-98ec-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 18,
+  "fields": {
+    "source_id": 1232,
+    "model": 2,
+    "name": "0012",
+    "mdm_object_uuid": "bf9b1a73-c094-11ee-98ec-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 19,
+  "fields": {
+    "source_id": 1246,
+    "model": 2,
+    "name": "0013",
+    "mdm_object_uuid": "2673e8cb-c095-11ee-98ec-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 20,
+  "fields": {
+    "source_id": 18,
+    "model": 2,
+    "name": "0100",
+    "mdm_object_uuid": "8f363c90-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 21,
+  "fields": {
+    "source_id": 19,
+    "model": 2,
+    "name": "0101",
+    "mdm_object_uuid": "8f363cbe-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 22,
+  "fields": {
+    "source_id": 20,
+    "model": 2,
+    "name": "0102",
+    "mdm_object_uuid": "953cf48c-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 23,
+  "fields": {
+    "source_id": 21,
+    "model": 2,
+    "name": "0103",
+    "mdm_object_uuid": "8f363cb0-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 24,
+  "fields": {
+    "source_id": 22,
+    "model": 2,
+    "name": "0104",
+    "mdm_object_uuid": "953cf451-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 25,
+  "fields": {
+    "source_id": 23,
+    "model": 2,
+    "name": "0105",
+    "mdm_object_uuid": "953cf44c-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 26,
+  "fields": {
+    "source_id": 24,
+    "model": 2,
+    "name": "0106",
+    "mdm_object_uuid": "953cf454-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 27,
+  "fields": {
+    "source_id": 25,
+    "model": 2,
+    "name": "0107",
+    "mdm_object_uuid": "10771ae7-d5b5-11ec-98c0-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 28,
+  "fields": {
+    "source_id": 26,
+    "model": 2,
+    "name": "0108",
+    "mdm_object_uuid": "6536e62e-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 29,
+  "fields": {
+    "source_id": 27,
+    "model": 2,
+    "name": "0109",
+    "mdm_object_uuid": "6536e630-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 30,
+  "fields": {
+    "source_id": 28,
+    "model": 2,
+    "name": "0110",
+    "mdm_object_uuid": "6536e632-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 31,
+  "fields": {
+    "source_id": 29,
+    "model": 2,
+    "name": "0111",
+    "mdm_object_uuid": "6536e633-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 32,
+  "fields": {
+    "source_id": 30,
+    "model": 2,
+    "name": "0227",
+    "mdm_object_uuid": "0973a508-d5b5-11ec-98c0-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 33,
+  "fields": {
+    "source_id": 31,
+    "model": 2,
+    "name": "0228",
+    "mdm_object_uuid": "3c83b2b1-d5b5-11ec-98c0-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 34,
+  "fields": {
+    "source_id": 32,
+    "model": 2,
+    "name": "0229",
+    "mdm_object_uuid": "8f363cae-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 35,
+  "fields": {
+    "source_id": 33,
+    "model": 2,
+    "name": "0236",
+    "mdm_object_uuid": "773cbf13-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 36,
+  "fields": {
+    "source_id": 34,
+    "model": 2,
+    "name": "0237",
+    "mdm_object_uuid": "953cf48e-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 37,
+  "fields": {
+    "source_id": 35,
+    "model": 2,
+    "name": "0240",
+    "mdm_object_uuid": "a72fb9b2-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 38,
+  "fields": {
+    "source_id": 36,
+    "model": 2,
+    "name": "0241",
+    "mdm_object_uuid": "8f363c8a-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 39,
+  "fields": {
+    "source_id": 37,
+    "model": 2,
+    "name": "0244",
+    "mdm_object_uuid": "773cbf3e-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 40,
+  "fields": {
+    "source_id": 38,
+    "model": 2,
+    "name": "0245",
+    "mdm_object_uuid": "8f363c8b-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 41,
+  "fields": {
+    "source_id": 139,
+    "model": 2,
+    "name": "0539",
+    "mdm_object_uuid": "4f45cfb2-2316-11ed-98c9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 42,
+  "fields": {
+    "source_id": 140,
+    "model": 2,
+    "name": "0699",
+    "mdm_object_uuid": "4f45cfb6-2316-11ed-98c9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 43,
+  "fields": {
+    "source_id": 141,
+    "model": 2,
+    "name": "0777",
+    "mdm_object_uuid": "e62ff63f-1fcf-11ed-98c8-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 44,
+  "fields": {
+    "source_id": 142,
+    "model": 2,
+    "name": "0782",
+    "mdm_object_uuid": "e62ff641-1fcf-11ed-98c8-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 45,
+  "fields": {
+    "source_id": 146,
+    "model": 2,
+    "name": "0789",
+    "mdm_object_uuid": "e62ff643-1fcf-11ed-98c8-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 46,
+  "fields": {
+    "source_id": 144,
+    "model": 2,
+    "name": "0803",
+    "mdm_object_uuid": "e62ff611-1fcf-11ed-98c8-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 47,
+  "fields": {
+    "source_id": 147,
+    "model": 2,
+    "name": "0808",
+    "mdm_object_uuid": "e62ff613-1fcf-11ed-98c8-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 48,
+  "fields": {
+    "source_id": 148,
+    "model": 2,
+    "name": "0834",
+    "mdm_object_uuid": "e62ff615-1fcf-11ed-98c8-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 49,
+  "fields": {
+    "source_id": 149,
+    "model": 2,
+    "name": "0835",
+    "mdm_object_uuid": "e62ff617-1fcf-11ed-98c8-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 50,
+  "fields": {
+    "source_id": 150,
+    "model": 2,
+    "name": "0839",
+    "mdm_object_uuid": "e62ff633-1fcf-11ed-98c8-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 51,
+  "fields": {
+    "source_id": 151,
+    "model": 2,
+    "name": "0840",
+    "mdm_object_uuid": "e62ff635-1fcf-11ed-98c8-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 52,
+  "fields": {
+    "source_id": 1318,
+    "model": 2,
+    "name": "ТЕСТ_Komatsu_HD_785",
+    "mdm_object_uuid": "a3ff3f9d-ff9e-4bc6-9038-645ab104ce8b"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 53,
+  "fields": {
+    "source_id": 246,
+    "model": 3,
+    "name": "0052",
+    "mdm_object_uuid": "a72fb9b4-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 54,
+  "fields": {
+    "source_id": 247,
+    "model": 3,
+    "name": "0053",
+    "mdm_object_uuid": "a72fb9b5-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 55,
+  "fields": {
+    "source_id": 248,
+    "model": 3,
+    "name": "0054",
+    "mdm_object_uuid": "5770e44e-2316-11ed-98c9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 56,
+  "fields": {
+    "source_id": 249,
+    "model": 3,
+    "name": "0056",
+    "mdm_object_uuid": "10771ae6-d5b5-11ec-98c0-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 57,
+  "fields": {
+    "source_id": 250,
+    "model": 3,
+    "name": "0057",
+    "mdm_object_uuid": "5770e44c-2316-11ed-98c9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 58,
+  "fields": {
+    "source_id": 251,
+    "model": 3,
+    "name": "0062",
+    "mdm_object_uuid": "4f45cfb4-2316-11ed-98c9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 59,
+  "fields": {
+    "source_id": 288,
+    "model": 4,
+    "name": "901",
+    "mdm_object_uuid": "a87122a3-3bee-11ee-98db-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 60,
+  "fields": {
+    "source_id": 289,
+    "model": 4,
+    "name": "902",
+    "mdm_object_uuid": "2a0d5a43-3bef-11ee-98db-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 61,
+  "fields": {
+    "source_id": 284,
+    "model": 4,
+    "name": "903",
+    "mdm_object_uuid": "1754ebc6-3bf1-11ee-98db-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 62,
+  "fields": {
+    "source_id": 285,
+    "model": 4,
+    "name": "904",
+    "mdm_object_uuid": "1754ece8-3bf1-11ee-98db-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 63,
+  "fields": {
+    "source_id": 283,
+    "model": 4,
+    "name": "905",
+    "mdm_object_uuid": "1754ee1c-3bf1-11ee-98db-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 64,
+  "fields": {
+    "source_id": 290,
+    "model": 4,
+    "name": "906",
+    "mdm_object_uuid": "1754ef50-3bf1-11ee-98db-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 65,
+  "fields": {
+    "source_id": 282,
+    "model": 4,
+    "name": "907",
+    "mdm_object_uuid": "1754f072-3bf1-11ee-98db-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 66,
+  "fields": {
+    "source_id": 1041,
+    "model": 4,
+    "name": "908",
+    "mdm_object_uuid": "0b54b4c9-414c-11ee-98db-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 67,
+  "fields": {
+    "source_id": 1039,
+    "model": 4,
+    "name": "909",
+    "mdm_object_uuid": "f6d2de22-44d5-11ee-98dc-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 68,
+  "fields": {
+    "source_id": 1040,
+    "model": 4,
+    "name": "910",
+    "mdm_object_uuid": "f6d2df56-44d5-11ee-98dc-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 69,
+  "fields": {
+    "source_id": 1129,
+    "model": 4,
+    "name": "911",
+    "mdm_object_uuid": "f6d2e078-44d5-11ee-98dc-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 70,
+  "fields": {
+    "source_id": 1124,
+    "model": 4,
+    "name": "912",
+    "mdm_object_uuid": "f6d2e1ac-44d5-11ee-98dc-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 71,
+  "fields": {
+    "source_id": 1131,
+    "model": 4,
+    "name": "913",
+    "mdm_object_uuid": "f6d2e2ce-44d5-11ee-98dc-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 72,
+  "fields": {
+    "source_id": 1125,
+    "model": 4,
+    "name": "914",
+    "mdm_object_uuid": "f6d2e3f0-44d5-11ee-98dc-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 73,
+  "fields": {
+    "source_id": 1130,
+    "model": 4,
+    "name": "915",
+    "mdm_object_uuid": "f6d2e512-44d5-11ee-98dc-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 74,
+  "fields": {
+    "source_id": 1126,
+    "model": 4,
+    "name": "916",
+    "mdm_object_uuid": "f6d2e634-44d5-11ee-98dc-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 75,
+  "fields": {
+    "source_id": 1127,
+    "model": 4,
+    "name": "917",
+    "mdm_object_uuid": "f6d2e756-44d5-11ee-98dc-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 76,
+  "fields": {
+    "source_id": 1224,
+    "model": 4,
+    "name": "918",
+    "mdm_object_uuid": "65297184-c86c-11ee-98ed-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 77,
+  "fields": {
+    "source_id": 1225,
+    "model": 4,
+    "name": "919",
+    "mdm_object_uuid": "6a00f19e-c989-11ee-98ed-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 78,
+  "fields": {
+    "source_id": 1227,
+    "model": 4,
+    "name": "928",
+    "mdm_object_uuid": "6a00f995-c989-11ee-98ed-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 79,
+  "fields": {
+    "source_id": 1226,
+    "model": 4,
+    "name": "929",
+    "mdm_object_uuid": "6ab153ca-c989-11ee-98ed-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 80,
+  "fields": {
+    "source_id": 1316,
+    "model": 4,
+    "name": "ТЕСТ_SANY_SET_150",
+    "mdm_object_uuid": "944e080e-3ea2-4067-bd7d-6b2d3f9f2a4a"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 81,
+  "fields": {
+    "source_id": 1501,
+    "model": 5,
+    "name": "Tonly 01",
+    "mdm_object_uuid": "a137505d-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 82,
+  "fields": {
+    "source_id": 1510,
+    "model": 5,
+    "name": "Tonly 02",
+    "mdm_object_uuid": "a137505c-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 83,
+  "fields": {
+    "source_id": 1497,
+    "model": 5,
+    "name": "Tonly 03",
+    "mdm_object_uuid": "953cf482-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 84,
+  "fields": {
+    "source_id": 1494,
+    "model": 5,
+    "name": "Tonly 04",
+    "mdm_object_uuid": "953cf481-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 85,
+  "fields": {
+    "source_id": 1506,
+    "model": 5,
+    "name": "Tonly 05",
+    "mdm_object_uuid": "953cf480-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 86,
+  "fields": {
+    "source_id": 1502,
+    "model": 5,
+    "name": "Tonly 06",
+    "mdm_object_uuid": "953cf46e-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 87,
+  "fields": {
+    "source_id": 1493,
+    "model": 5,
+    "name": "Tonly 07",
+    "mdm_object_uuid": "953cf472-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 88,
+  "fields": {
+    "source_id": 1499,
+    "model": 5,
+    "name": "Tonly 08",
+    "mdm_object_uuid": "953cf477-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 89,
+  "fields": {
+    "source_id": 1503,
+    "model": 5,
+    "name": "Tonly 09",
+    "mdm_object_uuid": "953cf478-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 90,
+  "fields": {
+    "source_id": 1505,
+    "model": 5,
+    "name": "Tonly 10",
+    "mdm_object_uuid": "953cf479-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 91,
+  "fields": {
+    "source_id": 1511,
+    "model": 5,
+    "name": "Tonly 11",
+    "mdm_object_uuid": "953cf47a-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 92,
+  "fields": {
+    "source_id": 1507,
+    "model": 5,
+    "name": "Tonly 12",
+    "mdm_object_uuid": "953cf47b-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 93,
+  "fields": {
+    "source_id": 1495,
+    "model": 5,
+    "name": "Tonly 13",
+    "mdm_object_uuid": "953cf47c-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 94,
+  "fields": {
+    "source_id": 1500,
+    "model": 5,
+    "name": "Tonly 14",
+    "mdm_object_uuid": "953cf47d-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 95,
+  "fields": {
+    "source_id": 1498,
+    "model": 5,
+    "name": "Tonly 15",
+    "mdm_object_uuid": "953cf47e-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 96,
+  "fields": {
+    "source_id": 1509,
+    "model": 5,
+    "name": "Tonly 16",
+    "mdm_object_uuid": "953cf47f-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 97,
+  "fields": {
+    "source_id": 39,
+    "model": 6,
+    "name": "0086",
+    "mdm_object_uuid": "6536e616-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 98,
+  "fields": {
+    "source_id": 120,
+    "model": 6,
+    "name": "0087",
+    "mdm_object_uuid": "7d411477-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 99,
+  "fields": {
+    "source_id": 121,
+    "model": 6,
+    "name": "0088",
+    "mdm_object_uuid": "7d41147b-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 100,
+  "fields": {
+    "source_id": 122,
+    "model": 6,
+    "name": "0090",
+    "mdm_object_uuid": "6536e622-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 101,
+  "fields": {
+    "source_id": 123,
+    "model": 6,
+    "name": "0091",
+    "mdm_object_uuid": "7d411496-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 102,
+  "fields": {
+    "source_id": 124,
+    "model": 6,
+    "name": "0092",
+    "mdm_object_uuid": "83397e12-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 103,
+  "fields": {
+    "source_id": 40,
+    "model": 6,
+    "name": "0093",
+    "mdm_object_uuid": "89344982-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 104,
+  "fields": {
+    "source_id": 125,
+    "model": 6,
+    "name": "0094",
+    "mdm_object_uuid": "773cbf27-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 105,
+  "fields": {
+    "source_id": 1388,
+    "model": 6,
+    "name": "0112",
+    "mdm_object_uuid": "6536e634-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 106,
+  "fields": {
+    "source_id": 41,
+    "model": 6,
+    "name": "0113",
+    "mdm_object_uuid": "6536e635-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 107,
+  "fields": {
+    "source_id": 42,
+    "model": 6,
+    "name": "0114",
+    "mdm_object_uuid": "8f363cac-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 108,
+  "fields": {
+    "source_id": 126,
+    "model": 6,
+    "name": "0115",
+    "mdm_object_uuid": "953cf499-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 109,
+  "fields": {
+    "source_id": 43,
+    "model": 6,
+    "name": "0116",
+    "mdm_object_uuid": "9b3c84af-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 110,
+  "fields": {
+    "source_id": 44,
+    "model": 6,
+    "name": "0117",
+    "mdm_object_uuid": "a13750b2-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 111,
+  "fields": {
+    "source_id": 45,
+    "model": 6,
+    "name": "0118",
+    "mdm_object_uuid": "6536e63a-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 112,
+  "fields": {
+    "source_id": 46,
+    "model": 6,
+    "name": "0119",
+    "mdm_object_uuid": "7d411490-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 113,
+  "fields": {
+    "source_id": 127,
+    "model": 6,
+    "name": "0120",
+    "mdm_object_uuid": "7d411499-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 114,
+  "fields": {
+    "source_id": 128,
+    "model": 6,
+    "name": "0121",
+    "mdm_object_uuid": "7d4114a9-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 115,
+  "fields": {
+    "source_id": 47,
+    "model": 6,
+    "name": "0122",
+    "mdm_object_uuid": "7d4114ad-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 116,
+  "fields": {
+    "source_id": 129,
+    "model": 6,
+    "name": "0123",
+    "mdm_object_uuid": "7d4114b1-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 117,
+  "fields": {
+    "source_id": 130,
+    "model": 6,
+    "name": "0124",
+    "mdm_object_uuid": "7d4114b4-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 118,
+  "fields": {
+    "source_id": 131,
+    "model": 6,
+    "name": "0125",
+    "mdm_object_uuid": "7d4114bd-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 119,
+  "fields": {
+    "source_id": 132,
+    "model": 6,
+    "name": "0126",
+    "mdm_object_uuid": "7d4114bc-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 120,
+  "fields": {
+    "source_id": 133,
+    "model": 6,
+    "name": "0127",
+    "mdm_object_uuid": "953cf496-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 121,
+  "fields": {
+    "source_id": 134,
+    "model": 6,
+    "name": "0128",
+    "mdm_object_uuid": "953cf48d-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 122,
+  "fields": {
+    "source_id": 48,
+    "model": 6,
+    "name": "0129",
+    "mdm_object_uuid": "89344974-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 123,
+  "fields": {
+    "source_id": 135,
+    "model": 6,
+    "name": "0130",
+    "mdm_object_uuid": "83397dfb-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 124,
+  "fields": {
+    "source_id": 136,
+    "model": 6,
+    "name": "0131",
+    "mdm_object_uuid": "83397de1-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 125,
+  "fields": {
+    "source_id": 1172,
+    "model": 6,
+    "name": "0132",
+    "mdm_object_uuid": "ef6c3287-9a0e-11ee-98e2-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 126,
+  "fields": {
+    "source_id": 1173,
+    "model": 6,
+    "name": "0133",
+    "mdm_object_uuid": "a039cc0f-9a2e-11ee-98e2-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 127,
+  "fields": {
+    "source_id": 1174,
+    "model": 6,
+    "name": "0134",
+    "mdm_object_uuid": "f21d9c3a-9a2e-11ee-98e2-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 128,
+  "fields": {
+    "source_id": 1296,
+    "model": 6,
+    "name": "0135",
+    "mdm_object_uuid": "924c178a-f55b-11ee-98ee-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 129,
+  "fields": {
+    "source_id": 1300,
+    "model": 6,
+    "name": "0136",
+    "mdm_object_uuid": "5c7cad60-f55c-11ee-98ee-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 130,
+  "fields": {
+    "source_id": 1314,
+    "model": 6,
+    "name": "0137",
+    "mdm_object_uuid": "98cdbab3-f55d-11ee-98ee-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 131,
+  "fields": {
+    "source_id": 1315,
+    "model": 6,
+    "name": "0138",
+    "mdm_object_uuid": "ddd10aaa-f609-11ee-98ee-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 132,
+  "fields": {
+    "source_id": 1590,
+    "model": 6,
+    "name": "0139",
+    "mdm_object_uuid": "f33d3725-61f0-4c47-9c8b-92a890bee7c3"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 133,
+  "fields": {
+    "source_id": 1591,
+    "model": 6,
+    "name": "0140",
+    "mdm_object_uuid": "ad6378d8-5147-40f8-835d-cae0725fd0bf"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 134,
+  "fields": {
+    "source_id": 1594,
+    "model": 6,
+    "name": "0141",
+    "mdm_object_uuid": "409b94c0-96a8-4ed8-88fa-ac46f2c76fa3"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 135,
+  "fields": {
+    "source_id": 1593,
+    "model": 6,
+    "name": "0142",
+    "mdm_object_uuid": "f3821d7e-cfd4-4253-aa15-4bb23eab6d1b"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 136,
+  "fields": {
+    "source_id": 1624,
+    "model": 6,
+    "name": "0143",
+    "mdm_object_uuid": "8cba76c7-6643-46d2-ba72-c9902feead0a"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 137,
+  "fields": {
+    "source_id": 1621,
+    "model": 6,
+    "name": "0144",
+    "mdm_object_uuid": "3a3eb19c-2651-4eec-b11d-ccffbd727924"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 138,
+  "fields": {
+    "source_id": 1620,
+    "model": 6,
+    "name": "0145",
+    "mdm_object_uuid": "6bb696c2-b5b6-4a08-aef3-77ca0ac977c6"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 139,
+  "fields": {
+    "source_id": 1619,
+    "model": 6,
+    "name": "0146",
+    "mdm_object_uuid": "c478dcf7-25ec-4594-97db-d9af1b12b800"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 140,
+  "fields": {
+    "source_id": 1188,
+    "model": 6,
+    "name": "3023",
+    "mdm_object_uuid": "06dd2a16-9ecd-11ee-98e3-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 141,
+  "fields": {
+    "source_id": 1196,
+    "model": 6,
+    "name": "3028",
+    "mdm_object_uuid": "0e4b3616-b2e1-11ee-98e4-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 142,
+  "fields": {
+    "source_id": 1244,
+    "model": 6,
+    "name": "3051",
+    "mdm_object_uuid": "8272c077-b40a-11ee-98e4-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 143,
+  "fields": {
+    "source_id": 1105,
+    "model": 6,
+    "name": "3052",
+    "mdm_object_uuid": "278dbcc3-cda3-11ed-98d9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 144,
+  "fields": {
+    "source_id": 1185,
+    "model": 6,
+    "name": "3387",
+    "mdm_object_uuid": "5822df84-9ec5-11ee-98e3-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 145,
+  "fields": {
+    "source_id": 1184,
+    "model": 6,
+    "name": "3388",
+    "mdm_object_uuid": "fdebe3d2-9ece-11ee-98e3-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 146,
+  "fields": {
+    "source_id": 1223,
+    "model": 6,
+    "name": "3390",
+    "mdm_object_uuid": "50933029-9ecf-11ee-98e3-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 147,
+  "fields": {
+    "source_id": 1215,
+    "model": 6,
+    "name": "3407",
+    "mdm_object_uuid": "d6e9abeb-b40b-11ee-98e4-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 148,
+  "fields": {
+    "source_id": 1108,
+    "model": 6,
+    "name": "3575",
+    "mdm_object_uuid": "6adbf148-a440-11ed-98d9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 149,
+  "fields": {
+    "source_id": 1109,
+    "model": 6,
+    "name": "3579",
+    "mdm_object_uuid": "6adbf1e0-a440-11ed-98d9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 150,
+  "fields": {
+    "source_id": 1110,
+    "model": 6,
+    "name": "3591",
+    "mdm_object_uuid": "6adbef5e-a440-11ed-98d9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 151,
+  "fields": {
+    "source_id": 1111,
+    "model": 6,
+    "name": "3593",
+    "mdm_object_uuid": "6adbf092-a440-11ed-98d9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 152,
+  "fields": {
+    "source_id": 1106,
+    "model": 6,
+    "name": "4372",
+    "mdm_object_uuid": "a71cb893-49e8-11ee-98dd-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 153,
+  "fields": {
+    "source_id": 1107,
+    "model": 6,
+    "name": "4421",
+    "mdm_object_uuid": "afc06c56-4539-11ee-98dc-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 154,
+  "fields": {
+    "source_id": 1317,
+    "model": 6,
+    "name": "ТЕСТ_БЕЛАЗ_75131",
+    "mdm_object_uuid": "75d609a0-57c8-406b-ae00-80b1d076e106"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 155,
+  "fields": {
+    "source_id": 265,
+    "model": 7,
+    "name": "0991",
+    "mdm_object_uuid": "f5b5161c-8b4e-4629-8531-9c08f2b13411"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 156,
+  "fields": {
+    "source_id": 1095,
+    "model": 7,
+    "name": "1000",
+    "mdm_object_uuid": "1cbb69d7-1ae5-4067-936c-c902b4e1dfa7"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 157,
+  "fields": {
+    "source_id": 273,
+    "model": 7,
+    "name": "1001",
+    "mdm_object_uuid": "9d157c03-4f4e-45fa-ba11-047c5d579d9f"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 158,
+  "fields": {
+    "source_id": 274,
+    "model": 7,
+    "name": "1004",
+    "mdm_object_uuid": "198b06d5-c8be-4037-aff2-5fabf2d01b98"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 159,
+  "fields": {
+    "source_id": 267,
+    "model": 7,
+    "name": "1012",
+    "mdm_object_uuid": "24a0f85a-a7d8-4489-87ef-fc69a0ea2d15"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 160,
+  "fields": {
+    "source_id": 12,
+    "model": 7,
+    "name": "1035",
+    "mdm_object_uuid": "ad31ac95-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 161,
+  "fields": {
+    "source_id": 5,
+    "model": 7,
+    "name": "1036",
+    "mdm_object_uuid": "6536e63f-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 162,
+  "fields": {
+    "source_id": 3,
+    "model": 7,
+    "name": "1037",
+    "mdm_object_uuid": "6536e640-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 163,
+  "fields": {
+    "source_id": 15,
+    "model": 7,
+    "name": "1038",
+    "mdm_object_uuid": "6536e644-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 164,
+  "fields": {
+    "source_id": 6,
+    "model": 7,
+    "name": "1039",
+    "mdm_object_uuid": "6536e646-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 165,
+  "fields": {
+    "source_id": 7,
+    "model": 7,
+    "name": "1040",
+    "mdm_object_uuid": "6536e649-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 166,
+  "fields": {
+    "source_id": 13,
+    "model": 7,
+    "name": "1041",
+    "mdm_object_uuid": "6536e64c-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 167,
+  "fields": {
+    "source_id": 2,
+    "model": 7,
+    "name": "1042",
+    "mdm_object_uuid": "6536e60b-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 168,
+  "fields": {
+    "source_id": 17,
+    "model": 7,
+    "name": "1043",
+    "mdm_object_uuid": "6536e64f-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 169,
+  "fields": {
+    "source_id": 8,
+    "model": 7,
+    "name": "1044",
+    "mdm_object_uuid": "b933302a-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 170,
+  "fields": {
+    "source_id": 268,
+    "model": 7,
+    "name": "1052",
+    "mdm_object_uuid": "846c5678-76c2-4c43-ae24-05f33c26a3f3"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 171,
+  "fields": {
+    "source_id": 269,
+    "model": 7,
+    "name": "1157",
+    "mdm_object_uuid": "d58caab0-6a2c-4179-860c-d8e133016e85"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 172,
+  "fields": {
+    "source_id": 1098,
+    "model": 7,
+    "name": "1158",
+    "mdm_object_uuid": "746ee012-011b-4f4e-be29-55398afd2ade"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 173,
+  "fields": {
+    "source_id": 1099,
+    "model": 7,
+    "name": "1159",
+    "mdm_object_uuid": "082535f8-8c66-4e7c-a228-e1ad29cbeb5d"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 174,
+  "fields": {
+    "source_id": 270,
+    "model": 7,
+    "name": "1163",
+    "mdm_object_uuid": "cab284d7-ab92-4f99-804c-c8000c69b9c5"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 175,
+  "fields": {
+    "source_id": 1100,
+    "model": 7,
+    "name": "1254",
+    "mdm_object_uuid": "e584a144-1f0d-4344-b6b2-d9df91fe786b"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 176,
+  "fields": {
+    "source_id": 271,
+    "model": 7,
+    "name": "1269",
+    "mdm_object_uuid": "9be1921a-c237-4d52-8d07-75ae18abbec3"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 177,
+  "fields": {
+    "source_id": 1101,
+    "model": 7,
+    "name": "1297",
+    "mdm_object_uuid": "773cbf28-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 178,
+  "fields": {
+    "source_id": 1102,
+    "model": 7,
+    "name": "1298",
+    "mdm_object_uuid": "773cbf17-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 179,
+  "fields": {
+    "source_id": 277,
+    "model": 7,
+    "name": "1299",
+    "mdm_object_uuid": "773cbf3f-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 180,
+  "fields": {
+    "source_id": 1116,
+    "model": 7,
+    "name": "1300",
+    "mdm_object_uuid": "773cbf47-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 181,
+  "fields": {
+    "source_id": 1103,
+    "model": 7,
+    "name": "1312",
+    "mdm_object_uuid": "773cbf49-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 182,
+  "fields": {
+    "source_id": 1104,
+    "model": 7,
+    "name": "1315",
+    "mdm_object_uuid": "773cbf4d-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 183,
+  "fields": {
+    "source_id": 1114,
+    "model": 7,
+    "name": "1328",
+    "mdm_object_uuid": "7d411486-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 184,
+  "fields": {
+    "source_id": 272,
+    "model": 7,
+    "name": "1336",
+    "mdm_object_uuid": "dda3604a-7112-4766-8329-b6b00d9c749a"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 185,
+  "fields": {
+    "source_id": 266,
+    "model": 7,
+    "name": "1344",
+    "mdm_object_uuid": "432475fe-3097-4312-9bee-a60d5a5764a9"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 186,
+  "fields": {
+    "source_id": 16,
+    "model": 7,
+    "name": "1345",
+    "mdm_object_uuid": "7d411497-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 187,
+  "fields": {
+    "source_id": 138,
+    "model": 7,
+    "name": "1347",
+    "mdm_object_uuid": "a137508b-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 188,
+  "fields": {
+    "source_id": 9,
+    "model": 7,
+    "name": "1349",
+    "mdm_object_uuid": "7d411492-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 189,
+  "fields": {
+    "source_id": 1,
+    "model": 7,
+    "name": "1373",
+    "mdm_object_uuid": "7d4114ac-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 190,
+  "fields": {
+    "source_id": 10,
+    "model": 7,
+    "name": "1374",
+    "mdm_object_uuid": "7d41149a-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 191,
+  "fields": {
+    "source_id": 105,
+    "model": 7,
+    "name": "1380",
+    "mdm_object_uuid": "83397e0c-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 192,
+  "fields": {
+    "source_id": 11,
+    "model": 7,
+    "name": "1381",
+    "mdm_object_uuid": "83397e0e-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 193,
+  "fields": {
+    "source_id": 4,
+    "model": 7,
+    "name": "1385",
+    "mdm_object_uuid": "7d4114b6-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 194,
+  "fields": {
+    "source_id": 14,
+    "model": 7,
+    "name": "1386",
+    "mdm_object_uuid": "8f363cb7-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 195,
+  "fields": {
+    "source_id": 106,
+    "model": 7,
+    "name": "1395",
+    "mdm_object_uuid": "83397e13-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 196,
+  "fields": {
+    "source_id": 152,
+    "model": 7,
+    "name": "1403",
+    "mdm_object_uuid": "7d4114ca-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 197,
+  "fields": {
+    "source_id": 1512,
+    "model": 7,
+    "name": "1404",
+    "mdm_object_uuid": "713f90ec-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 198,
+  "fields": {
+    "source_id": 153,
+    "model": 7,
+    "name": "1409",
+    "mdm_object_uuid": "713f90e5-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 199,
+  "fields": {
+    "source_id": 154,
+    "model": 7,
+    "name": "1425",
+    "mdm_object_uuid": "83397e03-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 200,
+  "fields": {
+    "source_id": 237,
+    "model": 7,
+    "name": "1431",
+    "mdm_object_uuid": "7d4114af-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 201,
+  "fields": {
+    "source_id": 238,
+    "model": 7,
+    "name": "1434",
+    "mdm_object_uuid": "83397deb-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 202,
+  "fields": {
+    "source_id": 239,
+    "model": 7,
+    "name": "1435",
+    "mdm_object_uuid": "9b3c84aa-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 203,
+  "fields": {
+    "source_id": 155,
+    "model": 7,
+    "name": "1436",
+    "mdm_object_uuid": "83397df3-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 204,
+  "fields": {
+    "source_id": 156,
+    "model": 7,
+    "name": "1437",
+    "mdm_object_uuid": "893449bd-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 205,
+  "fields": {
+    "source_id": 240,
+    "model": 7,
+    "name": "1440",
+    "mdm_object_uuid": "b9333018-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 206,
+  "fields": {
+    "source_id": 157,
+    "model": 7,
+    "name": "1442",
+    "mdm_object_uuid": "9b3c84b0-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 207,
+  "fields": {
+    "source_id": 158,
+    "model": 7,
+    "name": "1443",
+    "mdm_object_uuid": "b933302b-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 208,
+  "fields": {
+    "source_id": 159,
+    "model": 7,
+    "name": "1444",
+    "mdm_object_uuid": "9b3c84b2-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 209,
+  "fields": {
+    "source_id": 160,
+    "model": 7,
+    "name": "1460",
+    "mdm_object_uuid": "b933302c-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 210,
+  "fields": {
+    "source_id": 107,
+    "model": 7,
+    "name": "1490",
+    "mdm_object_uuid": "9b3c84bf-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 211,
+  "fields": {
+    "source_id": 108,
+    "model": 7,
+    "name": "1491",
+    "mdm_object_uuid": "9b3c84bc-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 212,
+  "fields": {
+    "source_id": 109,
+    "model": 7,
+    "name": "1492",
+    "mdm_object_uuid": "9b3c84c6-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 213,
+  "fields": {
+    "source_id": 110,
+    "model": 7,
+    "name": "1493",
+    "mdm_object_uuid": "5f39b803-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 214,
+  "fields": {
+    "source_id": 111,
+    "model": 7,
+    "name": "1494",
+    "mdm_object_uuid": "9b3c84c2-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 215,
+  "fields": {
+    "source_id": 112,
+    "model": 7,
+    "name": "1496",
+    "mdm_object_uuid": "9b3c84be-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 216,
+  "fields": {
+    "source_id": 113,
+    "model": 7,
+    "name": "1497",
+    "mdm_object_uuid": "b3313d3a-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 217,
+  "fields": {
+    "source_id": 114,
+    "model": 7,
+    "name": "1498",
+    "mdm_object_uuid": "a72fb9f2-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 218,
+  "fields": {
+    "source_id": 115,
+    "model": 7,
+    "name": "1499",
+    "mdm_object_uuid": "9b3c84b8-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 219,
+  "fields": {
+    "source_id": 241,
+    "model": 7,
+    "name": "1501",
+    "mdm_object_uuid": "9b3c84b7-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 220,
+  "fields": {
+    "source_id": 116,
+    "model": 7,
+    "name": "1502",
+    "mdm_object_uuid": "9b3c84c4-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 221,
+  "fields": {
+    "source_id": 117,
+    "model": 7,
+    "name": "1503",
+    "mdm_object_uuid": "9b3c84ba-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 222,
+  "fields": {
+    "source_id": 161,
+    "model": 7,
+    "name": "1504",
+    "mdm_object_uuid": "a1375059-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 223,
+  "fields": {
+    "source_id": 118,
+    "model": 7,
+    "name": "1505",
+    "mdm_object_uuid": "9b3c84c0-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 224,
+  "fields": {
+    "source_id": 1312,
+    "model": 7,
+    "name": "ТЕСТ_БЕЛАЗ_75306",
+    "mdm_object_uuid": "9970ecee-ffaf-40b2-9a7a-258c594f06f0"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 225,
+  "fields": {
+    "source_id": 162,
+    "model": 8,
+    "name": "1861",
+    "mdm_object_uuid": "696fe5ff-3b94-11ed-98cb-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 226,
+  "fields": {
+    "source_id": 163,
+    "model": 8,
+    "name": "1862",
+    "mdm_object_uuid": "b7c5dd51-3990-11ed-98cb-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 227,
+  "fields": {
+    "source_id": 164,
+    "model": 8,
+    "name": "1866",
+    "mdm_object_uuid": "9c1d1990-1fa9-11ed-98c8-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 228,
+  "fields": {
+    "source_id": 165,
+    "model": 8,
+    "name": "1867",
+    "mdm_object_uuid": "e61c0ceb-2ff3-11ed-98cb-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 229,
+  "fields": {
+    "source_id": 166,
+    "model": 8,
+    "name": "1870",
+    "mdm_object_uuid": "d01e7398-4743-11ed-98ce-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 230,
+  "fields": {
+    "source_id": 167,
+    "model": 8,
+    "name": "1871",
+    "mdm_object_uuid": "9c1d198f-1fa9-11ed-98c8-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 231,
+  "fields": {
+    "source_id": 168,
+    "model": 8,
+    "name": "1877",
+    "mdm_object_uuid": "d01e73f4-4743-11ed-98ce-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 232,
+  "fields": {
+    "source_id": 169,
+    "model": 8,
+    "name": "1883",
+    "mdm_object_uuid": "d01e742c-4743-11ed-98ce-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 233,
+  "fields": {
+    "source_id": 170,
+    "model": 8,
+    "name": "1888",
+    "mdm_object_uuid": "c85e162d-638d-11ed-98d0-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 234,
+  "fields": {
+    "source_id": 171,
+    "model": 8,
+    "name": "1907",
+    "mdm_object_uuid": "ec6bada8-712b-11ed-98d7-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 235,
+  "fields": {
+    "source_id": 172,
+    "model": 8,
+    "name": "1908",
+    "mdm_object_uuid": "c85e17f1-638d-11ed-98d0-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 236,
+  "fields": {
+    "source_id": 173,
+    "model": 8,
+    "name": "1909",
+    "mdm_object_uuid": "3caf2cc7-79cd-11ed-98d7-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 237,
+  "fields": {
+    "source_id": 174,
+    "model": 8,
+    "name": "1910",
+    "mdm_object_uuid": "c85e1817-638d-11ed-98d0-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 238,
+  "fields": {
+    "source_id": 235,
+    "model": 8,
+    "name": "1967",
+    "mdm_object_uuid": "4c303334-d7da-11ed-98d9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 239,
+  "fields": {
+    "source_id": 234,
+    "model": 8,
+    "name": "1968",
+    "mdm_object_uuid": "4c303564-d7da-11ed-98d9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 240,
+  "fields": {
+    "source_id": 236,
+    "model": 8,
+    "name": "1969",
+    "mdm_object_uuid": "4c3036bc-d7da-11ed-98d9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 241,
+  "fields": {
+    "source_id": 1237,
+    "model": 8,
+    "name": "2121",
+    "mdm_object_uuid": "84b54927-bf2b-11ee-98ec-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 242,
+  "fields": {
+    "source_id": 1238,
+    "model": 8,
+    "name": "2122",
+    "mdm_object_uuid": "923c086a-bf2c-11ee-98ec-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 243,
+  "fields": {
+    "source_id": 1239,
+    "model": 8,
+    "name": "2123",
+    "mdm_object_uuid": "ca350664-bf2c-11ee-98ec-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 244,
+  "fields": {
+    "source_id": 1425,
+    "model": 8,
+    "name": "2124",
+    "mdm_object_uuid": "08c8d015-6a56-11ef-9903-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 245,
+  "fields": {
+    "source_id": 1423,
+    "model": 8,
+    "name": "2125",
+    "mdm_object_uuid": "eecf32aa-6a56-11ef-9903-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 246,
+  "fields": {
+    "source_id": 1427,
+    "model": 8,
+    "name": "2126",
+    "mdm_object_uuid": "36fa1948-86d0-11ef-9903-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 247,
+  "fields": {
+    "source_id": 1240,
+    "model": 8,
+    "name": "2129",
+    "mdm_object_uuid": "2361c387-bf2d-11ee-98ec-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 248,
+  "fields": {
+    "source_id": 1221,
+    "model": 8,
+    "name": "2134",
+    "mdm_object_uuid": "5bf847d3-bf2d-11ee-98ec-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 249,
+  "fields": {
+    "source_id": 1219,
+    "model": 8,
+    "name": "2135",
+    "mdm_object_uuid": "a4b984b7-bf2d-11ee-98ec-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 250,
+  "fields": {
+    "source_id": 1241,
+    "model": 8,
+    "name": "2136",
+    "mdm_object_uuid": "aa49c9fc-bf2e-11ee-98ec-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 251,
+  "fields": {
+    "source_id": 1242,
+    "model": 8,
+    "name": "2137",
+    "mdm_object_uuid": "e6a5de12-bf2e-11ee-98ec-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 252,
+  "fields": {
+    "source_id": 1414,
+    "model": 8,
+    "name": "2146",
+    "mdm_object_uuid": "12a5ffef-6a57-11ef-9903-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 253,
+  "fields": {
+    "source_id": 1424,
+    "model": 8,
+    "name": "2147",
+    "mdm_object_uuid": "29756e70-6a57-11ef-9903-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 254,
+  "fields": {
+    "source_id": 1644,
+    "model": 8,
+    "name": "2174",
+    "mdm_object_uuid": "a2cd879f-6987-4e75-a752-ef57c5b08647"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 255,
+  "fields": {
+    "source_id": 1431,
+    "model": 8,
+    "name": "2234",
+    "mdm_object_uuid": "c6611d0b-8766-11ef-9903-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 256,
+  "fields": {
+    "source_id": 1487,
+    "model": 8,
+    "name": "2257",
+    "mdm_object_uuid": "9eb3a0c2-8762-11ef-9903-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 257,
+  "fields": {
+    "source_id": 1519,
+    "model": 8,
+    "name": "2258",
+    "mdm_object_uuid": "2cf29014-8771-11ef-9903-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 258,
+  "fields": {
+    "source_id": 1537,
+    "model": 8,
+    "name": "2259",
+    "mdm_object_uuid": "8e0bdc5a-4922-4eb2-8b66-23ec97dc6f91"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 259,
+  "fields": {
+    "source_id": 1530,
+    "model": 8,
+    "name": "2260",
+    "mdm_object_uuid": "d41943c9-780c-41c4-be95-f98b417f1b64"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 260,
+  "fields": {
+    "source_id": 1535,
+    "model": 8,
+    "name": "2261",
+    "mdm_object_uuid": "641b2160-86ed-4180-8894-715319ed2205"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 261,
+  "fields": {
+    "source_id": 1628,
+    "model": 8,
+    "name": "2381",
+    "mdm_object_uuid": "f4710b84-2233-475a-a9a4-794837fa96ec"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 262,
+  "fields": {
+    "source_id": 1627,
+    "model": 8,
+    "name": "2383",
+    "mdm_object_uuid": "28f67ce0-39eb-4b8a-9221-0074c671a677"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 263,
+  "fields": {
+    "source_id": 1641,
+    "model": 8,
+    "name": "2384",
+    "mdm_object_uuid": "4b82528d-4c99-4da8-bbb4-5fe6006a0210"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 264,
+  "fields": {
+    "source_id": 1626,
+    "model": 8,
+    "name": "2385",
+    "mdm_object_uuid": "a693d118-2d4a-4d8d-b5a5-44805d585cc9"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 265,
+  "fields": {
+    "source_id": 1645,
+    "model": 8,
+    "name": "2386",
+    "mdm_object_uuid": "9b55cf55-0b8e-4a74-920a-4516b2ba5357"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 266,
+  "fields": {
+    "source_id": 1595,
+    "model": 8,
+    "name": "Тестовый самосвал",
+    "mdm_object_uuid": "6878c761-ebc8-4ece-99f5-92faf7284d17"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 267,
+  "fields": {
+    "source_id": 1496,
+    "model": 9,
+    "name": "0097",
+    "mdm_object_uuid": "ee880d7e-4073-11ed-98cb-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 268,
+  "fields": {
+    "source_id": 231,
+    "model": 11,
+    "name": "EX 1200 /115",
+    "mdm_object_uuid": "6b3472df-9960-11ec-98ba-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 269,
+  "fields": {
+    "source_id": 98,
+    "model": 11,
+    "name": "EX 1200 /49",
+    "mdm_object_uuid": "a72fb9bb-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 270,
+  "fields": {
+    "source_id": 1228,
+    "model": 12,
+    "name": "EX 1900 /2",
+    "mdm_object_uuid": "373e3a4c-b40d-11ee-98e4-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 271,
+  "fields": {
+    "source_id": 1236,
+    "model": 12,
+    "name": "EX 1900 /3",
+    "mdm_object_uuid": "a49ef398-d0fd-11ee-98ed-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 272,
+  "fields": {
+    "source_id": 1584,
+    "model": 13,
+    "name": "EX 2600 D /100",
+    "mdm_object_uuid": "614bc6ae-fd4a-4bbd-be23-e1ae3656f20e"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 273,
+  "fields": {
+    "source_id": 229,
+    "model": 14,
+    "name": "EX 2600 E /51",
+    "mdm_object_uuid": "b50e48ae-c6d3-11ed-98d9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 274,
+  "fields": {
+    "source_id": 101,
+    "model": 15,
+    "name": "EX 3600 D /90",
+    "mdm_object_uuid": "6777f207-1fce-11ed-98c8-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 275,
+  "fields": {
+    "source_id": 1093,
+    "model": 16,
+    "name": "EX 3600 E /27",
+    "mdm_object_uuid": "d72d94ff-d129-11ec-98bf-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 276,
+  "fields": {
+    "source_id": 1121,
+    "model": 16,
+    "name": "EX 3600 E /48",
+    "mdm_object_uuid": "428f86d4-d12a-11ec-98bf-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 277,
+  "fields": {
+    "source_id": 99,
+    "model": 16,
+    "name": "EX 3600 E /69",
+    "mdm_object_uuid": "49d1fb5c-995e-11ec-98ba-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 278,
+  "fields": {
+    "source_id": 1092,
+    "model": 16,
+    "name": "EX 3600 E /72",
+    "mdm_object_uuid": "0859678c-d12a-11ec-98bf-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 279,
+  "fields": {
+    "source_id": 100,
+    "model": 16,
+    "name": "EX 3600 E /87",
+    "mdm_object_uuid": "3e7a8002-9960-11ec-98ba-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 280,
+  "fields": {
+    "source_id": 1539,
+    "model": 18,
+    "name": "ZX 850 /9",
+    "mdm_object_uuid": "713f911e-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 281,
+  "fields": {
+    "source_id": 96,
+    "model": 19,
+    "name": "PC 1250 /1",
+    "mdm_object_uuid": "b3313d10-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 282,
+  "fields": {
+    "source_id": 97,
+    "model": 19,
+    "name": "PC 1250 /17",
+    "mdm_object_uuid": "6777f209-1fce-11ed-98c8-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 283,
+  "fields": {
+    "source_id": 213,
+    "model": 19,
+    "name": "PC 1250 /18",
+    "mdm_object_uuid": "d01e7464-4743-11ed-98ce-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 284,
+  "fields": {
+    "source_id": 210,
+    "model": 19,
+    "name": "PC 1250 /3",
+    "mdm_object_uuid": "8f363c92-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 285,
+  "fields": {
+    "source_id": 212,
+    "model": 19,
+    "name": "PC 1250 /5",
+    "mdm_object_uuid": "e62ff647-1fcf-11ed-98c8-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 286,
+  "fields": {
+    "source_id": 1392,
+    "model": 19,
+    "name": "PC 1250 /705",
+    "mdm_object_uuid": "9c02702b-f145-11ee-98ee-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 287,
+  "fields": {
+    "source_id": 90,
+    "model": 20,
+    "name": "PC 2000 /10",
+    "mdm_object_uuid": "713f90f9-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 288,
+  "fields": {
+    "source_id": 91,
+    "model": 20,
+    "name": "PC 2000 /15",
+    "mdm_object_uuid": "713f911f-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 289,
+  "fields": {
+    "source_id": 279,
+    "model": 20,
+    "name": "PC 2000 /16",
+    "mdm_object_uuid": "95a53b30-26b0-11ee-98db-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 290,
+  "fields": {
+    "source_id": 92,
+    "model": 20,
+    "name": "PC 2000 /20",
+    "mdm_object_uuid": "b9333038-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 291,
+  "fields": {
+    "source_id": 88,
+    "model": 20,
+    "name": "PC 2000 /4",
+    "mdm_object_uuid": "713f9122-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 292,
+  "fields": {
+    "source_id": 93,
+    "model": 20,
+    "name": "PC 2000 /43",
+    "mdm_object_uuid": "713f9133-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 293,
+  "fields": {
+    "source_id": 89,
+    "model": 20,
+    "name": "PC 2000 /8",
+    "mdm_object_uuid": "83397e06-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 294,
+  "fields": {
+    "source_id": 94,
+    "model": 20,
+    "name": "PC 2000 /82",
+    "mdm_object_uuid": "6777f20d-1fce-11ed-98c8-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 295,
+  "fields": {
+    "source_id": 1622,
+    "model": 20,
+    "name": "PC 2000 /88",
+    "mdm_object_uuid": "276b2c49-7cc0-493f-8aa5-7ba54a41c390"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 296,
+  "fields": {
+    "source_id": 211,
+    "model": 20,
+    "name": "PC 2000 /94",
+    "mdm_object_uuid": "ab938616-2a30-11ed-98ca-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 297,
+  "fields": {
+    "source_id": 95,
+    "model": 20,
+    "name": "PC 2000 /99",
+    "mdm_object_uuid": "89344976-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 298,
+  "fields": {
+    "source_id": 278,
+    "model": 21,
+    "name": "PC 210/210",
+    "mdm_object_uuid": "278b27f5-6a1a-11ed-98d5-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 299,
+  "fields": {
+    "source_id": 1646,
+    "model": 21,
+    "name": "PC-210 УМПШ / 3118",
+    "mdm_object_uuid": "af29df29-6752-11ed-98d5-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 300,
+  "fields": {
+    "source_id": 228,
+    "model": 22,
+    "name": "PC 300 /018",
+    "mdm_object_uuid": "263f0ee6-d25a-11ed-98d9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 301,
+  "fields": {
+    "source_id": 280,
+    "model": 22,
+    "name": "PC-300 /286",
+    "mdm_object_uuid": "13d628ae-a765-11ed-98d9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 302,
+  "fields": {
+    "source_id": 281,
+    "model": 22,
+    "name": "PC-300 /300",
+    "mdm_object_uuid": "b26067ab-71fc-11ed-98d7-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 303,
+  "fields": {
+    "source_id": 1117,
+    "model": 23,
+    "name": "PC 3000 D /31",
+    "mdm_object_uuid": "c30f6d3d-a11b-11ed-98d9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 304,
+  "fields": {
+    "source_id": 223,
+    "model": 24,
+    "name": "PC 400 /017",
+    "mdm_object_uuid": "35e62ca3-cde6-11ed-98d9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 305,
+  "fields": {
+    "source_id": 224,
+    "model": 24,
+    "name": "PC 400 /019",
+    "mdm_object_uuid": "35e62c23-cde6-11ed-98d9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 306,
+  "fields": {
+    "source_id": 225,
+    "model": 24,
+    "name": "PC 400 /020",
+    "mdm_object_uuid": "4f714fc9-d7da-11ed-98d9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 307,
+  "fields": {
+    "source_id": 226,
+    "model": 24,
+    "name": "PC 400 /021",
+    "mdm_object_uuid": "4f71519f-d7da-11ed-98d9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 308,
+  "fields": {
+    "source_id": 227,
+    "model": 24,
+    "name": "PC 400 /022",
+    "mdm_object_uuid": "4f7152c1-d7da-11ed-98d9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 309,
+  "fields": {
+    "source_id": 1189,
+    "model": 24,
+    "name": "PC 400 /26",
+    "mdm_object_uuid": "a1375060-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 310,
+  "fields": {
+    "source_id": 1096,
+    "model": 25,
+    "name": "PC 4000 D /42",
+    "mdm_object_uuid": "ad31acac-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 311,
+  "fields": {
+    "source_id": 1123,
+    "model": 26,
+    "name": "PC 4000 /45",
+    "mdm_object_uuid": "64d6833f-5567-4f3b-83bc-ee7bfa065eb1"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 312,
+  "fields": {
+    "source_id": 87,
+    "model": 26,
+    "name": "PC 4000 E /283",
+    "mdm_object_uuid": "4f45cfae-2316-11ed-98c9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 313,
+  "fields": {
+    "source_id": 209,
+    "model": 26,
+    "name": "PC 4000 E /284",
+    "mdm_object_uuid": "6777f205-1fce-11ed-98c8-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 314,
+  "fields": {
+    "source_id": 233,
+    "model": 26,
+    "name": "PC 4000 E /38",
+    "mdm_object_uuid": "2df89708-995e-11ec-98ba-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 315,
+  "fields": {
+    "source_id": 102,
+    "model": 27,
+    "name": "PC 800 /19",
+    "mdm_object_uuid": "85e32b47-3955-11ed-98cb-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 316,
+  "fields": {
+    "source_id": 103,
+    "model": 27,
+    "name": "PC 800 /704",
+    "mdm_object_uuid": "a72fb9ad-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 317,
+  "fields": {
+    "source_id": 1313,
+    "model": 27,
+    "name": "PC-800 /65",
+    "mdm_object_uuid": "ce28d7d1-68da-11ef-9903-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 318,
+  "fields": {
+    "source_id": 1186,
+    "model": 28,
+    "name": "R 9250 /5",
+    "mdm_object_uuid": "83397e35-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 319,
+  "fields": {
+    "source_id": 230,
+    "model": 29,
+    "name": "R 9400 E /7",
+    "mdm_object_uuid": "595d2ee5-d12d-11ec-98bf-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 320,
+  "fields": {
+    "source_id": 1582,
+    "model": 30,
+    "name": "R 944 УМПШ №3797",
+    "mdm_object_uuid": "f7904dbc-89e7-11ef-9903-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 321,
+  "fields": {
+    "source_id": 1568,
+    "model": 31,
+    "name": "R 954 C УМПШ /2",
+    "mdm_object_uuid": "6b06a91a-d368-11ed-98d9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 322,
+  "fields": {
+    "source_id": 1569,
+    "model": 32,
+    "name": "R 976 УМПШ №1",
+    "mdm_object_uuid": "29779386-9e17-11ed-98d9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 323,
+  "fields": {
+    "source_id": 1553,
+    "model": 32,
+    "name": "R 976 УМПШ №2",
+    "mdm_object_uuid": "29779388-9e17-11ed-98d9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 324,
+  "fields": {
+    "source_id": 214,
+    "model": 32,
+    "name": "R 976 УМПШ №3",
+    "mdm_object_uuid": "9d75f6e7-45cb-11ed-98ce-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 325,
+  "fields": {
+    "source_id": 1572,
+    "model": 32,
+    "name": "R 976 УМПШ №4",
+    "mdm_object_uuid": "29779384-9e17-11ed-98d9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 326,
+  "fields": {
+    "source_id": 1573,
+    "model": 32,
+    "name": "R 976 УМПШ №5",
+    "mdm_object_uuid": "29779382-9e17-11ed-98d9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 327,
+  "fields": {
+    "source_id": 1473,
+    "model": 33,
+    "name": "Эв LIUGONG №30 (5645)",
+    "mdm_object_uuid": "0567b087-7180-11ef-9903-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 328,
+  "fields": {
+    "source_id": 1474,
+    "model": 33,
+    "name": "Эв LIUGONG №31 (5655)",
+    "mdm_object_uuid": "05d40572-7180-11ef-9903-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 329,
+  "fields": {
+    "source_id": 1479,
+    "model": 33,
+    "name": "Эв LIUGONG №32 (5644)",
+    "mdm_object_uuid": "05d411db-7180-11ef-9903-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 330,
+  "fields": {
+    "source_id": 1475,
+    "model": 33,
+    "name": "Эв LIUGONG №33 (5646)",
+    "mdm_object_uuid": "05d410fe-7180-11ef-9903-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 331,
+  "fields": {
+    "source_id": 1476,
+    "model": 33,
+    "name": "Эв LIUGONG №36 (5656)",
+    "mdm_object_uuid": "05d40543-7180-11ef-9903-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 332,
+  "fields": {
+    "source_id": 1477,
+    "model": 33,
+    "name": "Эв LIUGONG №65 (5651)",
+    "mdm_object_uuid": "05d407f0-7180-11ef-9903-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 333,
+  "fields": {
+    "source_id": 1478,
+    "model": 33,
+    "name": "Эв LIUGONG №99 (5652)",
+    "mdm_object_uuid": "044d895a-7180-11ef-9903-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 334,
+  "fields": {
+    "source_id": 1243,
+    "model": 34,
+    "name": "SY 1250 /58",
+    "mdm_object_uuid": "083a2689-bef9-11ee-98ec-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 335,
+  "fields": {
+    "source_id": 294,
+    "model": 34,
+    "name": "SY 1250 /91",
+    "mdm_object_uuid": "f0de61c3-3cc7-11ee-98db-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 336,
+  "fields": {
+    "source_id": 810,
+    "model": 34,
+    "name": "SY 1250 /92",
+    "mdm_object_uuid": "381028ce-3ccb-11ee-98db-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 337,
+  "fields": {
+    "source_id": 1034,
+    "model": 34,
+    "name": "SY 1250 /93",
+    "mdm_object_uuid": "381028d0-3ccb-11ee-98db-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 338,
+  "fields": {
+    "source_id": 1179,
+    "model": 34,
+    "name": "SY 1250 /94",
+    "mdm_object_uuid": "f6d2dbba-44d5-11ee-98dc-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 339,
+  "fields": {
+    "source_id": 1180,
+    "model": 34,
+    "name": "SY 1250 /98",
+    "mdm_object_uuid": "df1eb973-8e73-4a94-a6c1-ac333c0b30a8"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 340,
+  "fields": {
+    "source_id": 1643,
+    "model": 105,
+    "name": "Конвейер Объект 2",
+    "mdm_object_uuid": "00000000-0000-0000-0000-000000000000"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 341,
+  "fields": {
+    "source_id": 1195,
+    "model": 35,
+    "name": "SY 330 /96",
+    "mdm_object_uuid": "fb6d09ba-988a-11ee-98e2-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 342,
+  "fields": {
+    "source_id": 1658,
+    "model": 37,
+    "name": "WK 20 /101",
+    "mdm_object_uuid": "b459dbde-16c0-4396-9a4b-5958aa75a491"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 343,
+  "fields": {
+    "source_id": 1112,
+    "model": 37,
+    "name": "WK 20 /97",
+    "mdm_object_uuid": "3385d5e0-21fd-11ee-98db-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 344,
+  "fields": {
+    "source_id": 1113,
+    "model": 37,
+    "name": "WK 20 /98",
+    "mdm_object_uuid": "3f934675-21fd-11ee-98db-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 345,
+  "fields": {
+    "source_id": 1596,
+    "model": 38,
+    "name": "Тестовый экскаватор",
+    "mdm_object_uuid": "66100fd1-209d-479a-bdfa-31ebfc5ea77a"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 346,
+  "fields": {
+    "source_id": 232,
+    "model": 39,
+    "name": "ЭКГ 20 /30",
+    "mdm_object_uuid": "93f622e9-995f-11ec-98ba-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 347,
+  "fields": {
+    "source_id": 1198,
+    "model": 41,
+    "name": "CAT D9N №13",
+    "mdm_object_uuid": "fbc2abb0-a2e4-11ee-98e4-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 348,
+  "fields": {
+    "source_id": 1558,
+    "model": 42,
+    "name": "D 155 УМПШ №29",
+    "mdm_object_uuid": "29779394-9e17-11ed-98d9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 349,
+  "fields": {
+    "source_id": 1234,
+    "model": 42,
+    "name": "D155 *21",
+    "mdm_object_uuid": "1baaee32-caf5-11ee-98ed-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 350,
+  "fields": {
+    "source_id": 263,
+    "model": 42,
+    "name": "D155 №13",
+    "mdm_object_uuid": "b9333027-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 351,
+  "fields": {
+    "source_id": 49,
+    "model": 42,
+    "name": "D155 №14",
+    "mdm_object_uuid": "b9333026-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 352,
+  "fields": {
+    "source_id": 1336,
+    "model": 43,
+    "name": "D275 *51",
+    "mdm_object_uuid": "8685342f-380a-11ef-98fd-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 353,
+  "fields": {
+    "source_id": 1337,
+    "model": 43,
+    "name": "D275 *52",
+    "mdm_object_uuid": "8c7fcfc5-380a-11ef-98fd-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 354,
+  "fields": {
+    "source_id": 1341,
+    "model": 43,
+    "name": "D275 *53",
+    "mdm_object_uuid": "9b62eb98-4402-11ef-98fd-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 355,
+  "fields": {
+    "source_id": 1342,
+    "model": 43,
+    "name": "D275 *54",
+    "mdm_object_uuid": "7ebe2004-4403-11ef-98fd-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 356,
+  "fields": {
+    "source_id": 1343,
+    "model": 43,
+    "name": "D275 *55",
+    "mdm_object_uuid": "d78ddf7a-4403-11ef-98fd-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 357,
+  "fields": {
+    "source_id": 1344,
+    "model": 43,
+    "name": "D275 *56",
+    "mdm_object_uuid": "ef847b7f-4403-11ef-98fd-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 358,
+  "fields": {
+    "source_id": 1345,
+    "model": 43,
+    "name": "D275 *57",
+    "mdm_object_uuid": "22465a22-4404-11ef-98fd-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 359,
+  "fields": {
+    "source_id": 1389,
+    "model": 43,
+    "name": "D275 №934",
+    "mdm_object_uuid": "47b7ce3b-5006-11ef-98fe-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 360,
+  "fields": {
+    "source_id": 1390,
+    "model": 43,
+    "name": "D275 №935",
+    "mdm_object_uuid": "47b7ce83-5006-11ef-98fe-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 361,
+  "fields": {
+    "source_id": 64,
+    "model": 44,
+    "name": "D375 *10",
+    "mdm_object_uuid": "5f39b7ff-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 362,
+  "fields": {
+    "source_id": 65,
+    "model": 44,
+    "name": "D375 *11",
+    "mdm_object_uuid": "5f39b800-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 363,
+  "fields": {
+    "source_id": 215,
+    "model": 44,
+    "name": "D375 *15",
+    "mdm_object_uuid": "8f363c91-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 364,
+  "fields": {
+    "source_id": 66,
+    "model": 44,
+    "name": "D375 *20",
+    "mdm_object_uuid": "713f90d6-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 365,
+  "fields": {
+    "source_id": 1541,
+    "model": 44,
+    "name": "D375 *23",
+    "mdm_object_uuid": "4de8e6c2-27a3-11ef-98fc-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 366,
+  "fields": {
+    "source_id": 68,
+    "model": 44,
+    "name": "D375 *25",
+    "mdm_object_uuid": "7d411467-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 367,
+  "fields": {
+    "source_id": 69,
+    "model": 44,
+    "name": "D375 *26",
+    "mdm_object_uuid": "7d41146b-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 368,
+  "fields": {
+    "source_id": 70,
+    "model": 44,
+    "name": "D375 *27",
+    "mdm_object_uuid": "7d4114b8-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 369,
+  "fields": {
+    "source_id": 71,
+    "model": 44,
+    "name": "D375 *28",
+    "mdm_object_uuid": "953cf450-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 370,
+  "fields": {
+    "source_id": 72,
+    "model": 44,
+    "name": "D375 *29",
+    "mdm_object_uuid": "953cf45c-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 371,
+  "fields": {
+    "source_id": 216,
+    "model": 44,
+    "name": "D375 *35",
+    "mdm_object_uuid": "769ad9d5-53d6-11ed-98d0-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 372,
+  "fields": {
+    "source_id": 217,
+    "model": 44,
+    "name": "D375 *36",
+    "mdm_object_uuid": "769ada0d-53d6-11ed-98d0-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 373,
+  "fields": {
+    "source_id": 218,
+    "model": 44,
+    "name": "D375 *37",
+    "mdm_object_uuid": "769ada45-53d6-11ed-98d0-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 374,
+  "fields": {
+    "source_id": 73,
+    "model": 44,
+    "name": "D375 *58",
+    "mdm_object_uuid": "9b3c84bb-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 375,
+  "fields": {
+    "source_id": 1115,
+    "model": 44,
+    "name": "D375 *81",
+    "mdm_object_uuid": "6bb9c4c3-d8e3-4e22-89c8-6e1a71d0f8bd"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 376,
+  "fields": {
+    "source_id": 1134,
+    "model": 44,
+    "name": "D375 *82",
+    "mdm_object_uuid": "dcc64285-ac91-4d5c-95d0-c8f387887b8d"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 377,
+  "fields": {
+    "source_id": 1504,
+    "model": 44,
+    "name": "D375 *83",
+    "mdm_object_uuid": "1a791062-63d6-4cba-8bc8-5cb9172d3f1c"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 378,
+  "fields": {
+    "source_id": 219,
+    "model": 44,
+    "name": "D375 *84",
+    "mdm_object_uuid": "a2742389-2f3f-11ed-98cb-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 379,
+  "fields": {
+    "source_id": 220,
+    "model": 44,
+    "name": "D375 *85",
+    "mdm_object_uuid": "e62ff62f-1fcf-11ed-98c8-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 380,
+  "fields": {
+    "source_id": 221,
+    "model": 44,
+    "name": "D375 *86",
+    "mdm_object_uuid": "a26c2a06-2f46-11ed-98cb-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 381,
+  "fields": {
+    "source_id": 67,
+    "model": 44,
+    "name": "D375 №22",
+    "mdm_object_uuid": "773cbf59-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 382,
+  "fields": {
+    "source_id": 1128,
+    "model": 44,
+    "name": "D375 №24",
+    "mdm_object_uuid": "773cbf4f-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 383,
+  "fields": {
+    "source_id": 1297,
+    "model": 44,
+    "name": "D375 №931",
+    "mdm_object_uuid": "d663d0c9-ebd8-11ee-98ee-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 384,
+  "fields": {
+    "source_id": 1310,
+    "model": 44,
+    "name": "D375 №932",
+    "mdm_object_uuid": "53e9b9b7-fc41-11ee-98ef-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 385,
+  "fields": {
+    "source_id": 1298,
+    "model": 44,
+    "name": "D375 №933",
+    "mdm_object_uuid": "8f1acf98-ea6c-11ee-98ee-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 386,
+  "fields": {
+    "source_id": 264,
+    "model": 45,
+    "name": "D65 *12",
+    "mdm_object_uuid": "a2742387-2f3f-11ed-98cb-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 387,
+  "fields": {
+    "source_id": 1118,
+    "model": 45,
+    "name": "D65 *16",
+    "mdm_object_uuid": "0a5f0b1d-cd1d-11ed-98d9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 388,
+  "fields": {
+    "source_id": 1119,
+    "model": 45,
+    "name": "D65 *17",
+    "mdm_object_uuid": "8a36bd9c-d42f-11ed-98d9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 389,
+  "fields": {
+    "source_id": 1382,
+    "model": 46,
+    "name": "D85 *30",
+    "mdm_object_uuid": "ab6dbf51-ff6d-11ed-98db-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 390,
+  "fields": {
+    "source_id": 1561,
+    "model": 47,
+    "name": "WD 600-6 УМПШ / 6",
+    "mdm_object_uuid": "29779390-9e17-11ed-98d9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 391,
+  "fields": {
+    "source_id": 50,
+    "model": 47,
+    "name": "WD600 *1",
+    "mdm_object_uuid": "953cf46b-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 392,
+  "fields": {
+    "source_id": 54,
+    "model": 47,
+    "name": "WD600 *34",
+    "mdm_object_uuid": "9b3c84c1-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 393,
+  "fields": {
+    "source_id": 51,
+    "model": 47,
+    "name": "WD600 *89",
+    "mdm_object_uuid": "5f39b7f7-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 394,
+  "fields": {
+    "source_id": 52,
+    "model": 47,
+    "name": "WD600 *90",
+    "mdm_object_uuid": "7d41148b-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 395,
+  "fields": {
+    "source_id": 53,
+    "model": 47,
+    "name": "WD600 *91",
+    "mdm_object_uuid": "7d4114c7-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 396,
+  "fields": {
+    "source_id": 1308,
+    "model": 47,
+    "name": "WD600 *92",
+    "mdm_object_uuid": "1515a022-e533-11ee-98ed-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 397,
+  "fields": {
+    "source_id": 1181,
+    "model": 48,
+    "name": "PR754 *2",
+    "mdm_object_uuid": "3a6a0211-95fd-474a-87c3-cb7183af235d"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 398,
+  "fields": {
+    "source_id": 56,
+    "model": 48,
+    "name": "PR754 *3",
+    "mdm_object_uuid": "6536e60d-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 399,
+  "fields": {
+    "source_id": 57,
+    "model": 48,
+    "name": "PR754 *4",
+    "mdm_object_uuid": "5f39b80a-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 400,
+  "fields": {
+    "source_id": 60,
+    "model": 48,
+    "name": "PR754 *8",
+    "mdm_object_uuid": "b3313d1b-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 401,
+  "fields": {
+    "source_id": 1559,
+    "model": 48,
+    "name": "PR754 УМПШ №1",
+    "mdm_object_uuid": "5f39b807-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 402,
+  "fields": {
+    "source_id": 259,
+    "model": 48,
+    "name": "PR754 УМПШ №2",
+    "mdm_object_uuid": "dcb60ae4-45c5-11ed-98ce-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 403,
+  "fields": {
+    "source_id": 55,
+    "model": 48,
+    "name": "PR754 №1 (УМПШ аренда)",
+    "mdm_object_uuid": "a1375080-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 404,
+  "fields": {
+    "source_id": 1197,
+    "model": 48,
+    "name": "PR754 №15",
+    "mdm_object_uuid": "2c69ef2d-b426-11ee-98e4-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 405,
+  "fields": {
+    "source_id": 1133,
+    "model": 48,
+    "name": "PR754 №23",
+    "mdm_object_uuid": "773cbf51-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 406,
+  "fields": {
+    "source_id": 58,
+    "model": 48,
+    "name": "PR754 №5 (ВГТ ТС аренда)",
+    "mdm_object_uuid": "a137507d-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 407,
+  "fields": {
+    "source_id": 59,
+    "model": 48,
+    "name": "PR754 №6 (ВГТ ТС аренда)",
+    "mdm_object_uuid": "953cf46a-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 408,
+  "fields": {
+    "source_id": 1235,
+    "model": 48,
+    "name": "PR754 №63",
+    "mdm_object_uuid": "09c79514-b40d-11ee-98e4-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 409,
+  "fields": {
+    "source_id": 1097,
+    "model": 48,
+    "name": "PR754 №67",
+    "mdm_object_uuid": "ddf8b613-afc6-11ed-98d9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 410,
+  "fields": {
+    "source_id": 1555,
+    "model": 49,
+    "name": "PR 764 УМПШ №1",
+    "mdm_object_uuid": "5416f92b-b188-11ed-98d9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 411,
+  "fields": {
+    "source_id": 1556,
+    "model": 49,
+    "name": "PR 764 УМПШ №2",
+    "mdm_object_uuid": "2977936e-9e17-11ed-98d9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 412,
+  "fields": {
+    "source_id": 1560,
+    "model": 49,
+    "name": "PR 764 УМПШ №3",
+    "mdm_object_uuid": "2977936a-9e17-11ed-98d9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 413,
+  "fields": {
+    "source_id": 1557,
+    "model": 49,
+    "name": "PR 764 УМПШ №4",
+    "mdm_object_uuid": "2977936c-9e17-11ed-98d9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 414,
+  "fields": {
+    "source_id": 1311,
+    "model": 49,
+    "name": "PR764 *7",
+    "mdm_object_uuid": "4858fb05-76e5-11ee-98df-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 415,
+  "fields": {
+    "source_id": 61,
+    "model": 49,
+    "name": "PR764 №9 (УМПШ)",
+    "mdm_object_uuid": "bf32c061-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 416,
+  "fields": {
+    "source_id": 1396,
+    "model": 49,
+    "name": "PR764 №936",
+    "mdm_object_uuid": "1bafd14d-64f5-11ef-9903-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 417,
+  "fields": {
+    "source_id": 1603,
+    "model": 49,
+    "name": "PR764 №937",
+    "mdm_object_uuid": "3cae799d-fbc1-413f-88c5-417aacecc293"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 418,
+  "fields": {
+    "source_id": 254,
+    "model": 50,
+    "name": "PR776 *18",
+    "mdm_object_uuid": "19e370f2-2298-11ed-98c9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 419,
+  "fields": {
+    "source_id": 255,
+    "model": 50,
+    "name": "PR776 *19",
+    "mdm_object_uuid": "19e370f4-2298-11ed-98c9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 420,
+  "fields": {
+    "source_id": 253,
+    "model": 50,
+    "name": "PR776 *31",
+    "mdm_object_uuid": "83397e11-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 421,
+  "fields": {
+    "source_id": 256,
+    "model": 50,
+    "name": "PR776 *32",
+    "mdm_object_uuid": "b933301a-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 422,
+  "fields": {
+    "source_id": 257,
+    "model": 50,
+    "name": "PR776 *43",
+    "mdm_object_uuid": "f85190b3-4608-11ed-98ce-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 423,
+  "fields": {
+    "source_id": 258,
+    "model": 50,
+    "name": "PR776 *44",
+    "mdm_object_uuid": "24c0b113-3fc4-11ed-98cb-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 424,
+  "fields": {
+    "source_id": 1467,
+    "model": 51,
+    "name": "Бульд LIUGONG №85",
+    "mdm_object_uuid": "044d844b-7180-11ef-9903-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 425,
+  "fields": {
+    "source_id": 1468,
+    "model": 51,
+    "name": "Бульд LIUGONG №88",
+    "mdm_object_uuid": "044d800b-7180-11ef-9903-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 426,
+  "fields": {
+    "source_id": 1469,
+    "model": 51,
+    "name": "Бульд LIUGONG №89",
+    "mdm_object_uuid": "044d6a94-7180-11ef-9903-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 427,
+  "fields": {
+    "source_id": 1471,
+    "model": 52,
+    "name": "Бульд LIUGONG №08",
+    "mdm_object_uuid": "05d414ff-7180-11ef-9903-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 428,
+  "fields": {
+    "source_id": 1472,
+    "model": 52,
+    "name": "Бульд LIUGONG №09",
+    "mdm_object_uuid": "05d4146f-7180-11ef-9903-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 429,
+  "fields": {
+    "source_id": 1470,
+    "model": 52,
+    "name": "Бульд LIUGONG №10",
+    "mdm_object_uuid": "05d41549-7180-11ef-9903-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 430,
+  "fields": {
+    "source_id": 1540,
+    "model": 53,
+    "name": "SHANTUI *50",
+    "mdm_object_uuid": "f7041d7f-e68e-4136-a0f3-0ea32be2bd7c"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 431,
+  "fields": {
+    "source_id": 1508,
+    "model": 55,
+    "name": "Shantu SD *39",
+    "mdm_object_uuid": "3980b2f9-427a-4196-bd1b-b183c8b01e76"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 432,
+  "fields": {
+    "source_id": 1321,
+    "model": 55,
+    "name": "Shantui SD *38",
+    "mdm_object_uuid": "0c6b3758-0c23-11ef-98f1-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 433,
+  "fields": {
+    "source_id": 1518,
+    "model": 55,
+    "name": "Shantui SD *40",
+    "mdm_object_uuid": "a22d4795-48aa-4e6e-9df9-6e54b02d51db"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 434,
+  "fields": {
+    "source_id": 291,
+    "model": 56,
+    "name": "920",
+    "mdm_object_uuid": "1754f2ec-3bf1-11ee-98db-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 435,
+  "fields": {
+    "source_id": 292,
+    "model": 56,
+    "name": "921",
+    "mdm_object_uuid": "55054ef6-3bf2-11ee-98db-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 436,
+  "fields": {
+    "source_id": 1038,
+    "model": 56,
+    "name": "923",
+    "mdm_object_uuid": "f6d2d42e-44d5-11ee-98dc-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 437,
+  "fields": {
+    "source_id": 888,
+    "model": 56,
+    "name": "924",
+    "mdm_object_uuid": "f6d2d952-44d5-11ee-98dc-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 438,
+  "fields": {
+    "source_id": 293,
+    "model": 56,
+    "name": "SD9 №922",
+    "mdm_object_uuid": "5505502a-3bf2-11ee-98db-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 439,
+  "fields": {
+    "source_id": 1647,
+    "model": 60,
+    "name": "WA200 УМПШ / 1",
+    "mdm_object_uuid": "5f39b7c3-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 440,
+  "fields": {
+    "source_id": 80,
+    "model": 61,
+    "name": "WA 470 / 2",
+    "mdm_object_uuid": "5f39b7d0-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 441,
+  "fields": {
+    "source_id": 83,
+    "model": 61,
+    "name": "WA 470 / 5",
+    "mdm_object_uuid": "6536e608-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 442,
+  "fields": {
+    "source_id": 79,
+    "model": 61,
+    "name": "WA 470 №1",
+    "mdm_object_uuid": "bf32c062-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 443,
+  "fields": {
+    "source_id": 81,
+    "model": 61,
+    "name": "WA 470 №3",
+    "mdm_object_uuid": "953cf469-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 444,
+  "fields": {
+    "source_id": 82,
+    "model": 61,
+    "name": "WA 470 №4",
+    "mdm_object_uuid": "b9333029-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 445,
+  "fields": {
+    "source_id": 84,
+    "model": 61,
+    "name": "WA 470 №6",
+    "mdm_object_uuid": "b3313d66-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 446,
+  "fields": {
+    "source_id": 85,
+    "model": 61,
+    "name": "WA 470 №7",
+    "mdm_object_uuid": "5f39b7f1-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 447,
+  "fields": {
+    "source_id": 1563,
+    "model": 62,
+    "name": "L580 УМПШ №1",
+    "mdm_object_uuid": "5785f042-558c-11ed-98d0-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 448,
+  "fields": {
+    "source_id": 1581,
+    "model": 62,
+    "name": "L580 УМПШ №2",
+    "mdm_object_uuid": "362f2796-4462-11ed-98cc-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 449,
+  "fields": {
+    "source_id": 1554,
+    "model": 62,
+    "name": "L580 УМПШ №3",
+    "mdm_object_uuid": "b3313d45-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 450,
+  "fields": {
+    "source_id": 1564,
+    "model": 62,
+    "name": "L580 УМПШ №4",
+    "mdm_object_uuid": "29779398-9e17-11ed-98d9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 451,
+  "fields": {
+    "source_id": 1565,
+    "model": 62,
+    "name": "L580 УМПШ №5",
+    "mdm_object_uuid": "29779396-9e17-11ed-98d9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 452,
+  "fields": {
+    "source_id": 62,
+    "model": 62,
+    "name": "L580 №1",
+    "mdm_object_uuid": "8f363c78-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 453,
+  "fields": {
+    "source_id": 63,
+    "model": 62,
+    "name": "L580 №2",
+    "mdm_object_uuid": "773cbf00-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 454,
+  "fields": {
+    "source_id": 1489,
+    "model": 63,
+    "name": "Shantui L №10",
+    "mdm_object_uuid": "e79371d1-b51d-4999-87f0-88286d6dba97"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 455,
+  "fields": {
+    "source_id": 1492,
+    "model": 63,
+    "name": "Shantui L №11",
+    "mdm_object_uuid": "bebeae0a-bc06-4aaa-a5cb-d29c32b85958"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 456,
+  "fields": {
+    "source_id": 1532,
+    "model": 63,
+    "name": "Shantui L №12",
+    "mdm_object_uuid": "6d36cde5-79b0-402f-8799-08eaeace0ec7"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 457,
+  "fields": {
+    "source_id": 1533,
+    "model": 63,
+    "name": "Shantui L №13",
+    "mdm_object_uuid": "3f210f10-b2cc-48c6-92cf-d0fc75b7633c"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 458,
+  "fields": {
+    "source_id": 1534,
+    "model": 63,
+    "name": "Shantui L №14",
+    "mdm_object_uuid": "e80676a9-5c97-4b63-880e-c5c7c1cafd5b"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 459,
+  "fields": {
+    "source_id": 1592,
+    "model": 63,
+    "name": "Shantui L №15",
+    "mdm_object_uuid": "1341b626-0721-44b8-9896-58ea0a40392d"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 460,
+  "fields": {
+    "source_id": 1583,
+    "model": 64,
+    "name": "6237СМ65",
+    "mdm_object_uuid": "5f39b7c1-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 461,
+  "fields": {
+    "source_id": 1480,
+    "model": 64,
+    "name": "6783СО65",
+    "mdm_object_uuid": "7d41146d-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 462,
+  "fields": {
+    "source_id": 1400,
+    "model": 65,
+    "name": "№3",
+    "mdm_object_uuid": "977b22e0-697a-11ef-9903-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 463,
+  "fields": {
+    "source_id": 1597,
+    "model": 66,
+    "name": "Ресайклер XCMG №1",
+    "mdm_object_uuid": "1f924cdd-50f2-11ee-98dd-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 464,
+  "fields": {
+    "source_id": 1415,
+    "model": 67,
+    "name": "Sitrak Н454ОМ",
+    "mdm_object_uuid": "655c00b5-4e12-11ef-98fe-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 465,
+  "fields": {
+    "source_id": 1294,
+    "model": 67,
+    "name": "АНЦ М203ХМ",
+    "mdm_object_uuid": "4fdcd1a3-4b05-11ed-98ce-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 466,
+  "fields": {
+    "source_id": 1304,
+    "model": 67,
+    "name": "АНЦ М249ХМ",
+    "mdm_object_uuid": "311ca241-4ae0-11ed-98ce-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 467,
+  "fields": {
+    "source_id": 1283,
+    "model": 67,
+    "name": "АНЦ М294ХМ",
+    "mdm_object_uuid": "6a143279-4af4-11ed-98ce-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 468,
+  "fields": {
+    "source_id": 1416,
+    "model": 67,
+    "name": "АНЦ Н464ОМ",
+    "mdm_object_uuid": "1f0a0708-fd1b-11ee-98ef-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 469,
+  "fields": {
+    "source_id": 1417,
+    "model": 67,
+    "name": "АНЦ Н484ОМ",
+    "mdm_object_uuid": "96e375b2-4e0f-11ef-98fe-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 470,
+  "fields": {
+    "source_id": 1418,
+    "model": 67,
+    "name": "АНЦ Н495ОМ",
+    "mdm_object_uuid": "1f09fc8d-fd1b-11ee-98ef-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 471,
+  "fields": {
+    "source_id": 1623,
+    "model": 67,
+    "name": "АНЦ Н505ОМ",
+    "mdm_object_uuid": "fd9da31b-3294-11ef-98fd-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 472,
+  "fields": {
+    "source_id": 1420,
+    "model": 67,
+    "name": "М169ХМ",
+    "mdm_object_uuid": "237cce04-9e17-11ed-98d9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 473,
+  "fields": {
+    "source_id": 1334,
+    "model": 68,
+    "name": "КМУ Н325ОМ",
+    "mdm_object_uuid": "f9e35bb0-b5c7-11ee-98e4-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 474,
+  "fields": {
+    "source_id": 1333,
+    "model": 68,
+    "name": "СЗМ Н523ОМ",
+    "mdm_object_uuid": "fb9c7f9f-2306-11ef-98fa-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 475,
+  "fields": {
+    "source_id": 1335,
+    "model": 68,
+    "name": "СЗМ Н562ОМ",
+    "mdm_object_uuid": "678801b1-2c5b-11ef-98fd-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 476,
+  "fields": {
+    "source_id": 1653,
+    "model": 69,
+    "name": "КДМ М096ХМ",
+    "mdm_object_uuid": "71f5788d-48a5-11ed-98ce-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 477,
+  "fields": {
+    "source_id": 1291,
+    "model": 69,
+    "name": "КДМ М128ХМ",
+    "mdm_object_uuid": "636a2dc0-48a3-11ed-98ce-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 478,
+  "fields": {
+    "source_id": 1652,
+    "model": 69,
+    "name": "КДМ М201ХМ",
+    "mdm_object_uuid": "4e339f03-48a1-11ed-98ce-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 479,
+  "fields": {
+    "source_id": 1287,
+    "model": 69,
+    "name": "КДМ М304СР",
+    "mdm_object_uuid": "39f2f6ef-4adf-11ed-98ce-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 480,
+  "fields": {
+    "source_id": 1286,
+    "model": 69,
+    "name": "КДМ М397СР",
+    "mdm_object_uuid": "b94cc713-4a17-11ed-98ce-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 481,
+  "fields": {
+    "source_id": 1299,
+    "model": 69,
+    "name": "КДМ М994СО",
+    "mdm_object_uuid": "b94cc717-4a17-11ed-98ce-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 482,
+  "fields": {
+    "source_id": 1602,
+    "model": 70,
+    "name": "Легк К932ТА",
+    "mdm_object_uuid": "3f7c1a1d-146a-4d21-8b4b-e1e4c1915683"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 483,
+  "fields": {
+    "source_id": 883,
+    "model": 70,
+    "name": "Легк К983ХМ",
+    "mdm_object_uuid": "b52246c0-6752-11ed-98d5-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 484,
+  "fields": {
+    "source_id": 879,
+    "model": 70,
+    "name": "Легк М004СВ",
+    "mdm_object_uuid": "b52246dc-6752-11ed-98d5-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 485,
+  "fields": {
+    "source_id": 1448,
+    "model": 70,
+    "name": "Легк М093ХМ",
+    "mdm_object_uuid": "c560f11c-127c-11ef-98f9-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 486,
+  "fields": {
+    "source_id": 1488,
+    "model": 70,
+    "name": "Легк М099УВ",
+    "mdm_object_uuid": "b52246c2-6752-11ed-98d5-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 487,
+  "fields": {
+    "source_id": 988,
+    "model": 70,
+    "name": "Легк М132ХМ",
+    "mdm_object_uuid": "b522470a-6752-11ed-98d5-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 488,
+  "fields": {
+    "source_id": 1450,
+    "model": 70,
+    "name": "Легк М266ХМ",
+    "mdm_object_uuid": "90675982-75c0-11ed-98d7-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 489,
+  "fields": {
+    "source_id": 1087,
+    "model": 70,
+    "name": "Легк М295ХМ",
+    "mdm_object_uuid": "bd909729-75c0-11ed-98d7-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 490,
+  "fields": {
+    "source_id": 1599,
+    "model": 70,
+    "name": "Легк М320СХ",
+    "mdm_object_uuid": "7d8be899-1283-11ef-98f9-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 491,
+  "fields": {
+    "source_id": 999,
+    "model": 70,
+    "name": "Легк М337УК",
+    "mdm_object_uuid": "b52246d8-6752-11ed-98d5-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 492,
+  "fields": {
+    "source_id": 1520,
+    "model": 70,
+    "name": "Легк М347УХ",
+    "mdm_object_uuid": "b52246e4-6752-11ed-98d5-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 493,
+  "fields": {
+    "source_id": 1000,
+    "model": 70,
+    "name": "Легк М353УК",
+    "mdm_object_uuid": "b52246f0-6752-11ed-98d5-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 494,
+  "fields": {
+    "source_id": 880,
+    "model": 70,
+    "name": "Легк М493ВН",
+    "mdm_object_uuid": "b52246f6-6752-11ed-98d5-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 495,
+  "fields": {
+    "source_id": 885,
+    "model": 70,
+    "name": "Легк М540ОК",
+    "mdm_object_uuid": "b52246c8-6752-11ed-98d5-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 496,
+  "fields": {
+    "source_id": 1550,
+    "model": 70,
+    "name": "Легк М577УС",
+    "mdm_object_uuid": "b52246ee-6752-11ed-98d5-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 497,
+  "fields": {
+    "source_id": 1451,
+    "model": 70,
+    "name": "Легк М636УС",
+    "mdm_object_uuid": "ca9829f9-6fd6-11ef-9903-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 498,
+  "fields": {
+    "source_id": 1452,
+    "model": 70,
+    "name": "Легк М648УС",
+    "mdm_object_uuid": "b52246ca-6752-11ed-98d5-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 499,
+  "fields": {
+    "source_id": 886,
+    "model": 70,
+    "name": "Легк М678ХК",
+    "mdm_object_uuid": "b52246e0-6752-11ed-98d5-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 500,
+  "fields": {
+    "source_id": 1664,
+    "model": 70,
+    "name": "Легк М701УС",
+    "mdm_object_uuid": "b52246f2-6752-11ed-98d5-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 501,
+  "fields": {
+    "source_id": 1453,
+    "model": 70,
+    "name": "Легк М740УС",
+    "mdm_object_uuid": "b52246e6-6752-11ed-98d5-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 502,
+  "fields": {
+    "source_id": 1002,
+    "model": 70,
+    "name": "Легк М824УС",
+    "mdm_object_uuid": "b52246d6-6752-11ed-98d5-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 503,
+  "fields": {
+    "source_id": 1086,
+    "model": 70,
+    "name": "Легк М870УС",
+    "mdm_object_uuid": "53dec6b1-75c0-11ed-98d7-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 504,
+  "fields": {
+    "source_id": 887,
+    "model": 70,
+    "name": "Легк М968УК",
+    "mdm_object_uuid": "b52246e2-6752-11ed-98d5-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 505,
+  "fields": {
+    "source_id": 1005,
+    "model": 70,
+    "name": "Легк Н042КМ",
+    "mdm_object_uuid": "b52246fa-6752-11ed-98d5-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 506,
+  "fields": {
+    "source_id": 1615,
+    "model": 70,
+    "name": "Легк Н043ОТ",
+    "mdm_object_uuid": "82e60f00-f991-43a6-9b6d-526a0b3a162a"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 507,
+  "fields": {
+    "source_id": 875,
+    "model": 70,
+    "name": "Легк Н050ВС",
+    "mdm_object_uuid": "b5224726-6752-11ed-98d5-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 508,
+  "fields": {
+    "source_id": 1524,
+    "model": 70,
+    "name": "Легк Н052ОТ",
+    "mdm_object_uuid": "b520a0c8-b0f1-490f-9098-97d7865fcd5a"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 509,
+  "fields": {
+    "source_id": 1611,
+    "model": 70,
+    "name": "Легк Н072ОТ",
+    "mdm_object_uuid": "470ae8eb-6a4b-4838-ad8e-b9e302776184"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 510,
+  "fields": {
+    "source_id": 1527,
+    "model": 70,
+    "name": "Легк Н073НА",
+    "mdm_object_uuid": "6e62d668-c3cb-11ed-98d9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 511,
+  "fields": {
+    "source_id": 1523,
+    "model": 70,
+    "name": "Легк Н091ОТ",
+    "mdm_object_uuid": "a401655b-9706-4054-861d-e42a047c4154"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 512,
+  "fields": {
+    "source_id": 1614,
+    "model": 70,
+    "name": "Легк Н106ОТ",
+    "mdm_object_uuid": "25dd38e5-5d00-44c3-b220-85a928bd6510"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 513,
+  "fields": {
+    "source_id": 1598,
+    "model": 70,
+    "name": "Легк Н112ОТ",
+    "mdm_object_uuid": "d7a592c3-b385-4d87-b40c-a212808ee2ea"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 514,
+  "fields": {
+    "source_id": 1608,
+    "model": 70,
+    "name": "Легк Н135ОТ",
+    "mdm_object_uuid": "bb1d093b-cb03-43cc-9fe7-9b326ab3885d"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 515,
+  "fields": {
+    "source_id": 1454,
+    "model": 70,
+    "name": "Легк Н136НК",
+    "mdm_object_uuid": "117ce550-4a20-11ef-98fd-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 516,
+  "fields": {
+    "source_id": 1076,
+    "model": 70,
+    "name": "Легк Н140НА",
+    "mdm_object_uuid": "db89cfa7-1c6d-11ee-98db-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 517,
+  "fields": {
+    "source_id": 1075,
+    "model": 70,
+    "name": "Легк Н142ВС",
+    "mdm_object_uuid": "215d0bb1-75c1-11ed-98d7-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 518,
+  "fields": {
+    "source_id": 876,
+    "model": 70,
+    "name": "Легк Н150КМ",
+    "mdm_object_uuid": "b5224702-6752-11ed-98d5-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 519,
+  "fields": {
+    "source_id": 1612,
+    "model": 70,
+    "name": "Легк Н162ОТ",
+    "mdm_object_uuid": "43b26c58-ba70-4d6e-bfd6-ed2978693d8a"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 520,
+  "fields": {
+    "source_id": 1081,
+    "model": 70,
+    "name": "Легк Н167НА",
+    "mdm_object_uuid": "1da8c178-efca-11ed-98da-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 521,
+  "fields": {
+    "source_id": 1617,
+    "model": 70,
+    "name": "Легк Н167ОТ",
+    "mdm_object_uuid": "2d50046d-4aed-404e-b883-1221d9c906c4"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 522,
+  "fields": {
+    "source_id": 1013,
+    "model": 70,
+    "name": "Легк Н170ВС",
+    "mdm_object_uuid": "b5224722-6752-11ed-98d5-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 523,
+  "fields": {
+    "source_id": 1606,
+    "model": 70,
+    "name": "Легк Н171ОТ",
+    "mdm_object_uuid": "8eb2b595-06b1-414e-a1e5-64dbbc0fe51b"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 524,
+  "fields": {
+    "source_id": 1659,
+    "model": 70,
+    "name": "Легк Н181ОТ",
+    "mdm_object_uuid": "87ea705c-d8a4-40f4-be74-72ae52e7b553"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 525,
+  "fields": {
+    "source_id": 1609,
+    "model": 70,
+    "name": "Легк Н233ОТ",
+    "mdm_object_uuid": "91daab95-586c-469d-a978-63d35d949f68"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 526,
+  "fields": {
+    "source_id": 1613,
+    "model": 70,
+    "name": "Легк Н239ОТ",
+    "mdm_object_uuid": "e5839f0e-ac16-4974-9337-fe1a818c86fe"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 527,
+  "fields": {
+    "source_id": 1607,
+    "model": 70,
+    "name": "Легк Н287ОТ",
+    "mdm_object_uuid": "52ec13c7-6f57-46c3-a991-cadb86a24e9e"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 528,
+  "fields": {
+    "source_id": 1455,
+    "model": 70,
+    "name": "Легк Н314ОМ",
+    "mdm_object_uuid": "f1e0e004-a2c5-11ee-98e4-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 529,
+  "fields": {
+    "source_id": 1449,
+    "model": 70,
+    "name": "Легк Н321ОМ",
+    "mdm_object_uuid": "09ad28e3-b41e-11ee-98e4-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 530,
+  "fields": {
+    "source_id": 1655,
+    "model": 70,
+    "name": "Легк Н323ОМ",
+    "mdm_object_uuid": "f5e49114-a2c5-11ee-98e4-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 531,
+  "fields": {
+    "source_id": 1457,
+    "model": 70,
+    "name": "Легк Н339ОМ",
+    "mdm_object_uuid": "f531981f-a2c5-11ee-98e4-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 532,
+  "fields": {
+    "source_id": 1458,
+    "model": 70,
+    "name": "Легк Н347ОМ",
+    "mdm_object_uuid": "3cc3754c-a2c6-11ee-98e4-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 533,
+  "fields": {
+    "source_id": 1082,
+    "model": 70,
+    "name": "Легк Н355НС",
+    "mdm_object_uuid": "d6943ced-069b-11ee-98db-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 534,
+  "fields": {
+    "source_id": 1459,
+    "model": 70,
+    "name": "Легк Н358ОМ",
+    "mdm_object_uuid": "f3a83335-a2c5-11ee-98e4-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 535,
+  "fields": {
+    "source_id": 1083,
+    "model": 70,
+    "name": "Легк Н359НС",
+    "mdm_object_uuid": "5b023f78-069f-11ee-98db-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 536,
+  "fields": {
+    "source_id": 1084,
+    "model": 70,
+    "name": "Легк Н363НС",
+    "mdm_object_uuid": "b342bbd0-069e-11ee-98db-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 537,
+  "fields": {
+    "source_id": 1077,
+    "model": 70,
+    "name": "Легк Н365НС",
+    "mdm_object_uuid": "db89cf5d-1c6d-11ee-98db-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 538,
+  "fields": {
+    "source_id": 1078,
+    "model": 70,
+    "name": "Легк Н381НС",
+    "mdm_object_uuid": "db89cff1-1c6d-11ee-98db-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 539,
+  "fields": {
+    "source_id": 1085,
+    "model": 70,
+    "name": "Легк Н410НС",
+    "mdm_object_uuid": "23341b47-3694-11ee-98db-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 540,
+  "fields": {
+    "source_id": 881,
+    "model": 70,
+    "name": "Легк Н415ВН",
+    "mdm_object_uuid": "b52246ea-6752-11ed-98d5-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 541,
+  "fields": {
+    "source_id": 1600,
+    "model": 70,
+    "name": "Легк Н435НС",
+    "mdm_object_uuid": "958f5d57-1284-11ef-98f9-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 542,
+  "fields": {
+    "source_id": 1525,
+    "model": 70,
+    "name": "Легк Н440НС",
+    "mdm_object_uuid": "fcf2a459-67e8-11ee-98dd-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 543,
+  "fields": {
+    "source_id": 1526,
+    "model": 70,
+    "name": "Легк Н440ОМ",
+    "mdm_object_uuid": "978e21e9-2463-11ef-98fa-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 544,
+  "fields": {
+    "source_id": 1209,
+    "model": 70,
+    "name": "Легк Н453НС",
+    "mdm_object_uuid": "8c637b6e-7f97-11ee-98df-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 545,
+  "fields": {
+    "source_id": 1460,
+    "model": 70,
+    "name": "Легк Н455ОМ",
+    "mdm_object_uuid": "19768ff4-1ed7-11ef-98fa-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 546,
+  "fields": {
+    "source_id": 1210,
+    "model": 70,
+    "name": "Легк Н476НС",
+    "mdm_object_uuid": "985200e5-7f97-11ee-98df-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 547,
+  "fields": {
+    "source_id": 1461,
+    "model": 70,
+    "name": "Легк Н481ОМ",
+    "mdm_object_uuid": "f8a9b50d-26ee-11ef-98fa-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 548,
+  "fields": {
+    "source_id": 1462,
+    "model": 70,
+    "name": "Легк Н490НС",
+    "mdm_object_uuid": "3e2bec26-b41e-11ee-98e4-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 549,
+  "fields": {
+    "source_id": 1211,
+    "model": 70,
+    "name": "Легк Н498НС",
+    "mdm_object_uuid": "f2a14fe9-7f97-11ee-98df-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 550,
+  "fields": {
+    "source_id": 1463,
+    "model": 70,
+    "name": "Легк Н518ОМ",
+    "mdm_object_uuid": "339736c6-26e6-11ef-98fa-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 551,
+  "fields": {
+    "source_id": 1464,
+    "model": 70,
+    "name": "Легк Н529ОМ",
+    "mdm_object_uuid": "f2aada04-26e5-11ef-98fa-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 552,
+  "fields": {
+    "source_id": 1465,
+    "model": 70,
+    "name": "Легк Н533ОМ",
+    "mdm_object_uuid": "7bfb23be-1ee6-11ef-98fa-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 553,
+  "fields": {
+    "source_id": 1610,
+    "model": 70,
+    "name": "Легк Н543ОМ",
+    "mdm_object_uuid": "b7a5e549-d582-4e1e-8dd4-15f3d4ffb3c2"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 554,
+  "fields": {
+    "source_id": 993,
+    "model": 70,
+    "name": "Легк Н557МА",
+    "mdm_object_uuid": "b5224714-6752-11ed-98d5-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 555,
+  "fields": {
+    "source_id": 1604,
+    "model": 70,
+    "name": "Легк Н571ОМ",
+    "mdm_object_uuid": "7a861d9a-85f7-11ef-9903-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 556,
+  "fields": {
+    "source_id": 1433,
+    "model": 70,
+    "name": "Легк Н581ОМ",
+    "mdm_object_uuid": "e1003e18-2a70-4433-ba3b-ada9eaa8a22c"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 557,
+  "fields": {
+    "source_id": 994,
+    "model": 70,
+    "name": "Легк Н605МА",
+    "mdm_object_uuid": "b522470c-6752-11ed-98d5-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 558,
+  "fields": {
+    "source_id": 1006,
+    "model": 70,
+    "name": "Легк Н606МА",
+    "mdm_object_uuid": "b5224710-6752-11ed-98d5-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 559,
+  "fields": {
+    "source_id": 1014,
+    "model": 70,
+    "name": "Легк Н622МА",
+    "mdm_object_uuid": "b522470e-6752-11ed-98d5-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 560,
+  "fields": {
+    "source_id": 1016,
+    "model": 70,
+    "name": "Легк Н646МА",
+    "mdm_object_uuid": "b5224716-6752-11ed-98d5-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 561,
+  "fields": {
+    "source_id": 996,
+    "model": 70,
+    "name": "Легк Н665МА",
+    "mdm_object_uuid": "b5224712-6752-11ed-98d5-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 562,
+  "fields": {
+    "source_id": 1007,
+    "model": 70,
+    "name": "Легк Н679ВО",
+    "mdm_object_uuid": "b52246fc-6752-11ed-98d5-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 563,
+  "fields": {
+    "source_id": 1466,
+    "model": 70,
+    "name": "Легк Н730МА",
+    "mdm_object_uuid": "36c95a29-26f0-11ef-98fa-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 564,
+  "fields": {
+    "source_id": 877,
+    "model": 70,
+    "name": "Легк Н819КС",
+    "mdm_object_uuid": "b5224704-6752-11ed-98d5-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 565,
+  "fields": {
+    "source_id": 1275,
+    "model": 70,
+    "name": "Легк Н834КС",
+    "mdm_object_uuid": "b5224708-6752-11ed-98d5-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 566,
+  "fields": {
+    "source_id": 878,
+    "model": 70,
+    "name": "Легк Н835КС",
+    "mdm_object_uuid": "b5224700-6752-11ed-98d5-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 567,
+  "fields": {
+    "source_id": 1008,
+    "model": 70,
+    "name": "Легк Н874КС",
+    "mdm_object_uuid": "b5224706-6752-11ed-98d5-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 568,
+  "fields": {
+    "source_id": 1528,
+    "model": 70,
+    "name": "Легк Н885КС",
+    "mdm_object_uuid": "86539ceb-127e-11ef-98f9-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 569,
+  "fields": {
+    "source_id": 997,
+    "model": 70,
+    "name": "Легк Н964МР",
+    "mdm_object_uuid": "b5224720-6752-11ed-98d5-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 570,
+  "fields": {
+    "source_id": 998,
+    "model": 70,
+    "name": "Легк Н966МР",
+    "mdm_object_uuid": "b522471e-6752-11ed-98d5-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 571,
+  "fields": {
+    "source_id": 1601,
+    "model": 70,
+    "name": "Легк Х648ЕН",
+    "mdm_object_uuid": "1845f521-421e-4549-a4ff-d6c8e539fd92"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 572,
+  "fields": {
+    "source_id": 1618,
+    "model": 70,
+    "name": "Фермер Н891КС",
+    "mdm_object_uuid": "74457956-a4c4-4911-92ce-aa7bc9696a64"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 573,
+  "fields": {
+    "source_id": 874,
+    "model": 71,
+    "name": "Авт В891СХ",
+    "mdm_object_uuid": "08375d1e-49e6-11ed-98ce-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 574,
+  "fields": {
+    "source_id": 873,
+    "model": 71,
+    "name": "Авт М286ХМ",
+    "mdm_object_uuid": "b02d6b36-49c3-11ed-98ce-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 575,
+  "fields": {
+    "source_id": 871,
+    "model": 71,
+    "name": "Авт Н127ВС",
+    "mdm_object_uuid": "af29df38-6752-11ed-98d5-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 576,
+  "fields": {
+    "source_id": 1094,
+    "model": 71,
+    "name": "Авт Н317НС",
+    "mdm_object_uuid": "af29df3b-6752-11ed-98d5-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 577,
+  "fields": {
+    "source_id": 1074,
+    "model": 71,
+    "name": "В-та М212ХМ",
+    "mdm_object_uuid": "ab032af2-4ae4-11ed-98ce-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 578,
+  "fields": {
+    "source_id": 1441,
+    "model": 71,
+    "name": "В-та М414УК",
+    "mdm_object_uuid": "3b8a9c60-ed7c-11ee-98ee-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 579,
+  "fields": {
+    "source_id": 1445,
+    "model": 71,
+    "name": "В-та М967ЕР",
+    "mdm_object_uuid": "32c0a3ac-ed76-11ee-98ee-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 580,
+  "fields": {
+    "source_id": 872,
+    "model": 71,
+    "name": "В-та Н145НА",
+    "mdm_object_uuid": "8db58efa-4a19-11ed-98ce-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 581,
+  "fields": {
+    "source_id": 1444,
+    "model": 71,
+    "name": "В-та №803",
+    "mdm_object_uuid": "ac061e53-b7af-4cee-acc9-ee6771dfd949"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 582,
+  "fields": {
+    "source_id": 1543,
+    "model": 72,
+    "name": "ТЗ 186",
+    "mdm_object_uuid": "72a1a4ce-6e9c-4958-9d1d-1044a0b2b84d"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 583,
+  "fields": {
+    "source_id": 817,
+    "model": 72,
+    "name": "ТЗ М253УК",
+    "mdm_object_uuid": "e3938e21-3894-11ed-98cb-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 584,
+  "fields": {
+    "source_id": 818,
+    "model": 72,
+    "name": "ТЗ М262УК",
+    "mdm_object_uuid": "e3938e1d-3894-11ed-98cb-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 585,
+  "fields": {
+    "source_id": 819,
+    "model": 72,
+    "name": "ТЗ М268УК",
+    "mdm_object_uuid": "e3938e1f-3894-11ed-98cb-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 586,
+  "fields": {
+    "source_id": 811,
+    "model": 72,
+    "name": "ТЗ М284ЕС",
+    "mdm_object_uuid": "e3938e23-3894-11ed-98cb-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 587,
+  "fields": {
+    "source_id": 1490,
+    "model": 72,
+    "name": "ТЗ М367УК",
+    "mdm_object_uuid": "a4d9f9c2-7ac9-11ef-9903-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 588,
+  "fields": {
+    "source_id": 812,
+    "model": 72,
+    "name": "ТЗ М422РВ",
+    "mdm_object_uuid": "e3938e1b-3894-11ed-98cb-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 589,
+  "fields": {
+    "source_id": 1340,
+    "model": 72,
+    "name": "ТЗ М848УС",
+    "mdm_object_uuid": "1857658c-2ea4-11ef-98fd-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 590,
+  "fields": {
+    "source_id": 1491,
+    "model": 72,
+    "name": "ТЗ Н011НА",
+    "mdm_object_uuid": "2d2d86ba-a07d-421c-83ef-a6313fd83ab5"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 591,
+  "fields": {
+    "source_id": 1428,
+    "model": 72,
+    "name": "ТЗ Н040КМ",
+    "mdm_object_uuid": "af29df3f-6752-11ed-98d5-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 592,
+  "fields": {
+    "source_id": 1309,
+    "model": 72,
+    "name": "ТЗ Н305НС",
+    "mdm_object_uuid": "ab4d2237-30ee-11ee-98db-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 593,
+  "fields": {
+    "source_id": 1339,
+    "model": 72,
+    "name": "ТЗ Н347НС",
+    "mdm_object_uuid": "36c666a3-2064-11ee-98db-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 594,
+  "fields": {
+    "source_id": 1442,
+    "model": 73,
+    "name": "АПП М714УС",
+    "mdm_object_uuid": "af29df36-6752-11ed-98d5-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 595,
+  "fields": {
+    "source_id": 867,
+    "model": 73,
+    "name": "Бортовой А947ТУ",
+    "mdm_object_uuid": "af29df11-6752-11ed-98d5-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 596,
+  "fields": {
+    "source_id": 1439,
+    "model": 73,
+    "name": "В-та М057МО",
+    "mdm_object_uuid": "461b64f7-ec25-11ee-98ee-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 597,
+  "fields": {
+    "source_id": 1331,
+    "model": 73,
+    "name": "В-та М223ХМ",
+    "mdm_object_uuid": "d5feccc3-7435-11ed-98d7-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 598,
+  "fields": {
+    "source_id": 1091,
+    "model": 73,
+    "name": "Тягач М305КН",
+    "mdm_object_uuid": "8bb0b61f-4a23-11ed-98ce-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 599,
+  "fields": {
+    "source_id": 866,
+    "model": 73,
+    "name": "Фургон К197ТВ",
+    "mdm_object_uuid": "af29df14-6752-11ed-98d5-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 600,
+  "fields": {
+    "source_id": 870,
+    "model": 73,
+    "name": "Фургон М099ХМ",
+    "mdm_object_uuid": "297793a2-9e17-11ed-98d9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 601,
+  "fields": {
+    "source_id": 868,
+    "model": 73,
+    "name": "Фургон Н154КМ",
+    "mdm_object_uuid": "af29df19-6752-11ed-98d5-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 602,
+  "fields": {
+    "source_id": 1073,
+    "model": 74,
+    "name": "БУР М610УС",
+    "mdm_object_uuid": "c0cc81bc-4afc-11ed-98ce-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 603,
+  "fields": {
+    "source_id": 865,
+    "model": 74,
+    "name": "Бур Н064НА",
+    "mdm_object_uuid": "0caecbc8-8ad8-11ed-98d9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 604,
+  "fields": {
+    "source_id": 1443,
+    "model": 75,
+    "name": "КДМ М776УС",
+    "mdm_object_uuid": "97321592-4af8-11ed-98ce-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 605,
+  "fields": {
+    "source_id": 1651,
+    "model": 75,
+    "name": "КДМ Н197ОТ",
+    "mdm_object_uuid": "c342a0df-7272-474e-903f-24ecacf2f79a"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 606,
+  "fields": {
+    "source_id": 1657,
+    "model": 76,
+    "name": "КМУ Н629РТ65",
+    "mdm_object_uuid": "ba1f6c8d-f4db-439b-b0eb-694421650551"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 607,
+  "fields": {
+    "source_id": 823,
+    "model": 76,
+    "name": "Кран М051УВ",
+    "mdm_object_uuid": "8bb0b635-4a23-11ed-98ce-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 608,
+  "fields": {
+    "source_id": 822,
+    "model": 76,
+    "name": "Кран М332ЕС",
+    "mdm_object_uuid": "5ddb0482-4ae6-11ed-98ce-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 609,
+  "fields": {
+    "source_id": 825,
+    "model": 76,
+    "name": "Кран Н169ВС",
+    "mdm_object_uuid": "8bb0b633-4a23-11ed-98ce-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 610,
+  "fields": {
+    "source_id": 1017,
+    "model": 76,
+    "name": "Кран Н702МА",
+    "mdm_object_uuid": "284ce07a-48a0-11ed-98ce-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 611,
+  "fields": {
+    "source_id": 1320,
+    "model": 77,
+    "name": "Кран М142КМ",
+    "mdm_object_uuid": "2977939a-9e17-11ed-98d9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 612,
+  "fields": {
+    "source_id": 821,
+    "model": 77,
+    "name": "Кран М234ВУ",
+    "mdm_object_uuid": "86c037ce-4ad9-11ed-98ce-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 613,
+  "fields": {
+    "source_id": 1088,
+    "model": 77,
+    "name": "Кран Н016НА",
+    "mdm_object_uuid": "25a59f54-9adb-11ed-98d9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 614,
+  "fields": {
+    "source_id": 1090,
+    "model": 77,
+    "name": "Кран Н553ВН",
+    "mdm_object_uuid": "39652b9c-4aec-11ed-98ce-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 615,
+  "fields": {
+    "source_id": 824,
+    "model": 77,
+    "name": "Кран Н957МР",
+    "mdm_object_uuid": "f79062ce-4ae6-11ed-98ce-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 616,
+  "fields": {
+    "source_id": 832,
+    "model": 78,
+    "name": "Водовоз Н995МР",
+    "mdm_object_uuid": "ac3ad6e9-9ada-11ed-98d9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 617,
+  "fields": {
+    "source_id": 1089,
+    "model": 78,
+    "name": "ПАРМ К740СВ",
+    "mdm_object_uuid": "1dc9d58d-48a5-11ed-98ce-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 618,
+  "fields": {
+    "source_id": 826,
+    "model": 78,
+    "name": "ПАРМ М131УВ",
+    "mdm_object_uuid": "5d2f1d5b-4af1-11ed-98ce-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 619,
+  "fields": {
+    "source_id": 1440,
+    "model": 78,
+    "name": "ПАРМ М150ХМ",
+    "mdm_object_uuid": "b9e9dd75-64f8-11ef-9903-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 620,
+  "fields": {
+    "source_id": 828,
+    "model": 78,
+    "name": "ПАРМ М677ХК",
+    "mdm_object_uuid": "6a2d17fa-6708-11ed-98d5-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 621,
+  "fields": {
+    "source_id": 827,
+    "model": 78,
+    "name": "ПАРМ М779УС",
+    "mdm_object_uuid": "80b5fe7c-48a1-11ed-98ce-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 622,
+  "fields": {
+    "source_id": 1447,
+    "model": 78,
+    "name": "ПАРМ Н775МА",
+    "mdm_object_uuid": "1b0493dd-f9a5-41a7-a7aa-116a52195c61"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 623,
+  "fields": {
+    "source_id": 1319,
+    "model": 78,
+    "name": "ППУ Н022КМ",
+    "mdm_object_uuid": "8713a8c3-4adf-11ed-98ce-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 624,
+  "fields": {
+    "source_id": 1430,
+    "model": 78,
+    "name": "ППУ Н569ОМ",
+    "mdm_object_uuid": "d9aa714b-4f0d-11ef-98fe-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 625,
+  "fields": {
+    "source_id": 1437,
+    "model": 78,
+    "name": "Погр СМ9137",
+    "mdm_object_uuid": "af29df24-6752-11ed-98d5-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 626,
+  "fields": {
+    "source_id": 1438,
+    "model": 78,
+    "name": "Погр СМ9158",
+    "mdm_object_uuid": "af29df27-6752-11ed-98d5-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 627,
+  "fields": {
+    "source_id": 1446,
+    "model": 78,
+    "name": "Фургон Н589ОМ",
+    "mdm_object_uuid": "8dbb27ac-6a51-11ef-9903-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 628,
+  "fields": {
+    "source_id": 829,
+    "model": 79,
+    "name": "КамАЗ / 909",
+    "mdm_object_uuid": "2675d60f-4af3-11ed-98ce-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 629,
+  "fields": {
+    "source_id": 813,
+    "model": 80,
+    "name": "К292СК",
+    "mdm_object_uuid": "65c9740d-49bf-11ed-98ce-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 630,
+  "fields": {
+    "source_id": 243,
+    "model": 81,
+    "name": "0080",
+    "mdm_object_uuid": "773cbf46-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 631,
+  "fields": {
+    "source_id": 242,
+    "model": 81,
+    "name": "0085",
+    "mdm_object_uuid": "7d41147e-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 632,
+  "fields": {
+    "source_id": 252,
+    "model": 82,
+    "name": "0077",
+    "mdm_object_uuid": "6536e611-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 633,
+  "fields": {
+    "source_id": 244,
+    "model": 82,
+    "name": "0096",
+    "mdm_object_uuid": "5f39b811-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 634,
+  "fields": {
+    "source_id": 1135,
+    "model": 82,
+    "name": "0099",
+    "mdm_object_uuid": "6536e61b-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 635,
+  "fields": {
+    "source_id": 245,
+    "model": 84,
+    "name": "0079",
+    "mdm_object_uuid": "773cbf16-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 636,
+  "fields": {
+    "source_id": 262,
+    "model": 87,
+    "name": "CAT №11",
+    "mdm_object_uuid": "4a5a8836-2f48-11ed-98cb-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 637,
+  "fields": {
+    "source_id": 1399,
+    "model": 88,
+    "name": "GD-705 №7",
+    "mdm_object_uuid": "1dcebeb8-6926-11ef-9903-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 638,
+  "fields": {
+    "source_id": 75,
+    "model": 89,
+    "name": "GD-825 №2",
+    "mdm_object_uuid": "5f39b7bf-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 639,
+  "fields": {
+    "source_id": 76,
+    "model": 89,
+    "name": "GD-825 №3",
+    "mdm_object_uuid": "b9333028-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 640,
+  "fields": {
+    "source_id": 77,
+    "model": 89,
+    "name": "GD-825 №4",
+    "mdm_object_uuid": "7d41148f-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 641,
+  "fields": {
+    "source_id": 78,
+    "model": 89,
+    "name": "GD-825 №5",
+    "mdm_object_uuid": "7d411495-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 642,
+  "fields": {
+    "source_id": 74,
+    "model": 89,
+    "name": "GD825 №1",
+    "mdm_object_uuid": "953cf46c-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 643,
+  "fields": {
+    "source_id": 1386,
+    "model": 90,
+    "name": "Гр LiuGong №930",
+    "mdm_object_uuid": "8044b2c3-ebca-11ee-98ee-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 644,
+  "fields": {
+    "source_id": 1120,
+    "model": 91,
+    "name": "Sinomach №927",
+    "mdm_object_uuid": "1c195c26-4d1b-11ee-98dd-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 645,
+  "fields": {
+    "source_id": 1165,
+    "model": 91,
+    "name": "Test tech ",
+    "mdm_object_uuid": "713f9118-90c4-11ec-98b9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 646,
+  "fields": {
+    "source_id": 1434,
+    "model": 92,
+    "name": "Гр XCMG300 №10",
+    "mdm_object_uuid": "5de33fc0-a061-4766-a92e-b139e1d60ec0"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 647,
+  "fields": {
+    "source_id": 1436,
+    "model": 92,
+    "name": "Гр XCMG300 №12",
+    "mdm_object_uuid": "9acdceca-76bd-47df-9ce4-bcd093dc602d"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 648,
+  "fields": {
+    "source_id": 1429,
+    "model": 92,
+    "name": "Гр XCMG300 №8",
+    "mdm_object_uuid": "83039d4f-4070-4ebd-b33e-d9bf8c35e722"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 649,
+  "fields": {
+    "source_id": 1435,
+    "model": 92,
+    "name": "Гр XCMG300 №9",
+    "mdm_object_uuid": "5e04eb8c-1e43-43bc-993f-2e859ee48196"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 650,
+  "fields": {
+    "source_id": 1667,
+    "model": 96,
+    "name": "184",
+    "mdm_object_uuid": "94c6f275-f82d-11ed-98da-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 651,
+  "fields": {
+    "source_id": 1668,
+    "model": 96,
+    "name": "534",
+    "mdm_object_uuid": "051b23aa-6b8a-11ed-98d5-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 652,
+  "fields": {
+    "source_id": 1665,
+    "model": 96,
+    "name": "690",
+    "mdm_object_uuid": "c2baeace-9efe-11ed-98d9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 653,
+  "fields": {
+    "source_id": 1666,
+    "model": 96,
+    "name": "939",
+    "mdm_object_uuid": "46df08ed-4a1a-11ed-98ce-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 654,
+  "fields": {
+    "source_id": 1481,
+    "model": 96,
+    "name": "FAW H551OE",
+    "mdm_object_uuid": "1df5550a-7f04-11ee-98df-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 655,
+  "fields": {
+    "source_id": 1483,
+    "model": 96,
+    "name": "FAW X630BP",
+    "mdm_object_uuid": "6b2b7120-fab2-11ed-98da-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 656,
+  "fields": {
+    "source_id": 1485,
+    "model": 96,
+    "name": "FAW X797BP",
+    "mdm_object_uuid": "2072322a-0641-11ee-98db-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 657,
+  "fields": {
+    "source_id": 1486,
+    "model": 96,
+    "name": "FAW Н566ОР",
+    "mdm_object_uuid": "3af5ff85-1702-11ef-98fa-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 658,
+  "fields": {
+    "source_id": 1482,
+    "model": 96,
+    "name": "FAW Н606НС",
+    "mdm_object_uuid": "3f5cf0be-f69e-11ed-98da-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 659,
+  "fields": {
+    "source_id": 1033,
+    "model": 96,
+    "name": "Н193НА65",
+    "mdm_object_uuid": "04b0aaff-a058-4959-9831-0d9e398ef6f0"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 660,
+  "fields": {
+    "source_id": 1484,
+    "model": 96,
+    "name": "х791вр65 Акваприм",
+    "mdm_object_uuid": "1e0d9b45-f0c9-11ed-98da-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 661,
+  "fields": {
+    "source_id": 1156,
+    "model": 97,
+    "name": "475",
+    "mdm_object_uuid": "48318f4d-48ab-11ed-98ce-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 662,
+  "fields": {
+    "source_id": 1631,
+    "model": 97,
+    "name": "HOWO P382УН",
+    "mdm_object_uuid": "1b9d126e-60ad-4a67-8e99-e0d37b7e0d83"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 663,
+  "fields": {
+    "source_id": 1636,
+    "model": 97,
+    "name": "HOWO Р113ХО",
+    "mdm_object_uuid": "da0a0d39-8a06-4381-9ff7-1c64d8496cae"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 664,
+  "fields": {
+    "source_id": 1629,
+    "model": 97,
+    "name": "HOWO Р117ХО",
+    "mdm_object_uuid": "28b6f2bc-a925-4b8f-bc59-3247223231cd"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 665,
+  "fields": {
+    "source_id": 1630,
+    "model": 97,
+    "name": "HOWO Р815ХМ",
+    "mdm_object_uuid": "012efc35-caf1-4100-b325-fee4016c9633"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 666,
+  "fields": {
+    "source_id": 1637,
+    "model": 97,
+    "name": "HOWO Р838УУ",
+    "mdm_object_uuid": "aa033c72-c4e1-46b3-870c-8e6ec4d6a75d"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 667,
+  "fields": {
+    "source_id": 1150,
+    "model": 97,
+    "name": "SHACMAN Н315ВО",
+    "mdm_object_uuid": "d8c61cc0-48ab-11ed-98ce-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 668,
+  "fields": {
+    "source_id": 1151,
+    "model": 97,
+    "name": "SHACMAN Н819НС",
+    "mdm_object_uuid": "23642e48-0dc8-11ee-98db-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 669,
+  "fields": {
+    "source_id": 1632,
+    "model": 97,
+    "name": "SHACMAN Р157ХУ",
+    "mdm_object_uuid": "447cba25-c28c-437e-97ba-ca2f4421146e"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 670,
+  "fields": {
+    "source_id": 1633,
+    "model": 97,
+    "name": "SHACMAN Р177ХУ",
+    "mdm_object_uuid": "a14d7785-4f08-11ef-98fe-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 671,
+  "fields": {
+    "source_id": 1634,
+    "model": 97,
+    "name": "SHACMAN Р204ХУ",
+    "mdm_object_uuid": "954772de-4f08-11ef-98fe-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 672,
+  "fields": {
+    "source_id": 1635,
+    "model": 97,
+    "name": "SHACMAN Р228ХУ",
+    "mdm_object_uuid": "7f7187bf-9c1f-4f1f-956c-9fc1ec3f8f9a"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 673,
+  "fields": {
+    "source_id": 1155,
+    "model": 97,
+    "name": "SHACMAN Х018ВР",
+    "mdm_object_uuid": "bd9704e0-f8fc-11ed-98da-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 674,
+  "fields": {
+    "source_id": 1585,
+    "model": 97,
+    "name": "X919BB65",
+    "mdm_object_uuid": "ad8f389d-ec07-11ee-98ee-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 675,
+  "fields": {
+    "source_id": 1171,
+    "model": 97,
+    "name": "Н144HA65",
+    "mdm_object_uuid": "5ba2def4-dcd4-11ed-98d9-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 676,
+  "fields": {
+    "source_id": 1148,
+    "model": 97,
+    "name": "Н252НТ65",
+    "mdm_object_uuid": "a536a9d3-0dc7-11ee-98db-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 677,
+  "fields": {
+    "source_id": 1168,
+    "model": 97,
+    "name": "Н284КН65",
+    "mdm_object_uuid": "343e18aa-4454-11ed-98cc-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 678,
+  "fields": {
+    "source_id": 1149,
+    "model": 97,
+    "name": "Н296ВО 65RUS («Антрацит»)",
+    "mdm_object_uuid": "21667b62-4458-11ed-98cc-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 679,
+  "fields": {
+    "source_id": 1153,
+    "model": 97,
+    "name": "Н978МР65",
+    "mdm_object_uuid": "9e3d9c3f-4458-11ed-98cc-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 680,
+  "fields": {
+    "source_id": 1154,
+    "model": 97,
+    "name": "Н980МР65",
+    "mdm_object_uuid": "959f7442-4453-11ed-98cc-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 681,
+  "fields": {
+    "source_id": 1183,
+    "model": 97,
+    "name": "Н998МР65",
+    "mdm_object_uuid": "400848b0-49c0-11ed-98ce-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 682,
+  "fields": {
+    "source_id": 1587,
+    "model": 97,
+    "name": "Х306ЕА65",
+    "mdm_object_uuid": "8380b636-be64-11ee-98ec-bc2411df91be"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 683,
+  "fields": {
+    "source_id": 1157,
+    "model": 97,
+    "name": "Х508АЕ 65RUS («Антрацит»)",
+    "mdm_object_uuid": "d9717169-48a4-11ed-98ce-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 684,
+  "fields": {
+    "source_id": 1158,
+    "model": 97,
+    "name": "Х647ВЕ 65RUS («Антрацит»)",
+    "mdm_object_uuid": "c4eeba24-48a0-11ed-98ce-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 685,
+  "fields": {
+    "source_id": 1159,
+    "model": 97,
+    "name": "Х844ВЕ 65RUS («Антрацит»)",
+    "mdm_object_uuid": "eac9933a-48ab-11ed-98ce-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 686,
+  "fields": {
+    "source_id": 1160,
+    "model": 97,
+    "name": "Х846АТ 65RUS («Антрацит»)",
+    "mdm_object_uuid": "f0d14561-48a8-11ed-98ce-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 687,
+  "fields": {
+    "source_id": 1161,
+    "model": 97,
+    "name": "Х855АТ 65RUS («Антрацит»)",
+    "mdm_object_uuid": "b9be8606-4978-11ed-98ce-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 688,
+  "fields": {
+    "source_id": 1162,
+    "model": 97,
+    "name": "Х919ВР 65RUS («Антрацит»)",
+    "mdm_object_uuid": "d0f4914b-f903-11ed-98da-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 689,
+  "fields": {
+    "source_id": 1163,
+    "model": 97,
+    "name": "Х991ВР 65RUS («Антрацит»)",
+    "mdm_object_uuid": "60db3ccf-fea3-11ed-98db-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 690,
+  "fields": {
+    "source_id": 1164,
+    "model": 97,
+    "name": "Х997ВР 65RUS («Антрацит»)",
+    "mdm_object_uuid": "bf981941-f608-11ed-98da-00155d5fc801"
+  }
+},
+{
+  "model": "tasks.oesobject",
+  "pk": 691,
+  "fields": {
+    "source_id": 1654,
+    "model": 105,
+    "name": "АСУ-СР2",
+    "mdm_object_uuid": "806c341a-5cf2-4490-a1cf-a4f72d712630"
+  }
+}
+]

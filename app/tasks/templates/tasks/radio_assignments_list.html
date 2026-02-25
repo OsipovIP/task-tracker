@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block authenticated_content %}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4>{{ page_title }}</h4>
+        <div>
+            <a href="{% url 'radio_assign' %}" class="btn btn-primary">
+                <i class="fas fa-hand-holding me-2"></i>Выдать рацию
+            </a>
+        </div>
+    </div>
+
+    <div class="alert alert-info">
+        Выдано в данный момент: <strong>{{ active_assignments.count }}</strong> раций
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered" id="assignmentTable">
+            <thead class="table-dark">
+                <tr>
+                    <th>Рация</th>
+                    <th>Выдано кому</th>
+                    <th>Подразделение</th>
+                    <th>Выдал</th>
+                    <th>Дата выдачи</th>
+                    <th>Дата возврата</th>
+                    <th>Статус</th>
+                    <th>PDF</th>
+                    <th>Действия</th>
+                </tr>
+                <tr class="filters">
+                    <th><input type="text" class="form-control form-control-sm filter-input" placeholder="Фильтр..."></th>
+                    <th><input type="text" class="form-control form-control-sm filter-input" placeholder="Фильтр..."></th>
+                    <th><input type="text" class="form-control form-control-sm filter-input" placeholder="Фильтр..."></th>
+                    <th><input type="text" class="form-control form-control-sm filter-input" placeholder="Фильтр..."></th>
+                    <th><input type="text" class="form-control form-control-sm filter-input" placeholder="Фильтр..."></th>
+                    <th><input type="text" class="form-control form-control-sm filter-input" placeholder="Фильтр..."></th>
+                    <th><input type="text" class="form-control form-control-sm filter-input" placeholder="Фильтр..."></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for assignment in assignments %}
+                <tr>
+                    <td>{{ assignment.device }}</td>
+                    <td>{{ assignment.assignee_name }}</td>
+                    <td>{{ assignment.department }}</td>
+                    <td>{{ assignment.issued_by.get_full_name|default:assignment.issued_by.username }}</td>
+                    <td>{{ assignment.issued_at|date:"d.m.Y H:i" }}</td>
+                    <td>{{ assignment.returned_at|date:"d.m.Y H:i"|default:"—" }}</td>
+                    <td>
+                        {% if assignment.is_returned %}
+                            <span class="badge bg-success">Возвращена</span>
+                        {% else %}
+                            <span class="badge bg-warning text-dark">Выдана</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if assignment.pdf_file %}
+                            <a href="{{ assignment.pdf_file.url }}" class="btn btn-sm btn-secondary" target="_blank" download title="Скачать PDF">
+                                <i class="fas fa-file-pdf"></i>
+                            </a>
+                        {% else %}
+                            <span class="text-muted">—</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{% url 'radio_assignment_edit' assignment.pk %}" class="btn btn-sm btn-secondary me-1">Редактировать</a>
+                        <a href="{% url 'radio_assignment_act_excel' assignment.pk %}" class="btn btn-sm btn-secondary me-1">Акт (Excel)</a>
+                        {% if not assignment.is_returned %}
+                            <a href="{% url 'radio_return' assignment.pk %}" class="btn btn-sm btn-secondary">Возвратить</a>
+                        {% else %}
+                            <span class="text-muted">—</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="9" class="text-center">Нет выданных раций</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="mt-3">
+        <a href="{% url 'radio_list' %}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left me-2"></i>Назад к справочнику
+        </a>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+$(document).ready(function() {
+    // Фильтрация таблицы
+    $('.filter-input').on('keyup', function() {
+        var filters = [];
+        $('#assignmentTable .filters .filter-input').each(function() {
+            filters.push($(this).val().toLowerCase());
+        });
+        
+        $('#assignmentTable tbody tr').each(function() {
+            var $row = $(this);
+            var show = true;
+            
+            filters.forEach(function(filter, index) {
+                if (filter) {
+                    var cellText = $row.find('td').eq(index).text().toLowerCase();
+                    if (cellText.indexOf(filter) === -1) {
+                        show = false;
+                    }
+                }
+            });
+            
+            $row.toggle(show);
+        });
+    });
+});
+</script>
+{% endblock %}
+

@@ -1,0 +1,238 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block authenticated_content %}
+
+<!-- Сообщения от Django -->
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+{% endif %}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">Создать и закрыть задачу</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        
+                        <!-- Поиск актива -->
+                        <div class="mb-3">
+                            <label for="{{ form.asset_search.id_for_label }}" class="form-label">{{ form.asset_search.label }}</label>
+                            <div class="position-relative">
+                                {{ form.asset_search }}
+                                <input type="hidden" name="oes_object_id" id="oes_object_id">
+                                <input type="hidden" name="manual_asset_id" id="manual_asset_id">
+                                <div class="search-results position-absolute w-100" 
+                                     id="search-results" 
+                                     style="display: none; z-index: 1000; max-height: 200px; overflow-y: auto; background: white; border: 1px solid #ccc; border-radius: 4px; margin-top: 2px;">
+                                </div>
+                            </div>
+                            {% if form.asset_search.errors %}
+                                <div class="text-danger">{{ form.asset_search.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <!-- Заголовок -->
+                        <div class="mb-3">
+                            <label for="{{ form.title.id_for_label }}" class="form-label">{{ form.title.label }}</label>
+                            {{ form.title }}
+                            {% if form.title.errors %}
+                                <div class="text-danger">{{ form.title.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <!-- Описание -->
+                        <div class="mb-3">
+                            <label for="{{ form.description.id_for_label }}" class="form-label">{{ form.description.label }}</label>
+                            {{ form.description }}
+                            {% if form.description.errors %}
+                                <div class="text-danger">{{ form.description.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <!-- Номер ITIL -->
+                        <div class="mb-3">
+                            <label for="{{ form.itil_number.id_for_label }}" class="form-label">{{ form.itil_number.label }}</label>
+                            {{ form.itil_number }}
+                            {% if form.itil_number.errors %}
+                                <div class="text-danger">{{ form.itil_number.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <!-- Категория неисправности -->
+                        <div class="mb-3">
+                            <label for="{{ form.fault_category.id_for_label }}" class="form-label">{{ form.fault_category.label }}</label>
+                            {{ form.fault_category }}
+                            {% if form.fault_category.errors %}
+                                <div class="text-danger">{{ form.fault_category.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <!-- Выполненная работа -->
+                        <div class="mb-3">
+                            <label for="{{ form.work_performed.id_for_label }}" class="form-label">{{ form.work_performed.label }}</label>
+                            {{ form.work_performed }}
+                            {% if form.work_performed.errors %}
+                                <div class="text-danger">{{ form.work_performed.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-check-circle me-2"></i>Создать и закрыть
+                            </button>
+                            <a href="{% url 'work_order_management' %}" class="btn btn-secondary">
+                                <i class="fas fa-times me-2"></i>Отмена
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .search-results {
+        max-height: 200px;
+        overflow-y: auto;
+        background: white;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .search-result-item {
+        padding: 8px 12px;
+        cursor: pointer;
+        border-bottom: 1px solid #eee;
+    }
+    .search-result-item:hover {
+        background-color: #f5f5f5;
+    }
+    .search-result-item:last-child {
+        border-bottom: none;
+    }
+</style>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Ждем загрузки jQuery
+    if (typeof jQuery === 'undefined') {
+        console.error('jQuery не загружен!');
+    } else {
+        jQuery(document).ready(function($) {
+            // Используем несколько вариантов селектора для надежности
+            var $searchInput = $('#asset_search_field').length ? $('#asset_search_field') : 
+                              $('.asset-search-input').length ? $('.asset-search-input') : 
+                              $('input[name="asset_search"]');
+            var $searchResults = $('#search-results');
+            
+            // Проверяем, что элементы найдены
+            if ($searchInput.length === 0) {
+                console.error('Поле поиска актива не найдено!');
+                return;
+            }
+            
+            if ($searchResults.length === 0) {
+                console.error('Контейнер результатов поиска не найден!');
+                return;
+            }
+            
+            console.log('Инициализация поиска активов...');
+            
+            // Поиск активов
+            $searchInput.on('input', function() {
+                var searchQuery = $(this).val().trim();
+                
+                if (searchQuery.length < 2) {
+                    $searchResults.hide();
+                    return;
+                }
+                
+                console.log('Поиск:', searchQuery);
+                
+                // AJAX запрос для поиска активов
+                $.ajax({
+                    url: '{% url "ajax_load_objects" %}',
+                    method: 'GET',
+                    data: {
+                        'search': searchQuery
+                    },
+                    success: function(data) {
+                        console.log('Получены данные:', data);
+                        $searchResults.empty();
+                        
+                        var objects = data.objects || [];
+                        
+                        if (objects.length === 0) {
+                            $searchResults.append('<div class="search-result-item text-muted">Ничего не найдено</div>');
+                        } else {
+                            $.each(objects, function(index, item) {
+                                // Используем display_name если есть, иначе формируем сами
+                                var displayText = item.display_name || (item.name + (item.model_name ? ' (' + item.model_name + ')' : ''));
+                                var assetType = item.type || 'oes'; // По умолчанию OES
+                                
+                                var resultItem = $('<div>')
+                                    .addClass('search-result-item')
+                                    .text(displayText)
+                                    .data('id', item.id)
+                                    .data('name', displayText)
+                                    .data('type', assetType)
+                                    .click(function() {
+                                        var selectedType = $(this).data('type');
+                                        var selectedId = $(this).data('id');
+                                        var selectedName = $(this).data('name');
+                                        
+                                        // Очищаем оба поля
+                                        $('#oes_object_id').val('');
+                                        $('#manual_asset_id').val('');
+                                        
+                                        // Устанавливаем значение в правильное поле в зависимости от типа
+                                        if (selectedType === 'manual') {
+                                            $('#manual_asset_id').val(selectedId);
+                                        } else {
+                                            $('#oes_object_id').val(selectedId);
+                                        }
+                                        
+                                        $searchInput.val(selectedName);
+                                        $searchResults.hide();
+                                    });
+                                
+                                $searchResults.append(resultItem);
+                            });
+                        }
+                        
+                        $searchResults.show();
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Ошибка AJAX:', status, error, xhr);
+                        $searchResults.empty();
+                        $searchResults.append('<div class="search-result-item text-danger">Ошибка поиска: ' + error + '</div>');
+                        $searchResults.show();
+                    }
+                });
+            });
+            
+            // Закрытие результатов поиска при клике вне области
+            $(document).click(function(e) {
+                if (!$(e.target).closest('.position-relative').length) {
+                    $searchResults.hide();
+                }
+            });
+        });
+    }
+</script>
+{% endblock %}
+

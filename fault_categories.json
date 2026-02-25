@@ -1,0 +1,12 @@
+[
+{
+  "model": "tasks.faultcategory",
+  "pk": 1,
+  "fields": {
+    "name": "планшет",
+    "description": "",
+    "is_active": true,
+    "sort_order": 0
+  }
+}
+]

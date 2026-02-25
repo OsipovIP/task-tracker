@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block authenticated_content %}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4>{{ page_title }}</h4>
+        <div>
+            <a href="{% url 'radio_repair' %}" class="btn btn-warning">
+                <i class="fas fa-wrench me-2"></i>Зарегистрировать ремонт
+            </a>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered" id="repairTable">
+            <thead class="table-dark">
+                <tr>
+                    <th>Рация</th>
+                    <th>Дата ремонта</th>
+                    <th>Описание работ</th>
+                    <th>Выполнил</th>
+                </tr>
+                <tr class="filters">
+                    <th><input type="text" class="form-control form-control-sm filter-input" placeholder="Фильтр..."></th>
+                    <th><input type="text" class="form-control form-control-sm filter-input" placeholder="Фильтр..."></th>
+                    <th><input type="text" class="form-control form-control-sm filter-input" placeholder="Фильтр..."></th>
+                    <th><input type="text" class="form-control form-control-sm filter-input" placeholder="Фильтр..."></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for repair in repairs %}
+                <tr>
+                    <td>{{ repair.device }}</td>
+                    <td>{{ repair.repair_date|date:"d.m.Y H:i" }}</td>
+                    <td>{{ repair.description }}</td>
+                    <td>{{ repair.performed_by.get_full_name|default:repair.performed_by.username }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4" class="text-center">Нет записей о ремонтах</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="mt-3">
+        <a href="{% url 'radio_list' %}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left me-2"></i>Назад к справочнику
+        </a>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+$(document).ready(function() {
+    // Фильтрация таблицы
+    $('.filter-input').on('keyup', function() {
+        var filters = [];
+        $('#repairTable .filters .filter-input').each(function() {
+            filters.push($(this).val().toLowerCase());
+        });
+        
+        $('#repairTable tbody tr').each(function() {
+            var $row = $(this);
+            var show = true;
+            
+            filters.forEach(function(filter, index) {
+                if (filter) {
+                    var cellText = $row.find('td').eq(index).text().toLowerCase();
+                    if (cellText.indexOf(filter) === -1) {
+                        show = false;
+                    }
+                }
+            });
+            
+            $row.toggle(show);
+        });
+    });
+});
+</script>
+{% endblock %}
+

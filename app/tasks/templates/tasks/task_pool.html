@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block authenticated_content %}
+
+<!-- Сообщения от Django -->
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+{% endif %}
+
+{% if tasks %}
+    <!-- Таблица задач -->
+    <div class="table-responsive mt-3">
+        <table class="table table-hover table-bordered align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th style="width: 8%; padding: 12px 8px; text-align: center; border-right: 1px solid #495057;">ID</th>
+                    <th style="width: 35%; padding: 12px 8px; text-align: center; border-right: 1px solid #495057;">Заголовок</th>
+                    <th style="width: 25%; padding: 12px 8px; text-align: center; border-right: 1px solid #495057;">Актив</th>
+                    <th style="width: 20%; padding: 12px 8px; text-align: center; border-right: 1px solid #495057;">Назначена</th>
+                    <th style="width: 12%; padding: 12px 8px; text-align: center;">Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for task in tasks %}
+                <tr>
+                    <td><strong>#{{ task.id }}</strong></td>
+                    <td>
+                        <a href="{% url 'task_detail' pk=task.pk %}" class="text-decoration-none">
+                            {{ task.title }}
+                        </a>
+                        <br><small class="text-muted">{{ task.description|truncatechars:60 }}</small>
+                    </td>
+                    <td>
+                        {% if task.oes_object %}
+                            {{ task.oes_object.name }}
+                            {% if task.oes_object.model %}
+                                ({{ task.oes_object.model.name }})
+                            {% endif %}
+                        {% else %}
+                            <span class="text-muted">Не указан</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if task.assigned_to %}
+                            {% if task.assigned_to.first_name or task.assigned_to.last_name %}
+                                {{ task.assigned_to.first_name }} {{ task.assigned_to.last_name }}
+                            {% else %}
+                                {{ task.assigned_to.username }}
+                            {% endif %}
+                        {% elif task.assigned_group %}
+                            Пул ({{ task.assigned_group.name }})
+                        {% else %}
+                            <span class="text-muted">Не назначена</span>
+                        {% endif %}
+                    </td>
+                    <td class="text-center">
+                        <!-- Кнопка отправить в ТГ -->
+                        <form method="post" action="{% url 'task_pool' %}" class="d-inline">
+                            {% csrf_token %}
+                            <input type="hidden" name="send_task_telegram" value="{{ task.id }}">
+                            <button type="submit" class="btn btn-outline-info btn-sm" title="Отправить в Telegram">
+                                <i class="fas fa-plane"></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% else %}
+    <!-- Сообщение, если задач нет -->
+    <div class="alert alert-info py-3 shadow-sm" role="alert">
+        <h4 class="alert-heading"><i class="fas fa-info-circle me-2"></i> Нет задач к выполнению</h4>
+        В пуле нет задач со статусом "К выполнению".
+    </div>
+{% endif %}
+{% endblock authenticated_content %}

@@ -1,0 +1,155 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}УПАСК{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .priority-high { color: red; font-weight: bold; }
+        .priority-medium { color: orange; }
+        
+        /* Стили для сайдбара */
+        .sidebar {
+            position: fixed;
+            top: 56px; /* Высота навбара */
+            bottom: 0;
+            left: 0;
+            z-index: 100;
+            padding: 48px 0 0;
+            box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+        }
+        
+        .sidebar .nav-link {
+            color: #333;
+            border-radius: 0.375rem;
+            margin: 0.125rem 0.5rem;
+        }
+        
+        .sidebar .nav-link:hover {
+            color: #0d6efd;
+            background-color: rgba(13, 110, 253, 0.1);
+        }
+        
+        .sidebar .nav-link.active {
+            color: #fff;
+            background-color: #0d6efd;
+        }
+        
+        /* Основной контент с отступом для сайдбара */
+        main {
+            margin-top: 56px; /* Высота навбара */
+        }
+        
+        /* Адаптивность для мобильных устройств */
+        @media (max-width: 767.98px) {
+            .sidebar {
+                top: 56px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'task_list' %}">УПАСК</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto">
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <span class="navbar-text me-3">
+                                Привет, {{ user.username }}!
+                            </span>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-outline-danger" href="{% url 'logout' %}">Выход</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="btn btn-outline-success" href="{% url 'login' %}">Вход</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Основной контент -->
+    {% if user.is_authenticated %}
+    <!-- Сайдбар -->
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                <div class="position-sticky pt-3">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.resolver_match.url_name == 'task_list' %}active{% endif %}" 
+                               href="{% url 'task_list' %}">
+                                <i class="fas fa-user me-2"></i>Мои задачи
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.resolver_match.url_name == 'task_pool' %}active{% endif %}" 
+                               href="{% url 'task_pool' %}">
+                                <i class="fas fa-clipboard-list me-2"></i>Наряд
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.resolver_match.url_name == 'all_tasks' %}active{% endif %}" 
+                               href="{% url 'all_tasks' %}">
+                                <i class="fas fa-list me-2"></i>Все задачи
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if 'radio' in request.resolver_match.url_name %}active{% endif %}" 
+                               href="{% url 'radio_list' %}">
+                                <i class="fas fa-walkie-talkie me-2"></i>Рации
+                            </a>
+                        </li>
+                        {% if user.groups.all|length > 0 %}
+                            {% for group in user.groups.all %}
+                                {% if group.name == 'Менеджеры' %}
+                        <li class="nav-item">
+                            <hr class="text-muted">
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.resolver_match.url_name == 'work_order_management' %}active{% endif %}" 
+                               href="{% url 'work_order_management' %}">
+                                <i class="fas fa-clipboard-list me-2"></i>Формирование наряда
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.resolver_match.url_name == 'tasks_for_checking' %}active{% endif %}" 
+                               href="{% url 'tasks_for_checking' %}">
+                                <i class="fas fa-clipboard-check me-2"></i>Задачи на проверке
+                            </a>
+                        </li>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Основной контент -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                {% block authenticated_content %}{% endblock %}
+            </main>
+        </div>
+    </div>
+    {% else %}
+    <!-- Для неавторизованных пользователей -->
+    <div class="container mt-4">
+        {% block unauthenticated_content %}{% endblock %}
+    </div>
+    {% endif %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- Блок для дополнительных скриптов -->
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

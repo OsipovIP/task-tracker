@@ -1,0 +1,47 @@
+# task_tracker_project/docker-compose.yml
+version: '3.8'
+
+services:
+  web:
+    build: .
+    container_name: django_task_tracker
+    # Загружаем переменные окружения из .env
+    env_file:
+      - .env
+    # Открываем порт контейнера (8000) на порт хоста (80, 8000 или другой)
+    ports:
+      - "7575:8000"
+    # Подключаем том для сохранения загруженных фотографий
+    volumes:
+      - ./app:/usr/src/app 
+      - ./media_data:/usr/src/app/media
+      - telegram_data:/tmp
+    # Команда запуска Gunicorn (WSGI-сервер)
+    # Предполагается, что ваш проект Django будет называться "task_tracker"
+    command: gunicorn task_tracker.wsgi:application --bind 0.0.0.0:8000
+    # Настройка перезапуска при ошибках
+    restart: always
+
+  telegram_bot:
+    build: .
+    container_name: telegram_task_tracker_bot
+    # Загружаем переменные окружения из .env (включая TELEGRAM_BOT_TOKEN)
+    env_file:
+      - .env
+    # Подключаем тот же код приложения и media директорию
+    volumes:
+      - ./app:/usr/src/app
+      - ./telegram_bot:/usr/src/app/telegram_bot
+      - ./media_data:/usr/src/app/media
+      - telegram_data:/tmp
+    # Запускаем скрипт бота
+    command: bash -c "sleep 10 && python /usr/src/app/telegram_bot/bot.py"
+    # Настройка перезапуска при ошибках
+    restart: always
+    # Зависимость от веб-сервиса (чтобы Django был готов)
+    depends_on:
+      - web
+
+# Тома для сохранения данных
+volumes:
+  telegram_data:

@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Задачи на проверке{% endblock %}
+
+{% block authenticated_content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            
+            {% if tasks %}
+                <!-- Таблица задач на проверке -->
+                <div class="table-responsive mt-3">
+                    <table class="table table-hover table-bordered align-middle">
+                        <thead class="table-dark">
+                            <tr>
+                                <th style="width: 5%; padding: 12px 8px; text-align: center; border-right: 1px solid #495057;">#</th>
+                                <th style="width: 15%; padding: 12px 8px; text-align: center; border-right: 1px solid #495057;">Заголовок</th>
+                                <th style="width: 12%; padding: 12px 8px; text-align: center; border-right: 1px solid #495057;">Актив</th>
+                                <th style="width: 8%; padding: 12px 8px; text-align: center; border-right: 1px solid #495057;">Номер ITIL</th>
+                                <th style="width: 10%; padding: 12px 8px; text-align: center; border-right: 1px solid #495057;">Исполнитель</th>
+                                <th style="width: 8%; padding: 12px 8px; text-align: center; border-right: 1px solid #495057;">Приоритет</th>
+                                <th style="width: 20%; padding: 12px 8px; text-align: center; border-right: 1px solid #495057;">Описание</th>
+                                <th style="width: 10%; padding: 12px 8px; text-align: center; border-right: 1px solid #495057;">Срок</th>
+                                <th style="width: 12%; padding: 12px 8px; text-align: center;">Действия</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for task in tasks %}
+                            <tr>
+                                <td class="text-center">
+                                    #{{ task.id }}
+                                </td>
+                                
+                                <td>
+                                    <strong>{{ task.title }}</strong>
+                                </td>
+                                
+                                <td>
+                                    {% if task.oes_object %}
+                                        {{ task.oes_object.name }}
+                                        {% if task.oes_object.model %}
+                                            <br><small class="text-muted">{{ task.oes_object.model.name }}</small>
+                                        {% endif %}
+                                    {% else %}
+                                        <span class="text-muted">Не указан</span>
+                                    {% endif %}
+                                </td>
+                                
+                                <td>
+                                    {% if task.itil_number %}
+                                        {{ task.itil_number }}
+                                    {% else %}
+                                        <span class="text-muted">Не указан</span>
+                                    {% endif %}
+                                </td>
+                                
+                                <td>
+                                    {% if task.assigned_to %}
+                                        {% if task.assigned_to.first_name or task.assigned_to.last_name %}
+                                            {{ task.assigned_to.first_name }} {{ task.assigned_to.last_name }}
+                                        {% else %}
+                                            {{ task.assigned_to.username }}
+                                        {% endif %}
+                                    {% else %}
+                                        <span class="text-muted">Не назначен</span>
+                                    {% endif %}
+                                </td>
+                                
+                                <td>
+                                    {% if task.priority == 'critical' %}
+                                        Критический
+                                    {% elif task.priority == 'high' %}
+                                        Высокий
+                                    {% elif task.priority == 'medium' %}
+                                        Средний
+                                    {% else %}
+                                        Низкий
+                                    {% endif %}
+                                </td>
+                                
+                                <td>
+                                    <div class="text-truncate" style="max-width: 200px;" >
+                                        {{ task.description|truncatechars:100 }}
+                                    </div>
+                                </td>
+                                
+                                <td>
+                                    {% if task.due_date %}
+                                        <span class="text-muted">{{ task.due_date|date:"d.m.Y H:i" }}</span>
+                                    {% else %}
+                                        <span class="text-muted">Не указан</span>
+                                    {% endif %}
+                                </td>
+                                
+                                <td class="text-center">
+                                    <div class="btn-group" role="group">
+                                        <a href="{% url 'task_detail' task.id %}" 
+                                           class="btn btn-outline-secondary btn-sm" 
+>
+                                            👁️
+                                        </a>
+                                        
+                                        <!-- Кнопка подтверждения выполнения -->
+                                        <form method="post" action="{% url 'tasks_for_checking' %}" style="display: inline;">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="task_id" value="{{ task.id }}">
+                                            <input type="hidden" name="new_status" value="done">
+                                            <button type="submit" 
+                                                    class="btn btn-outline-secondary btn-sm" 
+                                                    onclick="return confirm('Подтвердить выполнение задачи #{{ task.id }}?')">
+                                                ✅
+                                            </button>
+                                        </form>
+                                        
+                                        <!-- Кнопка возврата в работу -->
+                                        <form method="post" action="{% url 'tasks_for_checking' %}" style="display: inline;">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="task_id" value="{{ task.id }}">
+                                            <input type="hidden" name="new_status" value="todo">
+                                            <button type="submit" 
+                                                    class="btn btn-outline-secondary btn-sm" 
+                                                    onclick="return confirm('Вернуть задачу #{{ task.id }} в работу?')">
+                                                🔄
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <!-- Сообщение, если задач нет -->
+                <div class="alert alert-info py-4" role="alert">
+                    <div class="text-center">
+                        <div style="font-size: 4rem;" class="text-muted mb-3">📋</div>
+                        <h4 class="alert-heading">Задач на проверке нет</h4>
+                        <p class="mb-0">Все задачи проверены или находятся в другом статусе.</p>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

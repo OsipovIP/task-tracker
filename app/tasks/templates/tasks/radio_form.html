@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block authenticated_content %}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="card">
+                <div class="card-header bg-secondary text-white">
+                    <h5 class="mb-0">{{ page_title }}</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        
+                        <div class="mb-3">
+                            <label for="{{ form.model.id_for_label }}" class="form-label">{{ form.model.label }}</label>
+                            {{ form.model }}
+                            {% if form.model.errors %}
+                                <div class="text-danger">{{ form.model.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="{{ form.sn.id_for_label }}" class="form-label">{{ form.sn.label }} *</label>
+                            {{ form.sn }}
+                            {% if form.sn.errors %}
+                                <div class="text-danger">{{ form.sn.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="{{ form.ccid.id_for_label }}" class="form-label">{{ form.ccid.label }}</label>
+                            {{ form.ccid }}
+                            {% if form.ccid.errors %}
+                                <div class="text-danger">{{ form.ccid.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="{{ form.sim.id_for_label }}" class="form-label">ID</label>
+                            {{ form.sim }}
+                            {% if form.sim.errors %}
+                                <div class="text-danger">{{ form.sim.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="{{ form.description.id_for_label }}" class="form-label">{{ form.description.label }}</label>
+                            {{ form.description }}
+                            {% if form.description.errors %}
+                                <div class="text-danger">{{ form.description.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="mb-3 form-check">
+                            {{ form.is_active }}
+                            <label for="{{ form.is_active.id_for_label }}" class="form-check-label">{{ form.is_active.label }}</label>
+                            {% if form.is_active.errors %}
+                                <div class="text-danger">{{ form.is_active.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-secondary">Сохранить</button>
+                            <a href="{% url 'radio_list' %}" class="btn btn-secondary">Отмена</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+

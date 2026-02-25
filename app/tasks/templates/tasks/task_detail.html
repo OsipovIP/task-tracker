@@ -1,0 +1,577 @@
+{% extends "base.html" %}
+
+{% block title %}Детали Задачи: #{{ task.id }}{% endblock %}
+
+{% block authenticated_content %}
+<div class="container mt-4">
+
+    <!-- Сообщения от Django (messages) -->
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <div class="row">
+        <!-- Левая колонка: Основная информация и Описание -->
+        <div class="col-lg-8">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-primary text-white">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h3 class="my-0">{{ task.title }}</h3>
+                        {% comment %} ITIL ОТКЛЮЧЕНО
+                        {% if task.external_source == 'ITIL' %}
+                            ITIL
+                        {% endif %}
+                        {% endcomment %}
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">{{ task.description|linebreaksbr }}</p>
+                    
+                    <!-- ITIL данные - ОТКЛЮЧЕНО -->
+                    {% comment %}
+                    {% if task.external_source == 'ITIL' and task.external_data %}
+                        <div class="alert alert-info mt-3">
+                            <h6><i class="fas fa-info-circle me-2"></i> Данные из ITIL системы:</h6>
+                            <div class="row small">
+                                <div class="col-md-6">
+                                    <p class="mb-1"><strong>ITIL ID:</strong> {{ task.external_data.Документ_ID|truncatechars:20 }}</p>
+                                    <p class="mb-1"><strong>Инициатор:</strong> {{ task.external_data.Документ_Инициатор }}</p>
+                                    <p class="mb-1"><strong>Организация:</strong> {{ task.external_data.Документ_Организация_инициатора|truncatechars:30 }}</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="mb-1"><strong>Исполнитель ITIL:</strong> {{ task.external_data.Документ_Текущий_исполнитель }}</p>
+                                    <p class="mb-1"><strong>Этап:</strong> {{ task.external_data.Текущий_Этап }}</p>
+                                    <p class="mb-1"><strong>Статус ITIL:</strong> {{ task.external_data.Документ_Статус }}</p>
+                                </div>
+                            </div>
+                            {% if task.external_data.Документ_Превышен_срок_решения == 'Да' %}
+                                <div class="alert alert-danger p-2 mt-2 mb-0">
+                                    <i class="fas fa-clock me-1"></i>
+                                    <strong>Срок решения превышен!</strong>
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                    {% endcomment %}
+                    
+                    <div class="row mt-3 small">
+                        <div class="col-md-6">
+                            <p class="mb-1"><strong>Создана:</strong> {{ task.created_at|date:"d M Y H:i" }}</p>
+                            <p class="mb-1"><strong>Репортер:</strong> {{ task.reporter.username|default:"Не указан" }}</p>
+                            <p class="mb-1"><strong>Группа:</strong> {{ task.assigned_group.name|default:"-" }}</p>
+                            <p class="mb-1"><strong>Номер ITIL:</strong> 
+                                {% if task.itil_number %}
+                                    {{ task.itil_number }}
+                                {% else %}
+                                    <span class="text-muted">Не указан</span>
+                                {% endif %}
+                            </p>
+                                   <p class="mb-1"><strong>Актив:</strong> 
+                                       {% if task.oes_object %}
+                                           {{ task.oes_object.name }}
+                                           {% if task.oes_object.model %}
+                                               ({{ task.oes_object.model.name }})
+                                           {% endif %}
+                                       {% else %}
+                                           <span class="text-muted">Не указан</span>
+                                       {% endif %}
+                                   </p>
+                            <p class="mb-1"><strong>Доп. исполнители:</strong>
+                                {% if task.additional_assignees.all %}
+                                    {% for user in task.additional_assignees.all %}
+                                        {{ user.username }}
+                                    {% endfor %}
+                                {% else %}
+                                    <span class="text-muted">-</span>
+                                {% endif %}
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="mb-1"><strong>Срок:</strong> {{ task.due_date|date:"d M Y H:i"|default:"Не установлен" }}</p>
+                            <p class="mb-1"><strong>Последнее обновление:</strong> {{ task.updated_at|date:"d M Y H:i" }}</p>
+                            <p class="mb-1"><strong>Приоритет:</strong> <span class="badge rounded-pill 
+                                {% if task.priority == 'critical' %}bg-danger
+                                {% elif task.priority == 'high' %}bg-warning text-dark
+                                {% else %}bg-info text-dark{% endif %}">
+                                {{ task.get_priority_display }}
+                            </span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <strong>Назначена:</strong> 
+                    {% if task.assigned_to %}
+                        {% if task.assigned_to.first_name or task.assigned_to.last_name %}
+                            {{ task.assigned_to.first_name }} {{ task.assigned_to.last_name }}
+                        {% else %}
+                            {{ task.assigned_to.username }}
+                        {% endif %}
+                    {% elif task.assigned_group %}
+                        В Пуле ({{ task.assigned_group.name }})
+                    {% else %}
+                        <span class="text-muted">Не назначена</span>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <!-- Секция Фотографии -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-light">
+                    <h5 class="my-0"><i class="fas fa-images me-2"></i> Фотографии ({{ photos|length }})</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row g-2">
+                        {% for photo in photos %}
+                            {% if photo.image %}
+                            <div class="col-4">
+                                <a href="{{ photo.image.url }}" target="_blank">
+                                    <img src="{{ photo.image.url }}" class="img-fluid rounded shadow-sm" alt="Фото задачи">
+                                </a>
+                                <small class="text-muted d-block mt-1">{{ photo.uploaded_by.username }}</small>
+                            </div>
+                            {% endif %}
+                        {% empty %}
+                        <p class="text-muted">Нет прикрепленных фотографий.</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Форма редактирования (для менеджеров) -->
+            {% if user_is_assigned %}
+            <div class="card shadow-sm mb-4 border-primary">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="my-0"><i class="fas fa-edit me-2"></i> Редактирование задачи</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ edit_form.oes_object }}
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="{{ edit_form.title.id_for_label }}" class="form-label">{{ edit_form.title.label }}</label>
+                                {{ edit_form.title }}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="{{ edit_form.priority.id_for_label }}" class="form-label">{{ edit_form.priority.label }}</label>
+                                {{ edit_form.priority }}
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="{{ edit_form.description.id_for_label }}" class="form-label">{{ edit_form.description.label }}</label>
+                            {{ edit_form.description }}
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="{{ edit_form.assigned_to.id_for_label }}" class="form-label">{{ edit_form.assigned_to.label }}</label>
+                                {{ edit_form.assigned_to }}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="{{ edit_form.assigned_group.id_for_label }}" class="form-label">{{ edit_form.assigned_group.label }}</label>
+                                {{ edit_form.assigned_group }}
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="{{ edit_form.status.id_for_label }}" class="form-label">{{ edit_form.status.label }}</label>
+                                {{ edit_form.status }}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="{{ edit_form.due_date.id_for_label }}" class="form-label">{{ edit_form.due_date.label }}</label>
+                                {{ edit_form.due_date }}
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3" style="position: relative;">
+                                <label for="{{ edit_form.oes_object_search.id_for_label }}" class="form-label">{{ edit_form.oes_object_search.label }}</label>
+                                {{ edit_form.oes_object_search }}
+                                <div id="edit_search_results" class="search-results"></div>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" name="edit_submit" class="btn btn-primary">
+                            <i class="fas fa-save me-1"></i> Сохранить изменения
+                        </button>
+                    </form>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Секция Комментарии -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-light">
+                    <h5 class="my-0"><i class="fas fa-comment-dots me-2"></i> Комментарии ({{ comments|length }})</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        {% for comment in comments %}
+                        <li class="list-group-item">
+                            <p class="mb-1">
+                                <strong>{{ comment.author.username }}</strong> 
+                                <span class="text-muted small">({{ comment.created_at|date:"d M Y H:i" }})</span>
+                            </p>
+                            <p class="text-break">{{ comment.text }}</p>
+                        </li>
+                        {% empty %}
+                        <p class="text-muted">Нет комментариев.</p>
+                        {% endfor %}
+                    </ul>
+                    
+                    <h6 class="mt-4">Добавить комментарий</h6>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            {{ comment_form.text }}
+                        </div>
+                        <button type="submit" name="comment_submit" class="btn btn-sm btn-outline-primary">Отправить Комментарий</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Правая колонка: Действия (Статус, Фото, ACK) -->
+        <div class="col-lg-4">
+            
+            <!-- Карточка Текущий Статус -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-info text-white">
+                    <h5 class="my-0"><i class="fas fa-info-circle me-2"></i> Текущий Статус</h5>
+                </div>
+                <div class="card-body text-center">
+                    {{ task.get_status_display }}
+                    <hr>
+                    
+                    <!-- Форма изменения статуса (только для назначенного исполнителя) -->
+                    {% if user_can_work %}
+                        <form method="post" class="mt-3">
+                            {% csrf_token %}
+                            <label for="{{ status_form.status.id_for_label }}" class="form-label small">Изменить статус:</label>
+                            <div class="d-flex">
+                                {{ status_form.status }}
+                                <button type="submit" name="status_submit" class="btn btn-primary ms-2">OK</button>
+                            </div>
+                        </form>
+                    {% else %}
+                        <p class="text-muted small mt-3">
+                            {% comment %} ITIL ОТКЛЮЧЕНО
+                            {% if task.external_source == 'ITIL' and not task.assigned_to %}
+                                Назначьте исполнителя для возможности редактирования статуса.
+                            {% else %}
+                            {% endcomment %}
+                                {% if task.assigned_to %}
+                                    {% if task.assigned_to.first_name or task.assigned_to.last_name %}
+                                        Только назначенный исполнитель ({{ task.assigned_to.first_name }} {{ task.assigned_to.last_name }}) может изменить статус.
+                                    {% else %}
+                                        Только назначенный исполнитель ({{ task.assigned_to.username }}) может изменить статус.
+                                    {% endif %}
+                                {% else %}
+                                    Только назначенный исполнитель (Никто) может изменить статус.
+                                {% endif %}
+                            {% comment %}
+                            {% endif %}
+                            {% endcomment %}
+                        </p>
+                    {% endif %}
+
+                </div>
+            </div>
+
+            <!-- Карточка Загрузка Фото -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-light">
+                    <h5 class="my-0"><i class="fas fa-upload me-2"></i> Загрузить Фото</h5>
+                </div>
+                <div class="card-body">
+                    {% if user_can_work %}
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ photo_form.as_p }}
+                            <button type="submit" name="photo_submit" class="btn btn-success w-100">Загрузить</button>
+                        </form>
+                    {% else %}
+                        <p class="text-muted">
+                            {% comment %} ITIL ОТКЛЮЧЕНО
+                            {% if task.external_source == 'ITIL' and not task.assigned_to %}
+                                Назначьте исполнителя для возможности загрузки фото.
+                            {% else %}
+                            {% endcomment %}
+                                Только назначенный исполнитель может загружать фото.
+                            {% comment %}
+                            {% endif %}
+                            {% endcomment %}
+                        </p>
+                    {% endif %}
+                </div>
+            </div>
+
+
+                   <!-- Карточка Закрытие задачи с отчетом -->
+                   {% if user_can_work and task.status != 'done' %}
+                   <div class="card shadow-sm mb-4 border-success">
+                       <div class="card-header bg-success text-white">
+                           <h5 class="my-0"><i class="fas fa-flag-checkered me-2"></i> Закрытие задачи</h5>
+                       </div>
+                       <div class="card-body">
+                           <form method="post">
+                               {% csrf_token %}
+                               <div class="mb-3">
+                                   <label for="{{ completion_form.fault_category.id_for_label }}" class="form-label">{{ completion_form.fault_category.label }}</label>
+                                   {{ completion_form.fault_category }}
+                               </div>
+                               <div class="mb-3">
+                                   <label for="{{ completion_form.work_performed.id_for_label }}" class="form-label">{{ completion_form.work_performed.label }}</label>
+                                   {{ completion_form.work_performed }}
+                               </div>
+                               <div class="mb-3">
+                                   <label for="{{ completion_form.root_cause.id_for_label }}" class="form-label">{{ completion_form.root_cause.label }}</label>
+                                   {{ completion_form.root_cause }}
+                               </div>
+                               <div class="mb-3">
+                                   <label for="{{ completion_form.preventive_measures.id_for_label }}" class="form-label">{{ completion_form.preventive_measures.label }}</label>
+                                   {{ completion_form.preventive_measures }}
+                               </div>
+                               <div class="mb-3">
+                                   <label for="{{ completion_form.time_spent.id_for_label }}" class="form-label">{{ completion_form.time_spent.label }}</label>
+                                   {{ completion_form.time_spent }}
+                               </div>
+                               <div class="mb-3">
+                                   <label for="{{ completion_form.additional_assignees.id_for_label }}" class="form-label">{{ completion_form.additional_assignees.label }}</label>
+                                   {{ completion_form.additional_assignees }}
+                                   {% if completion_form.additional_assignees.help_text %}
+                                   <small class="form-text text-muted">{{ completion_form.additional_assignees.help_text }}</small>
+                                   {% endif %}
+                               </div>
+                               <button type="submit" name="complete_submit" class="btn btn-success w-100">
+                                   <i class="fas fa-check-circle me-1"></i> Закрыть задачу с отчетом
+                               </button>
+                           </form>
+                       </div>
+                   </div>
+                   {% endif %}
+
+                   <!-- Карточка Отчет о закрытии -->
+                   {% if completion_report %}
+                   <div class="card shadow-sm mb-4 border-info">
+                       <div class="card-header bg-info text-white">
+                           <h5 class="my-0"><i class="fas fa-file-alt me-2"></i> Отчет о закрытии</h5>
+                       </div>
+                       <div class="card-body">
+                           <p class="small mb-2"><strong>Исполнитель:</strong> {{ completion_report.completed_by.username }}</p>
+                           {% if completion_report.fault_category %}
+                           <p class="small mb-2"><strong>Категория неисправности:</strong> {{ completion_report.fault_category.name }}</p>
+                           {% endif %}
+                           {% if completion_report.time_spent %}
+                           <p class="small mb-2"><strong>Затраченное время:</strong> {{ completion_report.time_spent }}</p>
+                           {% endif %}
+                           <p class="small mb-2"><strong>Дата закрытия:</strong> {{ completion_report.created_at|date:"d M Y H:i" }}</p>
+                           <hr>
+                           <p class="small"><strong>Выполненная работа:</strong></p>
+                           <p class="small">{{ completion_report.work_performed|linebreaksbr }}</p>
+                           {% if completion_report.root_cause %}
+                           <p class="small mt-2"><strong>Корневая причина:</strong></p>
+                           <p class="small">{{ completion_report.root_cause|linebreaksbr }}</p>
+                           {% endif %}
+                           {% if completion_report.preventive_measures %}
+                           <p class="small mt-2"><strong>Предупредительные меры:</strong></p>
+                           <p class="small">{{ completion_report.preventive_measures|linebreaksbr }}</p>
+                           {% endif %}
+                       </div>
+                   </div>
+                   {% endif %}
+
+        </div>
+    </div>
+</div>
+{% endblock authenticated_content %}
+
+{% block extra_js %}
+<style>
+/* Стили для результатов поиска */
+.search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #ced4da;
+    border-top: none;
+    border-radius: 0 0 0.375rem 0.375rem;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000;
+    display: none;
+}
+.search-results.show {
+    display: block;
+}
+.search-result-item {
+    padding: 8px 12px;
+    cursor: pointer;
+    border-bottom: 1px solid #f8f9fa;
+}
+.search-result-item:hover {
+    background-color: #f8f9fa;
+}
+.search-result-item.selected {
+    background-color: #e3f2fd;
+}
+.search-result-item:last-child {
+    border-bottom: none;
+}
+</style>
+<script>
+$(document).ready(function() {
+    // Автокомплит для формы редактирования
+    var editSelectedObjectId = null;
+    var editSearchTimeout = null;
+    var $editSearchInput = $('#{{ edit_form.oes_object_search.id_for_label }}');
+    var $editSearchResults = $('#edit_search_results');
+    var editSelectedIndex = -1;
+    
+    // Добавляем скрытое поле для хранения ID объекта
+    $editSearchInput.after('<input type="hidden" name="oes_object_id" id="edit_oes_object_id">');
+    
+    // Устанавливаем начальное значение если есть выбранный объект
+    {% if task.oes_object %}
+        $('#edit_oes_object_id').val('{{ task.oes_object.id }}');
+        editSelectedObjectId = '{{ task.oes_object.id }}';
+    {% endif %}
+    
+    // Обработчик ввода в поле поиска
+    $editSearchInput.on('input', function() {
+        var query = $(this).val().trim();
+        
+        // Очищаем предыдущий таймаут
+        if (editSearchTimeout) {
+            clearTimeout(editSearchTimeout);
+        }
+        
+        // Показываем результаты только если введено минимум 2 символа
+        if (query.length >= 2) {
+            editSearchTimeout = setTimeout(function() {
+                searchEditObjects(query);
+            }, 300);
+        } else {
+            hideEditResults();
+        }
+    });
+    
+    // Функция поиска объектов для редактирования
+    function searchEditObjects(query) {
+        console.log('Поиск объектов для редактирования:', query);
+        $.ajax({
+            url: '{% url "ajax_load_objects" %}',
+            data: { search: query },
+            dataType: 'json',
+            success: function(data) {
+                console.log('Результаты поиска:', data);
+                displayEditResults(data.objects.slice(0, 10)); // Ограничиваем до 10 результатов
+            },
+            error: function(xhr, status, error) {
+                console.error('Ошибка поиска:', error);
+                console.error('Статус:', status);
+                console.error('Ответ:', xhr.responseText);
+                hideEditResults();
+            }
+        });
+    }
+    
+    // Функция отображения результатов для редактирования
+    function displayEditResults(objects) {
+        console.log('Отображение результатов:', objects);
+        $editSearchResults.empty();
+        editSelectedIndex = -1;
+        
+        if (objects.length === 0) {
+            console.log('Нет объектов для отображения');
+            $editSearchResults.append('<div class="search-result-item">Объекты не найдены</div>');
+        } else {
+            console.log('Отображаем', objects.length, 'объектов');
+            objects.forEach(function(obj) {
+                var $item = $('<div class="search-result-item" data-id="' + obj.id + '">' + 
+                             obj.name + ' (' + obj.model_name + ')</div>');
+                $editSearchResults.append($item);
+            });
+        }
+        
+        $editSearchResults.addClass('show');
+        console.log('Результаты показаны, элементов:', $editSearchResults.find('.search-result-item').length);
+    }
+    
+    // Функция скрытия результатов для редактирования
+    function hideEditResults() {
+        $editSearchResults.removeClass('show').empty();
+        editSelectedIndex = -1;
+    }
+    
+    // Обработчик клика по результату для редактирования
+    $editSearchResults.on('click', '.search-result-item', function() {
+        var objectId = $(this).data('id');
+        if (objectId) {
+            editSelectedObjectId = objectId;
+            $('#edit_oes_object_id').val(editSelectedObjectId);
+            
+            // Устанавливаем значение в скрытое поле формы
+            $('input[name="oes_object"]').val(objectId);
+            console.log('Установлено значение в скрытое поле oes_object:', objectId);
+            
+            // Получаем текст объекта (без модели в скобках)
+            var objectText = $(this).text();
+            $editSearchInput.val(objectText);
+            
+            hideEditResults();
+            console.log('Выбран объект для редактирования:', objectId, objectText);
+        }
+    });
+    
+    // Обработчик нажатия клавиш для редактирования
+    $editSearchInput.on('keydown', function(e) {
+        var $items = $editSearchResults.find('.search-result-item[data-id]');
+        
+        if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            editSelectedIndex = Math.min(editSelectedIndex + 1, $items.length - 1);
+            updateEditSelection();
+        } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            editSelectedIndex = Math.max(editSelectedIndex - 1, -1);
+            updateEditSelection();
+        } else if (e.key === 'Enter') {
+            e.preventDefault();
+            if (editSelectedIndex >= 0 && editSelectedIndex < $items.length) {
+                $items.eq(editSelectedIndex).click();
+            }
+        } else if (e.key === 'Escape') {
+            hideEditResults();
+        }
+    });
+    
+    // Функция обновления выделения для редактирования
+    function updateEditSelection() {
+        var $items = $editSearchResults.find('.search-result-item[data-id]');
+        $items.removeClass('selected');
+        
+        if (editSelectedIndex >= 0 && editSelectedIndex < $items.length) {
+            $items.eq(editSelectedIndex).addClass('selected');
+        }
+    }
+    
+    // Скрываем результаты при клике вне поля для редактирования
+    $(document).on('click', function(e) {
+        if (!$(e.target).closest('.mb-3').length) {
+            hideEditResults();
+        }
+    });
+});
+</script>
+{% endblock extra_js %}
+
