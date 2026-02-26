@@ -7,3 +7,4 @@ Pillow
 requests
 python-telegram-bot==20.7 # Telegram Bot API
 openpyxl==3.1.2
+pytz==2024.1

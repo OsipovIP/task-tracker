@@ -55,7 +55,7 @@ class Command(BaseCommand):
         # 2. Получаем активные конфигурации тегов
         tag_configs = ModelTagConfig.objects.filter(
             is_active=True
-        ).select_related('oes_model')
+        ).prefetch_related('oes_models')
         
         if not tag_configs:
             self.stdout.write(self.style.WARNING(
@@ -69,9 +69,11 @@ class Command(BaseCommand):
         configs_by_model_table = defaultdict(list)
         models_with_configs = set()
         for tc in tag_configs:
-            key = (tc.oes_model_id, tc.clickhouse_table)
-            configs_by_model_table[key].append(tc)
-            models_with_configs.add(tc.oes_model_id)
+            for oes_model in tc.oes_models.all():
+                key = (oes_model.id, tc.clickhouse_table)
+                if tc not in configs_by_model_table[key]:
+                    configs_by_model_table[key].append(tc)
+                models_with_configs.add(oes_model.id)
         
         self.stdout.write(
             f"Конфигураций тегов: {tag_configs.count()}, "
@@ -81,7 +83,8 @@ class Command(BaseCommand):
         # 3. Получаем объекты с source_id, у которых модель имеет конфигурацию
         all_objects = OesObject.objects.filter(
             model_id__in=models_with_configs,
-            source_id__isnull=False
+            source_id__isnull=False,
+            exclude_from_monitoring=False
         ).select_related('model', 'model__category')
         
         self.stdout.write(f"Объектов с мониторингом: {all_objects.count()}")

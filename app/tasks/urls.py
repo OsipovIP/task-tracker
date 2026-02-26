@@ -48,4 +48,5 @@ urlpatterns = [
     path('telemetry/', views.telemetry_monitor, name='telemetry_monitor'),
     path('telemetry/create-task/<int:object_id>/', views.create_telemetry_task, name='create_telemetry_task'),
     path('telemetry/create-tasks-bulk/', views.create_telemetry_tasks_bulk, name='create_telemetry_tasks_bulk'),
+    path('telemetry/refresh-idles/', views.refresh_idles, name='refresh_idles'),
 ]

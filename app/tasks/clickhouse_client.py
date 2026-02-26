@@ -132,7 +132,7 @@ class ClickHouseClient:
             for uid in object_uuids:
                 result[uid] = {}
                 for tc in tag_configs:
-                    result[oid][tc.tag_name] = {
+                    result[uid][tc.tag_name] = {
                         'status': 'fail',
                         'detail': 'Нет данных из ClickHouse за последний час',
                         'values': {}

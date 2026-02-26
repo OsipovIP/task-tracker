@@ -1,43 +1,80 @@
-# tasks/admin.py (ОКОНЧАТЕЛЬНАЯ ВЕРСИЯ БЕЗ ДУБЛИРОВАНИЯ)
+# tasks/admin.py
 
 from django.contrib import admin, messages
-from .models import Task, TaskComment, TaskPhoto, OesObject, OesModel, OesCategory, FaultCategory, TaskCompletionReport, ManualAsset
-from .utils import import_oes_objects_data 
+from .models import (
+    Task, TaskComment, TaskPhoto, OesObject, OesModel, OesCategory,
+    FaultCategory, TaskCompletionReport, ManualAsset, IdleRecord, ModelTagConfig
+)
+from .utils import import_oes_objects_data
 
-# Создаем Admin Action для запуска импорта
+
+# =====================================================================
+# --- ДЕЙСТВИЯ (ACTIONS) ---
+# =====================================================================
+
 def update_oes_objects(modeladmin, request, queryset):
     """Admin action, которая запускает импорт"""
     success, message = import_oes_objects_data()
-    
     if success:
         modeladmin.message_user(request, message, messages.SUCCESS)
     else:
         modeladmin.message_user(request, message, messages.ERROR)
-
 update_oes_objects.short_description = "Обновить справочник Объектов OES из API"
 
-# РЕГИСТРАЦИЯ OesObject - ТОЛЬКО ОДИН РАЗ!
+
+def exclude_from_monitoring(modeladmin, request, queryset):
+    """Исключить выбранные объекты из мониторинга."""
+    count = queryset.update(exclude_from_monitoring=True)
+    modeladmin.message_user(request, f'{count} объектов исключено из мониторинга.', messages.SUCCESS)
+exclude_from_monitoring.short_description = "Исключить из мониторинга"
+
+
+def include_in_monitoring(modeladmin, request, queryset):
+    """Вернуть выбранные объекты в мониторинг."""
+    count = queryset.update(exclude_from_monitoring=False, exclude_reason='')
+    modeladmin.message_user(request, f'{count} объектов возвращено в мониторинг.', messages.SUCCESS)
+include_in_monitoring.short_description = "Вернуть в мониторинг"
+
+
+# =====================================================================
+# --- OES МОДЕЛИ ---
+# =====================================================================
+
 @admin.register(OesObject)
 class OesObjectAdmin(admin.ModelAdmin):
-    list_display = ('name', 'source_id', 'model')
-    search_fields = ('name', 'source_id')
-    list_filter = ('model__category', 'model')
-    
-    # Добавляем наше действие
-    actions = [update_oes_objects] 
+    list_display = ('name', 'source_id', 'model', 'exclude_from_monitoring', 'exclude_reason')
+    search_fields = ('name', 'source_id', 'mdm_object_uuid')
+    list_filter = ('model__category', 'model', 'exclude_from_monitoring')
+    list_editable = ('exclude_from_monitoring', 'exclude_reason')
+    actions = [update_oes_objects, exclude_from_monitoring, include_in_monitoring]
 
 
-# РЕГИСТРАЦИЯ Task
+@admin.register(OesModel)
+class OesModelAdmin(admin.ModelAdmin):
+    list_display = ('name', 'category')
+    search_fields = ('name', 'category__name')
+    list_filter = ('category',)
+
+
+@admin.register(OesCategory)
+class OesCategoryAdmin(admin.ModelAdmin):
+    list_display = ('name', 'source_id')
+    search_fields = ('name',)
+
+
+# =====================================================================
+# --- ЗАДАЧИ ---
+# =====================================================================
+
 @admin.register(Task)
 class TaskAdmin(admin.ModelAdmin):
-    # ITIL ОТКЛЮЧЕНО - убрано external_source из отображения, добавлено itil_number
     list_display = ('id', 'title', 'itil_number', 'status', 'priority', 'reporter', 'assigned_to', 'created_at')
-    list_filter = ('status', 'priority', 'created_at')  # убрано external_source
-    search_fields = ('title', 'description', 'reporter__username', 'assigned_to__username', 'itil_number')  # добавлено itil_number
-    raw_id_fields = ('oes_object',)  # Используем raw_id вместо select
-    autocomplete_fields = ('oes_object', 'manual_asset')  # Включаем автокомплит
+    list_filter = ('status', 'priority', 'created_at')
+    search_fields = ('title', 'description', 'reporter__username', 'assigned_to__username', 'itil_number')
+    raw_id_fields = ('oes_object',)
+    autocomplete_fields = ('oes_object', 'manual_asset')
     readonly_fields = ('external_source', 'external_id', 'external_data', 'created_at', 'updated_at')
-    
+
     fieldsets = (
         ('Основная информация', {
             'fields': ('title', 'description', 'status', 'priority', 'itil_number')
@@ -50,7 +87,6 @@ class TaskAdmin(admin.ModelAdmin):
             'classes': ('collapse',),
             'description': 'Выберите либо объект OES, либо ручной актив'
         }),
-        # ITIL ОТКЛЮЧЕНО - секция скрыта, но поля сохранены в БД
         ('Внешняя интеграция (ОТКЛЮЧЕНО)', {
             'fields': ('external_source', 'external_id', 'external_data'),
             'classes': ('collapse',),
@@ -61,32 +97,23 @@ class TaskAdmin(admin.ModelAdmin):
         })
     )
 
-# РЕГИСТРАЦИЯ OesModel для автокомплита
-@admin.register(OesModel)
-class OesModelAdmin(admin.ModelAdmin):
-    list_display = ('name', 'category')
-    search_fields = ('name', 'category__name')
-    list_filter = ('category',)
 
-# РЕГИСТРАЦИЯ OesCategory для автокомплита
-@admin.register(OesCategory)
-class OesCategoryAdmin(admin.ModelAdmin):
-    list_display = ('name', 'source_id')
-    search_fields = ('name',)
-
-# РЕГИСТРАЦИЯ TaskComment
 @admin.register(TaskComment)
 class TaskCommentAdmin(admin.ModelAdmin):
     list_display = ('task', 'author', 'created_at')
     list_filter = ('created_at', 'author')
 
-# РЕГИСТРАЦИЯ TaskPhoto
+
 @admin.register(TaskPhoto)
 class TaskPhotoAdmin(admin.ModelAdmin):
     list_display = ('task', 'uploaded_by', 'uploaded_at')
     list_filter = ('uploaded_at', 'uploaded_by')
 
-# РЕГИСТРАЦИЯ FaultCategory
+
+# =====================================================================
+# --- ОТЧЁТНОСТЬ ---
+# =====================================================================
+
 @admin.register(FaultCategory)
 class FaultCategoryAdmin(admin.ModelAdmin):
     list_display = ('name', 'sort_order', 'is_active')
@@ -94,14 +121,14 @@ class FaultCategoryAdmin(admin.ModelAdmin):
     search_fields = ('name', 'description')
     ordering = ('sort_order', 'name')
 
-# РЕГИСТРАЦИЯ TaskCompletionReport
+
 @admin.register(TaskCompletionReport)
 class TaskCompletionReportAdmin(admin.ModelAdmin):
     list_display = ('task', 'completed_by', 'fault_category', 'created_at')
     list_filter = ('fault_category', 'created_at', 'completed_by')
     search_fields = ('task__title', 'work_performed', 'root_cause')
     readonly_fields = ('task', 'completed_by', 'created_at')
-    
+
     fieldsets = (
         ('Основная информация', {
             'fields': ('task', 'completed_by', 'fault_category', 'time_spent')
@@ -115,17 +142,20 @@ class TaskCompletionReportAdmin(admin.ModelAdmin):
         })
     )
 
-# РЕГИСТРАЦИЯ ManualAsset
+
+# =====================================================================
+# --- АКТИВЫ ---
+# =====================================================================
+
 @admin.register(ManualAsset)
 class ManualAssetAdmin(admin.ModelAdmin):
     list_display = ('name', 'asset_type', 'model', 'is_active', 'created_at')
     list_filter = ('asset_type', 'is_active', 'created_at')
     search_fields = ('name', 'asset_type', 'model', 'description')
     ordering = ('name',)
-    
-    # Включаем автокомплит для использования в Task
-    list_editable = ('is_active',)  # Можно быстро менять статус из списка
-    
+    list_editable = ('is_active',)
+    readonly_fields = ('created_at', 'updated_at')
+
     fieldsets = (
         ('Основная информация', {
             'fields': ('name', 'asset_type', 'model', 'description')
@@ -138,11 +168,11 @@ class ManualAssetAdmin(admin.ModelAdmin):
             'classes': ('collapse',)
         })
     )
-    
-    readonly_fields = ('created_at', 'updated_at')
 
 
-from .models import IdleRecord
+# =====================================================================
+# --- МОНИТОРИНГ ТЕЛЕМЕТРИИ ---
+# =====================================================================
 
 @admin.register(IdleRecord)
 class IdleRecordAdmin(admin.ModelAdmin):
@@ -151,7 +181,7 @@ class IdleRecordAdmin(admin.ModelAdmin):
     search_fields = ('oes_object__name', 'category_name', 'comment')
     readonly_fields = ('external_id', 'raw_data', 'fetched_at')
     date_hierarchy = 'begin_dt'
-    
+
     fieldsets = (
         ('Основное', {
             'fields': ('external_id', 'oes_object', 'object_uuid', 'object_id_external')
@@ -174,24 +204,22 @@ class IdleRecordAdmin(admin.ModelAdmin):
             'classes': ('collapse',)
         }),
     )
-    # --- Добавить в конец admin.py ---
 
-from .models import ModelTagConfig
 
 @admin.register(ModelTagConfig)
 class ModelTagConfigAdmin(admin.ModelAdmin):
     list_display = (
-        'oes_model', 'clickhouse_table', 'tag_name', 
-        'check_type', 'threshold_min', 'threshold_max', 
+        'get_models_display', 'clickhouse_table', 'tag_name',
+        'check_type', 'threshold_min', 'threshold_max',
         'min_change', 'task_priority', 'is_active'
     )
-    list_filter = ('clickhouse_table', 'check_type', 'is_active', 'task_priority', 'oes_model')
+    list_filter = ('clickhouse_table', 'check_type', 'is_active', 'task_priority', 'oes_models')
     search_fields = ('tag_name', 'description', 'oes_model__name')
     list_editable = ('is_active', 'check_type', 'threshold_min', 'threshold_max', 'min_change', 'task_priority')
-    
+
     fieldsets = (
-        ('Привязка к модели', {
-            'fields': ('oes_model', 'clickhouse_table')
+        ('Привязка к моделям', {
+            'fields': ('oes_models', 'clickhouse_table')
         }),
         ('Тег и проверка', {
             'fields': ('tag_name', 'check_type', 'description')
@@ -214,9 +242,12 @@ class ModelTagConfigAdmin(admin.ModelAdmin):
             'fields': ('is_active',)
         }),
     )
-    
+
     def get_readonly_fields(self, request, obj=None):
-        """При редактировании нельзя менять модель и тег (это ключ unique_together)."""
         if obj:
-            return ('oes_model', 'tag_name')
+            return ('tag_name',)
         return ()
+
+    def get_models_display(self, obj):
+        return ", ".join(m.name for m in obj.oes_models.all()[:3])
+    get_models_display.short_description = "Модели"

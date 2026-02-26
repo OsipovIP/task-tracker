@@ -1450,7 +1450,7 @@ def telemetry_monitor(request):
     model_filter = request.GET.get('model', '')
     
     results = []
-    stats = {'ok': 0, 'warn': 0, 'fail': 0, 'total_objects': 0, 'working': 0}
+    stats = {'ok': 0, 'warn': 0, 'fail': 0, 'total_objects': 0, 'working': 0, 'idle': 0}
     ch_connected = False
     error_message = ''
     
@@ -1466,7 +1466,7 @@ def telemetry_monitor(request):
         # 2. Активные конфигурации тегов
         tag_configs = ModelTagConfig.objects.filter(
             is_active=True
-        ).select_related('oes_model')
+        ).prefetch_related('oes_models')
         
         if not tag_configs:
             error_message = 'Нет активных конфигураций тегов. Настройте их через Django Admin.'
@@ -1476,14 +1476,17 @@ def telemetry_monitor(request):
         configs_by_model_table = defaultdict(list)
         models_with_configs = set()
         for tc in tag_configs:
-            key = (tc.oes_model_id, tc.clickhouse_table)
-            configs_by_model_table[key].append(tc)
-            models_with_configs.add(tc.oes_model_id)
+            for oes_model in tc.oes_models.all():
+                key = (oes_model.id, tc.clickhouse_table)
+                if tc not in configs_by_model_table[key]:
+                    configs_by_model_table[key].append(tc)
+                models_with_configs.add(oes_model.id)
         
         # 3. Объекты с мониторингом
         all_objects = OesObject.objects.filter(
             model_id__in=models_with_configs,
-            source_id__isnull=False
+            source_id__isnull=False,
+            exclude_from_monitoring=False
         ).select_related('model', 'model__category')
         
         # Фильтр по модели
@@ -1506,6 +1509,7 @@ def telemetry_monitor(request):
             if obj.source_id not in idle_object_ids
         ]
         stats['working'] = len(working_objects)
+        stats['idle'] = stats['total_objects'] - stats['working']
         
         # 6. Группируем по (модель, таблица)
         objects_by_model_table = defaultdict(list)
@@ -1571,10 +1575,13 @@ def telemetry_monitor(request):
             error_message = str(e)
     
     # Модели для фильтра
+    tag_configs = ModelTagConfig.objects.filter(
+        is_active=True
+    ).prefetch_related('oes_models')
+    
     monitored_models = OesModel.objects.filter(
         tag_configs__is_active=True
-    ).distinct().order_by('name')
-    
+    ).distinct().order_by("name")
     context = {
         'results': results,
         'stats': stats,
@@ -1657,19 +1664,22 @@ def create_telemetry_tasks_bulk(request):
             return redirect('telemetry_monitor')
         
         # Повторяем логику из telemetry_monitor
-        tag_configs = ModelTagConfig.objects.filter(is_active=True).select_related('oes_model')
+        tag_configs = ModelTagConfig.objects.filter(is_active=True).prefetch_related('oes_models')
         
         configs_by_model_table = defaultdict(list)
         models_with_configs = set()
         for tc in tag_configs:
-            key = (tc.oes_model_id, tc.clickhouse_table)
-            configs_by_model_table[key].append(tc)
-            models_with_configs.add(tc.oes_model_id)
+            for oes_model in tc.oes_models.all():
+                key = (oes_model.id, tc.clickhouse_table)
+                if tc not in configs_by_model_table[key]:
+                    configs_by_model_table[key].append(tc)
+                models_with_configs.add(oes_model.id)
         
         all_objects = OesObject.objects.filter(
             model_id__in=models_with_configs,
-            source_id__isnull=False
-        ).select_related('model')
+            source_id__isnull=False,
+            exclude_from_monitoring=False
+        ).select_related('model', 'model__category')
         
         idle_object_ids = set(
             IdleRecord.objects.filter(
@@ -1783,3 +1793,35 @@ def create_telemetry_tasks_bulk(request):
         messages.error(request, f'Ошибка: {str(e)}')
     
     return redirect('telemetry_monitor')
+    # --- Добавить в конец views.py ---
+
+# --- Заменить функцию refresh_idles в views.py ---
+
+@login_required
+def refresh_idles(request):
+    """Обновление простоев за текущую смену и перенаправление на мониторинг."""
+    if request.method != 'POST':
+        return redirect('telemetry_monitor')
+    
+    from django.core.management import call_command
+    from io import StringIO
+    
+    try:
+        # Определяем текущую смену
+        now = timezone.localtime()
+        hour = now.hour
+        if 8 <= hour < 20:
+            shift = 'day'
+        else:
+            shift = 'night'
+        
+        out = StringIO()
+        call_command('fetch_idles', shift=shift, stdout=out)
+        output = out.getvalue().strip()
+        last_line = output.split('\n')[-1] if output else 'Готово'
+        messages.success(request, f'Простои обновлены ({shift})! {last_line}')
+    except Exception as e:
+        messages.error(request, f'Ошибка обновления простоев: {str(e)}')
+    
+    params = request.POST.get('next_params', '')
+    return redirect(f'/tasks/telemetry/?{params}' if params else 'telemetry_monitor')

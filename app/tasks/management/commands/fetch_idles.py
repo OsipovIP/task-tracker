@@ -6,6 +6,7 @@ Management-команда для загрузки простоев техник�
     python manage.py fetch_idles --shift day  # Принудительно дневная смена
     python manage.py fetch_idles --shift night # Принудительно ночная смена
     python manage.py fetch_idles --date 2026-02-25  # Конкретная дата
+    python manage.py fetch_idles --current    # Все незавершённые простои (для мониторинга)
 
 Расписание cron (Asia/Sakhalin):
     50 7 * * *  - после ночной смены (19:45 вчера → 07:45 сегодня)
@@ -68,6 +69,11 @@ class Command(BaseCommand):
             type=str,
             help='Дата в формате YYYY-MM-DD. По умолчанию — сегодня.'
         )
+        parser.add_argument(
+            '--current',
+            action='store_true',
+            help='Забрать все текущие незавершённые простои (без ограничения по дате)'
+        )
 
     def handle(self, *args, **options):
         # Определяем даты смены
@@ -75,29 +81,20 @@ class Command(BaseCommand):
             options.get('shift'),
             options.get('date')
         )
-
         self.stdout.write(
             f"Загрузка простоев за {shift_type} смену: "
             f"{begin_dt} → {end_dt}"
         )
-
         # Загружаем все страницы
         all_records = self._fetch_all_pages(begin_dt, end_dt)
-
         if not all_records:
             self.stdout.write(self.style.WARNING("Простоев не найдено."))
             return
-
         self.stdout.write(f"Получено записей из API: {len(all_records)}")
-
-        # Предзагружаем маппинг OesObject по mdm_object_uuid
         uuid_to_oes = self._build_uuid_mapping()
-
-        # Сохраняем в БД
         created, updated, skipped = self._save_records(
             all_records, uuid_to_oes, shift_type
         )
-
         self.stdout.write(self.style.SUCCESS(
             f"Готово! Создано: {created}, обновлено: {updated}, пропущено: {skipped}"
         ))
@@ -201,6 +198,19 @@ class Command(BaseCommand):
             if obj.mdm_object_uuid:
                 mapping[str(obj.mdm_object_uuid)] = obj
         return mapping
+
+    def _parse_dt(self, dt_str):
+        """Парсит дату из API и добавляет таймзону Сахалина."""
+        if not dt_str:
+            return None
+        from datetime import datetime
+        try:
+            dt = datetime.fromisoformat(dt_str.replace("Z", ""))
+            if dt.tzinfo is None:
+                return SAKHALIN_TZ.localize(dt)
+            return dt
+        except (ValueError, TypeError):
+            return None
 
     def _save_records(self, records, uuid_to_oes, shift_type):
         """Сохраняет записи в БД. Возвращает (created, updated, skipped)."""

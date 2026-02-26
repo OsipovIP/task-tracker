@@ -108,6 +108,12 @@
                                 <i class="fas fa-walkie-talkie me-2"></i>Рации
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.resolver_match.url_name == 'telemetry_monitor' %}active{% endif %}" 
+                               href="{% url 'telemetry_monitor' %}">
+                                <i class="fas fa-satellite-dish me-2"></i>Мониторинг
+                            </a>
+                        </li>
                         {% if user.groups.all|length > 0 %}
                             {% for group in user.groups.all %}
                                 {% if group.name == 'Менеджеры' %}

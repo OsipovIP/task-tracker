@@ -53,6 +53,20 @@ class OesObject(models.Model):
     name = models.CharField(max_length=255, verbose_name="Название объекта")
     mdm_object_uuid = models.CharField(max_length=50, unique=True, verbose_name="MDM UUID", null=True)
 
+    exclude_from_monitoring = models.BooleanField(
+        default=False,
+        verbose_name="Исключить из мониторинга",
+        help_text="Консервация, списание, ремонт — не проверять телеметрию"
+    )
+    exclude_reason = models.CharField(
+        max_length=100,
+        blank=True,
+        default='',
+        verbose_name="Причина исключения",
+        help_text="Например: Консервация, Списан, В ремонте"
+    )
+
+
     class Meta:
         verbose_name = "Объект OES"
         verbose_name_plural = "Объекты OES"
@@ -503,12 +517,11 @@ class ModelTagConfig(models.Model):
         (CH_TABLE_HEAVY, 'Тяжёлая техника (telemetry.heavy_equipment)'),
     ]
     
-    # Связь с моделью техники
-    oes_model = models.ForeignKey(
+    # Связь с моделями техники (несколько моделей на один тег)
+    oes_models = models.ManyToManyField(
         OesModel,
-        on_delete=models.CASCADE,
         related_name='tag_configs',
-        verbose_name="Модель техники"
+        verbose_name="Модели техники"
     )
     
     # Таблица ClickHouse
@@ -587,12 +600,13 @@ class ModelTagConfig(models.Model):
     class Meta:
         verbose_name = "Конфигурация тега мониторинга"
         verbose_name_plural = "Конфигурации тегов мониторинга"
-        ordering = ['oes_model', 'tag_name']
-        # Один тег на одну модель — без дублей
-        unique_together = ['oes_model', 'tag_name']
+        ordering = ['tag_name']
+        # unique_together убран, т.к. ManyToMany не поддерживает.
+        # Уникальность теперь по tag_name + clickhouse_table
+        unique_together = ['tag_name', 'clickhouse_table']
 
     def __str__(self):
-        return f"{self.oes_model.name} → {self.tag_name} ({self.get_check_type_display()})"
+        return f"{self.tag_name} ({self.get_check_type_display()})"
     
     def clean(self):
         """Валидация: проверяем что пороги заполнены для соответствующих типов проверки."""
