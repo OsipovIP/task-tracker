@@ -24,7 +24,7 @@ services:
 
   telegram_bot:
     build: .
-    container_name: telegram_task_tracker_bot_dev
+    container_name: telegram_task_tracker_bot_dev_dev_dev_dev
     # Загружаем переменные окружения из .env (включая TELEGRAM_BOT_TOKEN)
     env_file:
       - .env
