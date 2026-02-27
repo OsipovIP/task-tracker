@@ -630,3 +630,27 @@ class ModelTagConfig(models.Model):
         
         if errors:
             raise ValidationError(errors)
+            # =====================================================================
+# --- ГЕОЗОНЫ ДЛЯ МОНИТОРИНГА ---
+# =====================================================================
+
+class MonitoringGeozone(models.Model):
+    """Геозона для фильтрации мониторинга телеметрии.
+    
+    Машины, находящиеся внутри геозоны, скрываются из мониторинга —
+    они физически стоят на базе/ремзоне, но простой не зафиксирован.
+    """
+    name = models.CharField(max_length=255, verbose_name="Название", help_text="Например: База, Ремзона, Парковка")
+    lat = models.FloatField(verbose_name="Широта центра", help_text="Например: 46.958700")
+    lon = models.FloatField(verbose_name="Долгота центра", help_text="Например: 142.738300")
+    radius_m = models.PositiveIntegerField(verbose_name="Радиус (метры)", default=500)
+    is_active = models.BooleanField(default=True, verbose_name="Активна")
+    comment = models.TextField(blank=True, default='', verbose_name="Комментарий")
+
+    class Meta:
+        verbose_name = "Геозона мониторинга"
+        verbose_name_plural = "Геозоны мониторинга"
+        ordering = ['name']
+
+    def __str__(self):
+        return f"{self.name} (r={self.radius_m}м)"

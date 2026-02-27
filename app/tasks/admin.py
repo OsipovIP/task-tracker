@@ -6,6 +6,11 @@ from .models import (
     FaultCategory, TaskCompletionReport, ManualAsset, IdleRecord, ModelTagConfig
 )
 from .utils import import_oes_objects_data
+from .models import (
+    Task, TaskComment, TaskPhoto, OesObject, OesModel, OesCategory,
+    FaultCategory, TaskCompletionReport, ManualAsset, IdleRecord, ModelTagConfig,
+    MonitoringGeozone  # добавить
+)
 
 
 # =====================================================================
@@ -251,3 +256,9 @@ class ModelTagConfigAdmin(admin.ModelAdmin):
     def get_models_display(self, obj):
         return ", ".join(m.name for m in obj.oes_models.all()[:3])
     get_models_display.short_description = "Модели"
+    
+@admin.register(MonitoringGeozone)
+class MonitoringGeozoneAdmin(admin.ModelAdmin):
+    list_display = ['name', 'lat', 'lon', 'radius_m', 'is_active']
+    list_editable = ['is_active', 'radius_m']
+    list_filter = ['is_active']

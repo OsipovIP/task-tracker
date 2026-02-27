@@ -14,6 +14,24 @@ import logging
 from .models import IdleRecord, ModelTagConfig
 from .clickhouse_client import ClickHouseClient
 from collections import defaultdict
+import math
+
+def _haversine_distance(lat1, lon1, lat2, lon2):
+    """Расстояние между двумя точками на земле в метрах."""
+    R = 6371000  # радиус земли в метрах
+    phi1, phi2 = math.radians(lat1), math.radians(lat2)
+    dphi = math.radians(lat2 - lat1)
+    dlambda = math.radians(lon2 - lon1)
+    a = math.sin(dphi/2)**2 + math.cos(phi1) * math.cos(phi2) * math.sin(dlambda/2)**2
+    return R * 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
+
+def _get_geozone_for_position(lat, lon, geozones):
+    """Возвращает название геозоны если точка в ней, иначе None."""
+    for gz in geozones:
+        dist = _haversine_distance(lat, lon, gz.lat, gz.lon)
+        if dist <= gz.radius_m:
+            return gz.name
+    return None
 
 User = get_user_model()
 logger = logging.getLogger(__name__) 
@@ -1510,7 +1528,60 @@ def telemetry_monitor(request):
         ]
         stats['working'] = len(working_objects)
         stats['idle'] = stats['total_objects'] - stats['working']
+
+        # 5.5 Фильтрация по геозонам — скрываем машины стоящие на базе/ремзоне
+        from .models import MonitoringGeozone
+        active_geozones = list(MonitoringGeozone.objects.filter(is_active=True))
         
+        if working_objects:
+            # Собираем uuid всех работающих объектов для запроса координат
+            # Нужно знать таблицу CH — берём из конфига для каждого объекта
+            uuid_to_table = {}
+            for obj in working_objects:
+                if obj.mdm_object_uuid:
+                    for key in configs_by_model_table:
+                        model_id, ch_table = key
+                        if obj.model_id == model_id:
+                            uuid_to_table[obj.mdm_object_uuid] = ch_table
+                            break
+
+            # Группируем uuid по таблицам и запрашиваем координаты
+            positions = {}
+            uuids_by_table = defaultdict(list)
+            for uuid, table in uuid_to_table.items():
+                uuids_by_table[table].append(uuid)
+
+            for table, uuids in uuids_by_table.items():
+                pos = ch.get_last_positions(table, uuids)
+                positions.update(pos)
+
+            # Фильтруем — исключаем объекты в геозоне и без данных за 30 дней
+            filtered_working = []
+            for obj in working_objects:
+                uuid = obj.mdm_object_uuid
+                pos = positions.get(uuid)
+
+                if not pos:
+                    print(f"[ГЕО] {obj.name} — нет данных за 30 дней, скрыт")
+                    continue
+
+                gz_name = None
+                for gz in active_geozones:
+                    dist = _haversine_distance(pos['lat'], pos['lon'], gz.lat, gz.lon)
+                    print(f"[ГЕО] {obj.name} — расстояние до '{gz.name}': {dist:.0f}м (радиус {gz.radius_m}м)")
+                    if dist <= gz.radius_m:
+                        gz_name = gz.name
+                        break
+
+                if gz_name:
+                    print(f"[ГЕО] {obj.name} — скрыт, в геозоне '{gz_name}'")
+                    continue
+
+                print(f"[ГЕО] {obj.name} — показан в мониторинге")
+                filtered_working.append(obj)
+
+            working_objects = filtered_working
+
         # 6. Группируем по (модель, таблица)
         objects_by_model_table = defaultdict(list)
         for obj in working_objects:

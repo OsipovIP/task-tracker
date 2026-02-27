@@ -85,7 +85,6 @@ class ClickHouseClient:
             }
         """
         if not object_uuids or not tag_configs:
-
             return {}
         
         # Собираем уникальные теги
@@ -274,3 +273,41 @@ class ClickHouseClient:
         except Exception as e:
             logger.error(f"ClickHouse connection test failed: {e}")
             return False
+
+    def get_last_positions(self, table, object_uuids):
+        """Возвращает последние известные координаты объектов из ClickHouse.
+
+        Returns:
+            dict: {uuid: {'lat': float, 'lon': float}}
+        """
+        if not object_uuids:
+            return {}
+
+        ids_str = ','.join(f"'{uid}'" for uid in object_uuids)
+
+        query = (
+            f"SELECT mdm_object_uuid, "
+            f"argMax(lat, create_dt) as last_lat, "
+            f"argMax(lon, create_dt) as last_lon "
+            f"FROM telemetry.{table} "
+            f"WHERE mdm_object_uuid IN ({ids_str}) "
+            f"AND create_dt >= now() - INTERVAL 30 DAY "
+            f"AND lat != {CH_NO_DATA_VALUE} "
+            f"AND lon != {CH_NO_DATA_VALUE} "
+            f"GROUP BY mdm_object_uuid"
+        )
+
+        rows = self._execute(query, timeout=30)
+
+        result = {}
+        for row in rows:
+            try:
+                uid = row[0]
+                lat = float(row[1])
+                lon = float(row[2])
+                if lat != 0.0 and lon != 0.0:
+                    result[uid] = {'lat': lat, 'lon': lon}
+            except (IndexError, ValueError):
+                continue
+
+        return result
